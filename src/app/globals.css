@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0B0F14;
+  --foreground: #FFFFFF;
+  --surface: #1A1F2B;
+  --surface-2: #121723;
+  --primary: #5B8CFF;
+  --accent: #7CF7D4;
+  --muted: rgba(255, 255, 255, 0.72);
+  --muted-2: rgba(255, 255, 255, 0.56);
+  --border: rgba(255, 255, 255, 0.10);
 }
 
 @theme inline {
@@ -12,15 +19,25 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Theme switching is controlled by `next-themes` via the `.dark` class on `<html>`. */
+.dark {
+  --background: #0B0F14;
+  --foreground: #FFFFFF;
+  --surface: #1A1F2B;
+  --surface-2: #121723;
+  --primary: #5B8CFF;
+  --accent: #7CF7D4;
+  --muted: rgba(255, 255, 255, 0.72);
+  --muted-2: rgba(255, 255, 255, 0.56);
+  --border: rgba(255, 255, 255, 0.10);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes draxilo-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
