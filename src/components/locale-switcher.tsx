@@ -7,8 +7,10 @@ import { LOCALES, type Locale } from "@/lib/i18n/types";
 
 export function LocaleSwitcher({
   locale,
+  surface = "default",
 }: {
   locale: Locale;
+  surface?: "default" | "glass";
 }) {
   const [pending, startTransition] = React.useTransition();
   const [open, setOpen] = React.useState(false);
@@ -40,19 +42,23 @@ export function LocaleSwitcher({
     });
   }
 
+  const glassBtn =
+    "inline-flex h-9 items-center gap-2 rounded-full border px-3 text-sm font-medium border-[rgba(255,255,255,0.12)] bg-[rgba(26,31,43,0.45)] text-[rgba(255,255,255,0.72)] hover:bg-[rgba(26,31,43,0.72)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(91,140,255,0.55)] disabled:opacity-60 backdrop-blur-md";
+  const defaultBtn = [
+    "inline-flex h-9 items-center gap-2 rounded-full border px-3 text-sm font-medium",
+    "border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50",
+    "dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-zinc-900",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600",
+    "disabled:opacity-60",
+  ].join(" ");
+
   return (
     <div ref={rootRef} className="relative">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         disabled={pending}
-        className={[
-          "inline-flex h-9 items-center gap-2 rounded-full border px-3 text-sm font-medium",
-          "border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50",
-          "dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-zinc-900",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600",
-          "disabled:opacity-60",
-        ].join(" ")}
+        className={surface === "glass" ? glassBtn : defaultBtn}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label="Language"
@@ -73,7 +79,12 @@ export function LocaleSwitcher({
         <div
           role="menu"
           aria-label="Language menu"
-          className="absolute right-0 mt-2 w-40 overflow-hidden rounded-xl border border-zinc-200 bg-white p-1 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+          className={[
+            "absolute right-0 mt-2 w-40 overflow-hidden rounded-xl border p-1 shadow-lg backdrop-blur-xl",
+            surface === "glass"
+              ? "border-[rgba(255,255,255,0.12)] bg-[rgba(26,31,43,0.92)]"
+              : "border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950 shadow-sm",
+          ].join(" ")}
         >
           {LOCALES.map((l) => {
             const active = l === locale;
@@ -85,9 +96,13 @@ export function LocaleSwitcher({
                 onClick={() => pick(l)}
                 className={[
                   "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm",
-                  active
-                    ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
-                    : "text-zinc-800 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900",
+                  surface === "glass"
+                    ? active
+                      ? "bg-[rgba(91,140,255,0.22)] text-white"
+                      : "text-[rgba(255,255,255,0.72)] hover:bg-[rgba(255,255,255,0.06)] hover:text-white"
+                    : active
+                      ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
+                      : "text-zinc-800 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900",
                 ].join(" ")}
               >
                 <span className="font-medium">{l.toUpperCase()}</span>
