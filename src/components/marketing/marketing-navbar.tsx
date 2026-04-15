@@ -6,7 +6,7 @@ import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring } fro
 
 import type { Locale } from "@/lib/i18n/types";
 import type { Dictionary } from "@/lib/i18n/dictionary";
-import { DraxiloMark } from "@/components/brand/draxilo-logo";
+import { DraxionMark } from "@/components/brand/draxion-logo";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 
 export function MarketingNavbar({
@@ -37,9 +37,9 @@ export function MarketingNavbar({
             href="/"
             className="group inline-flex items-center gap-3 rounded-xl px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
           >
-            <DraxiloMark className="h-9 w-9 transition-transform duration-300 group-hover:scale-[1.03]" />
+            <DraxionMark className="h-9 w-9 transition-transform duration-300 group-hover:scale-[1.03]" />
             <span className="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-[rgba(255,255,255,0.92)]">
-              Draxilo
+              Draxion
             </span>
             <span className="pointer-events-none hidden h-px w-0 bg-[linear-gradient(90deg,transparent,rgba(91,140,255,0.7),transparent)] transition-all duration-300 group-hover:w-8 sm:block" />
           </Link>

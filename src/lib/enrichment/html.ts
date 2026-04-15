@@ -13,7 +13,7 @@ export async function fetchHomepageHtml(url: string) {
       redirect: "follow",
       headers: {
         "user-agent":
-          "DraxiloBot/1.0 (enrichment; +https://draxilo.local) AppleWebKit",
+          "DraxionBot/1.0 (enrichment; +https://draxion.local) AppleWebKit",
         accept: "text/html,application/xhtml+xml",
       },
     });

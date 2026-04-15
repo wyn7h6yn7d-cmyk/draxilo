@@ -42,17 +42,17 @@ function AnimatedBackground({ glow }: { glow: MotionValue<string> }) {
             "radial-gradient(35% 30% at 50% 35%, rgba(91,140,255,0.20), transparent 60%), radial-gradient(35% 30% at 65% 55%, rgba(124,247,212,0.14), transparent 60%), radial-gradient(35% 30% at 35% 65%, rgba(91,140,255,0.12), transparent 60%)",
         }}
       />
-      <div className="absolute inset-0 opacity-[0.26] [background-image:linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:72px_72px] [animation:draxilo-grid-drift_26s_linear_infinite]" />
+      <div className="absolute inset-0 opacity-[0.26] [background-image:linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:72px_72px] [animation:draxion-grid-drift_26s_linear_infinite]" />
       <svg className="absolute inset-0 opacity-[0.05] mix-blend-overlay" aria-hidden="true">
-        <filter id="draxiloNoiseMarketing">
+        <filter id="draxionNoiseMarketing">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
         </filter>
-        <rect width="100%" height="100%" filter="url(#draxiloNoiseMarketing)" />
+        <rect width="100%" height="100%" filter="url(#draxionNoiseMarketing)" />
       </svg>
-      <div className="absolute left-[12%] top-[18%] h-1.5 w-1.5 rounded-full bg-[rgba(124,247,212,0.9)] blur-[0.5px] [animation:draxilo-twinkle_2.8s_ease-in-out_infinite]" />
-      <div className="absolute left-[62%] top-[22%] h-1 w-1 rounded-full bg-[rgba(91,140,255,0.9)] blur-[0.5px] [animation:draxilo-twinkle_3.4s_ease-in-out_infinite]" />
-      <div className="absolute left-[78%] top-[64%] h-1.5 w-1.5 rounded-full bg-[rgba(124,247,212,0.85)] blur-[0.5px] [animation:draxilo-twinkle_3.1s_ease-in-out_infinite]" />
-      <div className="absolute left-[34%] top-[70%] h-1 w-1 rounded-full bg-[rgba(91,140,255,0.85)] blur-[0.5px] [animation:draxilo-twinkle_3.8s_ease-in-out_infinite]" />
+      <div className="absolute left-[12%] top-[18%] h-1.5 w-1.5 rounded-full bg-[rgba(124,247,212,0.9)] blur-[0.5px] [animation:draxion-twinkle_2.8s_ease-in-out_infinite]" />
+      <div className="absolute left-[62%] top-[22%] h-1 w-1 rounded-full bg-[rgba(91,140,255,0.9)] blur-[0.5px] [animation:draxion-twinkle_3.4s_ease-in-out_infinite]" />
+      <div className="absolute left-[78%] top-[64%] h-1.5 w-1.5 rounded-full bg-[rgba(124,247,212,0.85)] blur-[0.5px] [animation:draxion-twinkle_3.1s_ease-in-out_infinite]" />
+      <div className="absolute left-[34%] top-[70%] h-1 w-1 rounded-full bg-[rgba(91,140,255,0.85)] blur-[0.5px] [animation:draxion-twinkle_3.8s_ease-in-out_infinite]" />
       <motion.svg
         className="absolute inset-0 opacity-[0.20]"
         viewBox="0 0 1200 800"

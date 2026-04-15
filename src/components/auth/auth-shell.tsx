@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
-import { DraxiloLogo } from "@/components/brand/draxilo-logo";
+import { DraxionLogo } from "@/components/brand/draxion-logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Locale } from "@/lib/i18n/types";
@@ -27,7 +27,7 @@ export function AuthShell({
       <div className="w-full max-w-md">
         <div className="mb-6 flex items-center justify-between">
           <Link href="/" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600">
-            <DraxiloLogo />
+            <DraxionLogo />
           </Link>
           <div className="flex items-center gap-2">
             <LocaleSwitcher locale={locale} />

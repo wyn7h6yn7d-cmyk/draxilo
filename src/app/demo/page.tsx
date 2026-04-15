@@ -5,9 +5,13 @@ import { getI18n } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { dict } = await getI18n();
+  const title = dict.demo.metaTitle;
+  const description = dict.demo.metaDescription;
   return {
-    title: dict.demo.metaTitle,
-    description: dict.demo.metaDescription,
+    title,
+    description,
+    openGraph: { title, description, siteName: dict.app.name },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 

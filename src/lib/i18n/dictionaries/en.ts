@@ -2,7 +2,7 @@ import type { Dictionary } from "../dictionary";
 
 export const en: Dictionary = {
   app: {
-    name: "Draxilo",
+    name: "Draxion",
   },
   nav: {
     login: "Sign in",
@@ -16,11 +16,11 @@ export const en: Dictionary = {
     demo: "Try demo",
   },
   demo: {
-    metaTitle: "Draxilo — interactive demo",
+    metaTitle: "Draxion — interactive demo",
     metaDescription:
-      "Try Draxilo’s AI workflow without an account: enrichment, outreach, and a campaign preview in one view.",
+      "Try Draxion’s AI workflow without an account: enrichment, outreach, and a campaign preview in one view.",
     badge: "Public demo · OpenAI + live site when possible",
-    headline: "Experience the Draxilo workflow in your browser",
+    headline: "Experience Draxion’s workflow in your browser",
     subheadline:
       "Enter company context, run analysis, and see how AI finds a hook, drafts an email, and sets up a campaign preview—no login required.",
     disclaimer:
@@ -94,10 +94,10 @@ export const en: Dictionary = {
     },
     error: {
       title: "Demo request failed",
-      text: "Check your connection and try again. No database—this is a mock API only.",
+      text: "Check your connection and try again. Nothing from this demo session is persisted.",
       retry: "Retry",
       openaiUnconfigured:
-        "OPENAI_API_KEY is not set. Add it to your environment — without it the demo falls back to static preview data.",
+        "OPENAI_API_KEY is not set. Add it to your environment—the demo will not run without it.",
       aiFailed: "The AI request failed (network or provider error). Retry or verify your OPENAI_API_KEY is valid.",
     },
     cta: {
@@ -110,7 +110,7 @@ export const en: Dictionary = {
   marketing: {
     headline: "Find the right customers. Write better. Get more replies.",
     subheadline:
-      "Draxilo surfaces leads from public sources and CSVs, enriches firmographics, drafts personal outreach, and helps you launch campaigns with confidence.",
+      "Draxion surfaces leads from public sources and CSVs, enriches firmographics, drafts personal outreach, and helps you launch campaigns with confidence.",
     primaryCta: "Start free",
     secondaryCta: "Sign in",
     ui: {
@@ -119,7 +119,7 @@ export const en: Dictionary = {
       featuresSubtitle: "One workflow from search to send. Less grunt work, more qualified conversations.",
       featureCardKicker: "Real-time signals",
       productPreview: {
-        windowTitle: "Draxilo · workspace",
+        windowTitle: "Draxion · workspace",
         tabLeads: "Leads",
         tabEnrich: "Enrich",
         tabCompose: "Message",
@@ -147,7 +147,7 @@ export const en: Dictionary = {
         composePanelTitle: "Draft (EN)",
         generating: "Generating…",
         subjectLine: "A clean moment to tighten your maintenance plan",
-        bodySample: "Hi — Draxilo finds similar accounts and helps you draft short, human outreach.",
+        bodySample: "Hi — Draxion finds similar accounts and helps you draft short, human outreach.",
         campaignPanelTitle: "Campaign",
         campaignName: "Q2 · Nordic outbound",
         campaignState: "Sending",
@@ -222,7 +222,7 @@ export const en: Dictionary = {
           },
           deliverability: {
             q: "Will this ruin my deliverability?",
-            a: "Draxilo is built around approval flows and sender configuration. Deliverability still depends on your domain setup and list quality.",
+            a: "Draxion is built around approval flows and sender configuration. Deliverability still depends on your domain setup and list quality.",
           },
           languages: {
             q: "Does it really support ET/EN/RU end-to-end?",
@@ -256,7 +256,7 @@ export const en: Dictionary = {
     },
     signup: {
       title: "Create your account",
-      subtitle: "Start using Draxilo in minutes.",
+      subtitle: "Start using Draxion in minutes.",
       action: "Sign up",
       haveAccount: "Already have an account?",
     },
@@ -307,7 +307,7 @@ export const en: Dictionary = {
       idealCustomerExamples: "Ideal customer examples",
     },
     placeholders: {
-      businessName: "e.g. Draxilo",
+      businessName: "e.g. Draxion",
       websiteUrl: "https://…",
       whatYouSell: "e.g. AI lead gen + outbound automation for B2B teams",
       targetCustomerDescription: "e.g. B2B SaaS companies with 10–200 employees in Europe",
@@ -334,7 +334,7 @@ export const en: Dictionary = {
     subtitle: "Your workspace at a glance.",
     onboarding: {
       title: "Finish setup",
-      subtitle: "Add a few details so Draxilo can score leads and generate better messages.",
+      subtitle: "Add a few details so Draxion can score leads and generate better messages.",
       cta: "Continue onboarding",
     },
     kpis: {
@@ -355,7 +355,7 @@ export const en: Dictionary = {
       },
       csvImport: {
         title: "Import CSV",
-        subtitle: "Bring your existing list into Draxilo.",
+        subtitle: "Bring your existing list into Draxion.",
         action: "Upload CSV",
       },
       createCampaign: {
@@ -407,7 +407,7 @@ export const en: Dictionary = {
       },
       mapping: {
         title: "Mapping",
-        subtitle: "Match your CSV columns to Draxilo fields.",
+        subtitle: "Match your CSV columns to Draxion fields.",
         skip: "(skip)",
       },
       preview: {

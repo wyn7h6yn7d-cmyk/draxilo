@@ -81,7 +81,7 @@ export async function generateOutreachMessage(params: {
         model: process.env.OPENAI_MESSAGE_MODEL ?? "gpt-4o-mini",
         temperature: 0.2,
         maxOutputTokens: 900,
-          schemaName: "DraxiloOutreachBody",
+          schemaName: "DraxionOutreachBody",
         jsonSchema: {
           type: "object",
           additionalProperties: false,
@@ -137,7 +137,7 @@ export async function generateOutreachMessage(params: {
         model: process.env.OPENAI_MESSAGE_MODEL ?? "gpt-4o-mini",
         temperature: 0.2,
         maxOutputTokens: 900,
-          schemaName: "DraxiloOutreachBody",
+          schemaName: "DraxionOutreachBody",
         jsonSchema: {
           type: "object",
           additionalProperties: false,

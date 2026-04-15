@@ -32,8 +32,8 @@ async function main() {
       profile: {
         create: {
           locale: Locale.ET,
-          fullName: 'Draxilo Demo',
-          company: 'Draxilo',
+          fullName: 'Draxion Demo',
+          company: 'Draxion',
           title: 'Founder',
         },
       },
@@ -171,7 +171,7 @@ async function main() {
       status: 'DRAFT',
       objective: 'Book 3 discovery calls with EE B2B companies',
       localeDefault: Locale.ET,
-      fromName: 'Draxilo Demo',
+      fromName: 'Draxion Demo',
       fromEmail: 'demo@leadforge.dev',
       replyToEmail: 'demo@leadforge.dev',
     },
@@ -186,7 +186,7 @@ async function main() {
         language: Locale.ET,
         subject: 'Kiire küsimus {{company}} kohta',
         bodyText:
-          'Tere {{firstName}}!\n\nNägin, et {{company}} tegutseb {{industry}} valdkonnas. Kas oleks mõistlik 15 min kõne, et näidata, kuidas Draxilo aitab leide leida ja personaliseeritud outreach’i automatiseerida?\n\nParimat,\n{{fromName}}',
+          'Tere {{firstName}}!\n\nNägin, et {{company}} tegutseb {{industry}} valdkonnas. Kas oleks mõistlik 15 min kõne, et näidata, kuidas Draxion aitab leide leida ja personaliseeritud outreach’i automatiseerida?\n\nParimat,\n{{fromName}}',
         aiOutput: { seeded: true },
         model: 'gpt-4o-mini',
         prompt: 'seed',
@@ -200,7 +200,7 @@ async function main() {
         language: Locale.RU,
         subject: 'Короткий вопрос про {{company}}',
         bodyText:
-          'Здравствуйте, {{firstName}}!\n\nВижу, что {{company}} работает в сфере {{industry}}. Можно ли созвониться на 15 минут, чтобы показать, как Draxilo помогает находить лидов и автоматизировать персонализированный outreach?\n\nС уважением,\n{{fromName}}',
+          'Здравствуйте, {{firstName}}!\n\nВижу, что {{company}} работает в сфере {{industry}}. Можно ли созвониться на 15 минут, чтобы показать, как Draxion помогает находить лидов и автоматизировать персонализированный outreach?\n\nС уважением,\n{{fromName}}',
         aiOutput: { seeded: true },
         model: 'gpt-4o-mini',
         prompt: 'seed',

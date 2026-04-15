@@ -1,4 +1,4 @@
-// Draxilo Prisma Schema (PostgreSQL)
+// Draxion Prisma Schema (PostgreSQL)
 // Notes:
 // - IDs are UUID strings for compatibility with external auth providers.
 // - Almost all business records are workspace-scoped for multi-tenancy.

@@ -64,7 +64,7 @@ export function ResendSenderSettings({
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2 sm:col-span-2">
             <Label>Name</Label>
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Draxilo Sender" />
+            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Draxion Sender" />
           </div>
           <div className="space-y-2">
             <Label>From email</Label>
@@ -72,7 +72,7 @@ export function ResendSenderSettings({
           </div>
           <div className="space-y-2">
             <Label>From name</Label>
-            <Input value={fromName} onChange={(e) => setFromName(e.target.value)} placeholder="e.g. Anna from Draxilo" />
+            <Input value={fromName} onChange={(e) => setFromName(e.target.value)} placeholder="e.g. Anna from Draxion" />
           </div>
         </div>
 

@@ -199,9 +199,9 @@ export function FutureLanding({ locale, dict }: { locale: Locale; dict: Dictiona
 function Hero({ dict }: { dict: Dictionary }) {
   return (
     <section className="relative">
-      <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-[rgba(91,140,255,0.10)] blur-2xl [animation:draxilo-drift_10s_ease-in-out_infinite]" />
-      <div className="pointer-events-none absolute left-44 top-10 h-28 w-28 rounded-full bg-[rgba(124,247,212,0.08)] blur-2xl [animation:draxilo-drift_12s_ease-in-out_infinite]" />
-      <div className="pointer-events-none absolute right-8 top-6 hidden h-32 w-32 rounded-full bg-[rgba(91,140,255,0.08)] blur-2xl [animation:draxilo-float_6.5s_ease-in-out_infinite] sm:block" />
+      <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-[rgba(91,140,255,0.10)] blur-2xl [animation:draxion-drift_10s_ease-in-out_infinite]" />
+      <div className="pointer-events-none absolute left-44 top-10 h-28 w-28 rounded-full bg-[rgba(124,247,212,0.08)] blur-2xl [animation:draxion-drift_12s_ease-in-out_infinite]" />
+      <div className="pointer-events-none absolute right-8 top-6 hidden h-32 w-32 rounded-full bg-[rgba(91,140,255,0.08)] blur-2xl [animation:draxion-float_6.5s_ease-in-out_infinite] sm:block" />
 
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
         <motion.div
@@ -211,7 +211,7 @@ function Hero({ dict }: { dict: Dictionary }) {
           className="min-w-0"
         >
           <div className="relative inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[rgba(26,31,43,0.55)] px-3 py-2 text-xs text-[var(--muted)] backdrop-blur">
-            <span className="pointer-events-none absolute inset-0 rounded-full [background:radial-gradient(60%_120%_at_30%_0%,rgba(91,140,255,0.20),transparent_60%)] opacity-70 [animation:draxilo-breathe_4.2s_ease-in-out_infinite]" />
+            <span className="pointer-events-none absolute inset-0 rounded-full [background:radial-gradient(60%_120%_at_30%_0%,rgba(91,140,255,0.20),transparent_60%)] opacity-70 [animation:draxion-breathe_4.2s_ease-in-out_infinite]" />
             <span className="relative h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_12px_rgba(124,247,212,0.55)]" />
             {dict.marketing.ui.badge}
           </div>
@@ -763,7 +763,7 @@ function FooterCta({ dict }: { dict: Dictionary }) {
         </div>
       </div>
       <div className="mt-8 flex items-center justify-between text-xs text-[rgba(255,255,255,0.44)]">
-        <div>© {new Date().getFullYear()} Draxilo</div>
+        <div>© {new Date().getFullYear()} Draxion</div>
         <div className="hidden sm:block">{dict.marketing.ui.footerTagline}</div>
       </div>
     </section>

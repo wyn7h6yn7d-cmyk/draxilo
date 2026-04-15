@@ -182,7 +182,7 @@ async function enrichFromWebsite(homepageUrl: string, domain: string | null, mod
         model,
         temperature: 0.2,
         maxOutputTokens: 800,
-        schemaName: "DraxiloWebsiteEnrichment",
+        schemaName: "DraxionWebsiteEnrichment",
         jsonSchema: WEBSITE_ENRICHMENT_JSON_SCHEMA,
         prompt,
         parse: (json) => websiteEnrichmentSchema.parse(json),
@@ -207,7 +207,7 @@ async function enrichFromForm(input: DemoRequestBody, model: string): Promise<We
         model,
         temperature: 0.25,
         maxOutputTokens: 800,
-        schemaName: "DraxiloWebsiteEnrichment",
+        schemaName: "DraxionWebsiteEnrichment",
         jsonSchema: WEBSITE_ENRICHMENT_JSON_SCHEMA,
         prompt,
         parse: (json) => websiteEnrichmentSchema.parse(json),
@@ -301,7 +301,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
         model: msgModel,
         temperature: 0.2,
         maxOutputTokens: 200,
-        schemaName: "DraxiloOutreachSubject",
+        schemaName: "DraxionOutreachSubject",
         jsonSchema: SUBJECT_JSON_SCHEMA,
         prompt: outreachSubjectPrompt.build({
           language: input.language,
@@ -322,7 +322,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
         model: msgModel,
         temperature: 0.2,
         maxOutputTokens: 900,
-        schemaName: "DraxiloOutreachBody",
+        schemaName: "DraxionOutreachBody",
         jsonSchema: BODY_JSON_SCHEMA,
         prompt: outreachBodyPrompt.build({
           language: input.language,
@@ -359,7 +359,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
           model: msgModel,
           temperature: 0.2,
           maxOutputTokens: 900,
-          schemaName: "DraxiloOutreachBody",
+          schemaName: "DraxionOutreachBody",
           jsonSchema: BODY_JSON_SCHEMA,
           prompt:
             outreachBodyPrompt.build({
@@ -398,7 +398,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
         model: msgModel,
         temperature: 0.2,
         maxOutputTokens: 500,
-        schemaName: "DraxiloLeadScore",
+        schemaName: "DraxionLeadScore",
         jsonSchema: LEAD_SCORE_JSON_SCHEMA,
         prompt: leadScoringPrompt.build({
           language: input.language,

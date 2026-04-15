@@ -75,7 +75,7 @@ export async function enrichLeadById(params: { workspaceId: string; leadId: stri
           model: process.env.OPENAI_ENRICH_MODEL ?? "gpt-4o-mini",
           temperature: 0.2,
           maxOutputTokens: 800,
-          schemaName: "DraxiloWebsiteEnrichment",
+          schemaName: "DraxionWebsiteEnrichment",
           jsonSchema: {
             type: "object",
             additionalProperties: false,

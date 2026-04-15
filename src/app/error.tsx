@@ -13,7 +13,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
     <html lang="en">
       <body className="min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
         <div className="mx-auto max-w-xl px-6 py-16">
-          <div className="text-sm font-semibold tracking-tight">Draxilo</div>
+          <div className="text-sm font-semibold tracking-tight">Draxion</div>
           <h1 className="mt-4 text-2xl font-semibold tracking-tight">Something went wrong.</h1>
           <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
             Try again. If this keeps happening, check server logs.

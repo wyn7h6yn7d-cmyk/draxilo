@@ -2,7 +2,7 @@ import type { Dictionary } from "../dictionary";
 
 export const ru: Dictionary = {
   app: {
-    name: "Draxilo",
+    name: "Draxion",
   },
   nav: {
     login: "Войти",
@@ -16,11 +16,11 @@ export const ru: Dictionary = {
     demo: "Демо",
   },
   demo: {
-    metaTitle: "Draxilo — интерактивное демо",
+    metaTitle: "Draxion — интерактивное демо",
     metaDescription:
-      "Попробуйте AI‑workflow Draxilo без аккаунта: обогащение, письмо и превью кампании в одном экране.",
+      "Попробуйте AI‑workflow Draxion без аккаунта: обогащение, письмо и превью кампании в одном экране.",
     badge: "Публичное демо · OpenAI и сайт, если доступен",
-    headline: "Пройдите workflow Draxilo прямо в браузере",
+    headline: "Пройдите workflow Draxion прямо в браузере",
     subheadline:
       "Введите контекст компании, запустите анализ и посмотрите, как AI находит угол, черновик письма и превью кампании — без входа.",
     disclaimer:
@@ -94,10 +94,10 @@ export const ru: Dictionary = {
     },
     error: {
       title: "Демо не ответило",
-      text: "Проверьте сеть и повторите. Базы нет — только mock API.",
+      text: "Проверьте соединение и повторите. Данные этой демо-сессии не сохраняются.",
       retry: "Повторить",
       openaiUnconfigured:
-        "Не задан OPENAI_API_KEY. Добавьте ключ в окружение — иначе демо использует статический превью-режим.",
+        "Не задан OPENAI_API_KEY. Добавьте ключ в окружение — без него демо не запустится.",
       aiFailed: "Запрос к AI не удался (сеть или провайдер). Повторите или проверьте OPENAI_API_KEY.",
     },
     cta: {
@@ -110,7 +110,7 @@ export const ru: Dictionary = {
   marketing: {
     headline: "Найдите нужных клиентов. Пишите точнее. Получайте больше ответов.",
     subheadline:
-      "Draxilo находит лидов в публичных источниках и CSV, обогащает данные, создаёт персональные сообщения и помогает запускать кампании без хаоса.",
+      "Draxion находит лидов в публичных источниках и CSV, обогащает данные, создаёт персональные сообщения и помогает запускать кампании без хаоса.",
     primaryCta: "Начать бесплатно",
     secondaryCta: "Войти",
     ui: {
@@ -119,7 +119,7 @@ export const ru: Dictionary = {
       featuresSubtitle: "Один поток: от поиска до отправки. Меньше ручной работы, больше качественных диалогов.",
       featureCardKicker: "Сигналы в реальном времени",
       productPreview: {
-        windowTitle: "Draxilo · workspace",
+        windowTitle: "Draxion · workspace",
         tabLeads: "Лиды",
         tabEnrich: "Обогащение",
         tabCompose: "Сообщение",
@@ -147,7 +147,7 @@ export const ru: Dictionary = {
         composePanelTitle: "Черновик (RU)",
         generating: "Генерирую…",
         subjectLine: "Удачный момент упорядочить план обслуживания",
-        bodySample: "Здравствуйте — Draxilo находит похожие компании и помогает писать короткие, живые письма.",
+        bodySample: "Здравствуйте — Draxion находит похожие компании и помогает писать короткие, живые письма.",
         campaignPanelTitle: "Кампания",
         campaignName: "Q2 · Nordic outbound",
         campaignState: "Отправка",
@@ -222,7 +222,7 @@ export const ru: Dictionary = {
           },
           deliverability: {
             q: "Это испортит deliverability?",
-            a: "Draxilo построен вокруг flow утверждения и настройки отправителя. Deliverability всё равно зависит от домена и качества списка.",
+            a: "Draxion построен вокруг flow утверждения и настройки отправителя. Deliverability всё равно зависит от домена и качества списка.",
           },
           languages: {
             q: "ET/EN/RU действительно поддерживаются end‑to‑end?",
@@ -256,7 +256,7 @@ export const ru: Dictionary = {
     },
     signup: {
       title: "Создайте аккаунт",
-      subtitle: "Начните с Draxilo за пару минут.",
+      subtitle: "Начните с Draxion за пару минут.",
       action: "Зарегистрироваться",
       haveAccount: "Уже есть аккаунт?",
     },
@@ -307,7 +307,7 @@ export const ru: Dictionary = {
       idealCustomerExamples: "Примеры идеальных клиентов",
     },
     placeholders: {
-      businessName: "Напр. Draxilo",
+      businessName: "Напр. Draxion",
       websiteUrl: "https://…",
       whatYouSell: "Напр. AI‑лидогенерация и автоматизация outbound для B2B",
       targetCustomerDescription: "Напр. B2B SaaS 10–200 сотрудников в Европе",
@@ -334,7 +334,7 @@ export const ru: Dictionary = {
     subtitle: "Ваш workspace одним взглядом.",
     onboarding: {
       title: "Завершите настройку",
-      subtitle: "Добавьте детали, чтобы Draxilo лучше скорил лидов и генерировал сообщения.",
+      subtitle: "Добавьте детали, чтобы Draxion лучше скорил лидов и генерировал сообщения.",
       cta: "Продолжить onboarding",
     },
     kpis: {
@@ -355,7 +355,7 @@ export const ru: Dictionary = {
       },
       csvImport: {
         title: "Импорт CSV",
-        subtitle: "Загрузите вашу базу в Draxilo.",
+        subtitle: "Загрузите вашу базу в Draxion.",
         action: "Загрузить CSV",
       },
       createCampaign: {
@@ -407,7 +407,7 @@ export const ru: Dictionary = {
       },
       mapping: {
         title: "Сопоставление",
-        subtitle: "Свяжите колонки CSV с полями Draxilo.",
+        subtitle: "Свяжите колонки CSV с полями Draxion.",
         skip: "(пропустить)",
       },
       preview: {

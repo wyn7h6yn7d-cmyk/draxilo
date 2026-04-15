@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 import { signOutAction } from "@/app/actions/auth";
 import { LocaleSwitcher } from "@/components/locale-switcher";
-import { DraxiloLogo, DraxiloMark } from "@/components/brand/draxilo-logo";
+import { DraxionLogo, DraxionMark } from "@/components/brand/draxion-logo";
 import { Button } from "@/components/ui/button";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { getLocale, LOCALE_COOKIE } from "@/lib/i18n/locale";
@@ -38,7 +38,7 @@ export default async function MainAppLayout({ children }: { children: React.Reac
       <aside className="hidden w-60 shrink-0 border-r border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950 md:block">
         <div className="mb-6 flex items-center justify-between">
           <Link href="/app" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600">
-            <DraxiloLogo />
+            <DraxionLogo />
           </Link>
           <LocaleSwitcher locale={locale} />
         </div>
@@ -79,7 +79,7 @@ export default async function MainAppLayout({ children }: { children: React.Reac
         <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800 md:hidden">
           <Link href="/app" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600">
             <div className="flex items-center gap-2">
-              <DraxiloMark className="h-8 w-8" />
+              <DraxionMark className="h-8 w-8" />
               <span className="text-sm font-semibold tracking-tight">{dict.app.name}</span>
             </div>
           </Link>

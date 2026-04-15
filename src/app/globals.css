@@ -37,41 +37,41 @@ body {
   color: var(--foreground);
 }
 
-@keyframes draxilo-shimmer {
+@keyframes draxion-shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
-@keyframes draxilo-float {
+@keyframes draxion-float {
   0% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -10px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
 
-@keyframes draxilo-drift {
+@keyframes draxion-drift {
   0% { transform: translate3d(-2%, -1%, 0) scale(1); }
   50% { transform: translate3d(2%, 1%, 0) scale(1.03); }
   100% { transform: translate3d(-2%, -1%, 0) scale(1); }
 }
 
-@keyframes draxilo-twinkle {
+@keyframes draxion-twinkle {
   0%, 100% { opacity: 0.35; }
   50% { opacity: 0.85; }
 }
 
-@keyframes draxilo-scan {
+@keyframes draxion-scan {
   0% { transform: translate3d(-30%, -30%, 0); opacity: 0; }
   15% { opacity: 0.55; }
   50% { opacity: 0.25; }
   100% { transform: translate3d(30%, 30%, 0); opacity: 0; }
 }
 
-@keyframes draxilo-grid-drift {
+@keyframes draxion-grid-drift {
   0% { background-position: 0 0, 0 0; }
   100% { background-position: 120px 72px, 72px 120px; }
 }
 
-@keyframes draxilo-breathe {
+@keyframes draxion-breathe {
   0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.65; }
   50% { transform: translate3d(0,-1px,0) scale(1.01); opacity: 0.95; }
 }

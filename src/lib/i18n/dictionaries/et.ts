@@ -2,7 +2,7 @@ import type { Dictionary } from "../dictionary";
 
 export const et: Dictionary = {
   app: {
-    name: "Draxilo",
+    name: "Draxion",
   },
   nav: {
     login: "Logi sisse",
@@ -16,11 +16,11 @@ export const et: Dictionary = {
     demo: "Proovi demo",
   },
   demo: {
-    metaTitle: "Draxilo — interaktiivne demo",
+    metaTitle: "Draxion — interaktiivne demo",
     metaDescription:
-      "Proovi Draxilo AI töövoogu ilma kontota: rikastus, sõnum ja kampaania eelvaade ühes vaates.",
+      "Proovi Draxioni AI töövoogu ilma kontota: rikastus, sõnum ja kampaania eelvaade ühes vaates.",
     badge: "Avalik demo · OpenAI + võimalusel päris koduleht",
-    headline: "Koge Draxilo töövoogu otse brauseris",
+    headline: "Koge Draxioni töövoogu otse brauseris",
     subheadline:
       "Sisesta ettevõtte kontekst, käivita analüüs ja vaata, kuidas AI leiab haagi, koostab sõnumi ja seab kampaania eelvaate — ilma sisselogimiseta.",
     disclaimer:
@@ -94,10 +94,10 @@ export const et: Dictionary = {
     },
     error: {
       title: "Demo ei vastanud",
-      text: "Kontrolli võrku ja proovi uuesti. Andmebaasi pole — see on ainult mock API.",
+      text: "Kontrolli ühendust ja proovi uuesti. Demo ei salvesta sinu sisestust püsivalt.",
       retry: "Proovi uuesti",
       openaiUnconfigured:
-        "OpenAI API võti puudub. Lisa OPENAI_API_KEY keskkonnamuutujasse — ilma selleta jookseb demo vaid eelmääratud eelvaatega.",
+        "OpenAI API võti puudub. Lisa keskkonnamuutujasse OPENAI_API_KEY — ilma selleta demo ei tööta.",
       aiFailed:
         "AI päring ebaõnnestus (võrgu või teenuse viga). Proovi uuesti või kontrolli, kas OPENAI_API_KEY on kehtiv.",
     },
@@ -111,7 +111,7 @@ export const et: Dictionary = {
   marketing: {
     headline: "Leia õiged kliendid. Kirjuta neile paremini. Saa rohkem vastuseid.",
     subheadline:
-      "Draxilo leiab leade avalikest allikatest ja CSV-dest, rikastab andmeid, loob personaalseid sõnumeid ning aitab kampaaniad käima panna.",
+      "Draxion leiab leade avalikest allikatest ja CSV-dest, rikastab andmeid, loob personaalseid sõnumeid ning aitab kampaaniad käima panna.",
     primaryCta: "Alusta tasuta",
     secondaryCta: "Logi sisse",
     ui: {
@@ -120,7 +120,7 @@ export const et: Dictionary = {
       featuresSubtitle: "Üks töövoog: otsingust saateni. Vähem käsitööd, rohkem kvaliteetseid kõnemänge.",
       featureCardKicker: "Reaalajas signaalid",
       productPreview: {
-        windowTitle: "Draxilo · workspace",
+        windowTitle: "Draxion · workspace",
         tabLeads: "Leidid",
         tabEnrich: "Rikastus",
         tabCompose: "Sõnum",
@@ -148,7 +148,7 @@ export const et: Dictionary = {
         composePanelTitle: "Sõnum (ET)",
         generating: "Genereerin…",
         subjectLine: "Ideaalne aeg korrastada hooldusplaani",
-        bodySample: "Tere! Draxilo leiab sarnaseid kontakte ja aitab koostada lühike, inimlik sõnum.",
+        bodySample: "Tere! Draxion leiab sarnaseid kontakte ja aitab koostada lühike, inimlik sõnum.",
         campaignPanelTitle: "Kampaania",
         campaignName: "Q2 · Nordic outbound",
         campaignState: "Saadan",
@@ -223,7 +223,7 @@ export const et: Dictionary = {
           },
           deliverability: {
             q: "Kas see rikub mu deliverability?",
-            a: "Draxilo eeldab kinnitamise workflow’d ja saatja seadistust. Deliverability sõltub endiselt domeeni seadistusest ja listi kvaliteedist.",
+            a: "Draxion eeldab kinnitamise töövoogu ja saatja seadistust. Kohalejõudmine sõltub endiselt domeenist ja listi kvaliteedist.",
           },
           languages: {
             q: "Kas ET/EN/RU on päriselt end‑to‑end?",
@@ -257,7 +257,7 @@ export const et: Dictionary = {
     },
     signup: {
       title: "Loo konto",
-      subtitle: "Alusta Draxilo’ga minutitega.",
+      subtitle: "Alusta Draxioniga minutitega.",
       action: "Loo konto",
       haveAccount: "Sul on konto?",
     },
@@ -308,7 +308,7 @@ export const et: Dictionary = {
       idealCustomerExamples: "Näited ideaalsetest klientidest",
     },
     placeholders: {
-      businessName: "Nt Draxilo OÜ",
+      businessName: "Nt Draxion OÜ",
       websiteUrl: "https://…",
       whatYouSell: "Nt AI‑põhine lead generation ja outreach automaatika",
       targetCustomerDescription: "Nt 10–200 töötajaga B2B SaaS ettevõtted Euroopas",
@@ -335,7 +335,7 @@ export const et: Dictionary = {
     subtitle: "Sinu workspace ühe pilguga.",
     onboarding: {
       title: "Lõpeta seadistus",
-      subtitle: "Lisa paar detaili, et Draxilo saaks skoorida leide ja genereerida paremaid sõnumeid.",
+      subtitle: "Lisa paar detaili, et Draxion saaks skoorida leide ja genereerida paremaid sõnumeid.",
       cta: "Jätka onboardingut",
     },
     kpis: {
@@ -356,7 +356,7 @@ export const et: Dictionary = {
       },
       csvImport: {
         title: "Impordi CSV",
-        subtitle: "Too olemasolev nimekiri Draxilo’sse.",
+        subtitle: "Too olemasolev nimekiri Draxionisse.",
         action: "Lae CSV üles",
       },
       createCampaign: {
@@ -408,7 +408,7 @@ export const et: Dictionary = {
       },
       mapping: {
         title: "Kaardistus",
-        subtitle: "Seo CSV veerud Draxilo väljadega.",
+        subtitle: "Seo CSV veerud Draxioni väljadega.",
         skip: "(jäta vahele)",
       },
       preview: {

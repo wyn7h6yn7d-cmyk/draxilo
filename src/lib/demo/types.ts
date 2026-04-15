@@ -14,9 +14,9 @@ export type DemoRequestBody = {
   whatYouSell: string;
   language: DemoLanguage;
   tone: DemoTone;
-  /** Bump to vary mock email wording */
+  /** Bump to vary generated email wording */
   variantSalt?: number;
-  /** full | regenerate_email — same mock path, different salt behavior */
+  /** full | regenerate_email — same pipeline, different salt behavior */
   intent?: "full" | "regenerate_email";
   /** Echo from last response to skip re-fetching / re-enriching (regenerate, new tone) */
   continuation?: DemoContinuation | null;

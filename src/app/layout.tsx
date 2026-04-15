@@ -15,9 +15,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteDescription =
+  "AI-powered B2B lead generation, enrichment, and outreach—find accounts, draft messages, run campaigns.";
+
 export const metadata: Metadata = {
-  title: "Draxilo",
-  description: "AI-powered lead generation and outreach.",
+  metadataBase: new URL("https://draxion.eu"),
+  title: {
+    default: "Draxion",
+    template: "%s · Draxion",
+  },
+  description: siteDescription,
+  applicationName: "Draxion",
+  openGraph: {
+    type: "website",
+    siteName: "Draxion",
+    title: "Draxion",
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Draxion",
+    description: siteDescription,
+  },
 };
 
 export default async function RootLayout({

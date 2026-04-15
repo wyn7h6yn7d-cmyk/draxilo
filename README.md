@@ -1,6 +1,6 @@
-## Draxilo
+## Draxion
 
-Draxilo is a production-minded MVP for **AI-assisted lead generation and outreach**:
+Draxion is a production-minded MVP for **AI-assisted lead generation and outreach**:
 - Find/import leads (public web + CSV)
 - Enrich companies from their websites
 - Generate personalized outreach (ET/EN/RU)

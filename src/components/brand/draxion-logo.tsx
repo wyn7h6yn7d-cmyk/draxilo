@@ -7,7 +7,7 @@ type LogoProps = {
   title?: string;
 };
 
-export function DraxiloMark({ className, title = "Draxilo" }: LogoProps) {
+export function DraxionMark({ className, title = "Draxion" }: LogoProps) {
   return (
     <svg
       viewBox="0 0 56 56"
@@ -40,14 +40,13 @@ export function DraxiloMark({ className, title = "Draxilo" }: LogoProps) {
   );
 }
 
-export function DraxiloLogo({ className, title = "Draxilo" }: LogoProps) {
+export function DraxionLogo({ className, title = "Draxion" }: LogoProps) {
   return (
     <div className={cn("inline-flex items-center gap-2", className)} aria-label={title}>
-      <DraxiloMark className="h-9 w-9" />
+      <DraxionMark className="h-9 w-9" />
       <span className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-        Draxilo
+        Draxion
       </span>
     </div>
   );
 }
-

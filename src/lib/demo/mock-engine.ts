@@ -156,7 +156,7 @@ const COPY: Record<DemoLanguage, CopyPack> = {
       ];
       const body = `${t.o} Märkasin ${domain} ja seda, et ${company} fokusseerub „${sell}“ peale. ${t.c}
 
-Lühidalt: Draxilo aitab leida sarnaseid kontosid, rikastada konteksti ja kirjutada ${ind} jaoks sobiva tooniga sõnumeid — ilma käsitsi copy paste’ta.
+Lühidalt: Draxion aitab leida sarnaseid kontosid, rikastada konteksti ja kirjutada ${ind} jaoks sobiva tooniga sõnumeid — ilma käsitsi copy paste’ta.
 
 Parimate soovidega`;
 
@@ -277,7 +277,7 @@ Parimate soovidega`;
       ];
       const body = `${t.o} I noticed ${domain} and that ${company} focuses on “${sell}”. ${t.c}
 
-Briefly: Draxilo helps find similar accounts, enrich context, and draft on‑brand outreach—without manual copy‑paste.
+Briefly: Draxion helps find similar accounts, enrich context, and draft on‑brand outreach—without manual copy‑paste.
 
 Best`;
 
@@ -398,7 +398,7 @@ Best`;
       ];
       const body = `${t.o} Заметил(а) ${domain}: ${company} фокусируется на «${sell}». ${t.c}
 
-Коротко: Draxilo помогает находить похожие компании, обогащать контекст и писать outreach в нужном тоне — без ручного копипаста.
+Коротко: Draxion помогает находить похожие компании, обогащать контекст и писать outreach в нужном тоне — без ручного копипаста.
 
 С уважением`;
 

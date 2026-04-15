@@ -10,7 +10,7 @@ describe("outreachBodyPrompt", () => {
       tone: "DIRECT",
       length: "SHORT",
       wordLimit: 120,
-      workspaceBusinessName: "Draxilo",
+      workspaceBusinessName: "Draxion",
       whatYouSell: "AI outreach",
       callToAction: "book a quick call",
       companyName: "Acme",
