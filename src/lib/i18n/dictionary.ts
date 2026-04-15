@@ -89,9 +89,14 @@ export type Dictionary = {
     };
     error: {
       title: string;
+      /** Shown when OPENAI_API_KEY is missing (clearer than generic title). */
+      openaiTitle: string;
       text: string;
       retry: string;
-      openaiUnconfigured: string;
+      /** Short intro above the setup steps for missing OpenAI key. */
+      openaiUnconfiguredLead: string;
+      /** Numbered setup steps (local + production). */
+      openaiUnconfiguredSteps: string[];
       aiFailed: string;
     };
     cta: {

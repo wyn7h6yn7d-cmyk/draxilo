@@ -94,10 +94,17 @@ export const en: Dictionary = {
     },
     error: {
       title: "Demo request failed",
+      openaiTitle: "OpenAI isn’t configured",
       text: "Check your connection and try again. Nothing from this demo session is persisted.",
       retry: "Retry",
-      openaiUnconfigured:
-        "OPENAI_API_KEY is not set. Add it to your environment—the demo will not run without it.",
+      openaiUnconfiguredLead:
+        "The server couldn’t find OPENAI_API_KEY. This demo needs a valid OpenAI API key.",
+      openaiUnconfiguredSteps: [
+        "Local dev: in the `leadforge` folder, create or edit `.env` (see `.env.example`).",
+        "Add OPENAI_API_KEY=\"sk-...\" — create a key at https://platform.openai.com/api-keys",
+        "Restart the dev server (`npm run dev`) or redeploy; environment variables load at startup.",
+        "Production (e.g. Vercel): Project → Settings → Environment Variables → add OPENAI_API_KEY, then redeploy.",
+      ],
       aiFailed: "The AI request failed (network or provider error). Retry or verify your OPENAI_API_KEY is valid.",
     },
     cta: {

@@ -94,10 +94,17 @@ export const et: Dictionary = {
     },
     error: {
       title: "Demo ei vastanud",
+      openaiTitle: "OpenAI pole seadistatud",
       text: "Kontrolli ühendust ja proovi uuesti. Demo ei salvesta sinu sisestust püsivalt.",
       retry: "Proovi uuesti",
-      openaiUnconfigured:
-        "OpenAI API võti puudub. Lisa keskkonnamuutujasse OPENAI_API_KEY — ilma selleta demo ei tööta.",
+      openaiUnconfiguredLead:
+        "Server ei leidnud keskkonnamuutujat OPENAI_API_KEY. Demo vajab kehtivat OpenAI võtit.",
+      openaiUnconfiguredSteps: [
+        "Kui arendad kohapeal: `leadforge` kaustas loo või täienda `.env` (võid alustada `.env.example` põhjal).",
+        "Lisa rida OPENAI_API_KEY=\"sk-...\" — võtme saad https://platform.openai.com/api-keys",
+        "Taaskäivita dev-server (`npm run dev`) või tee uuesti deploy; muutujad laetakse käivitamisel.",
+        "Tootmises (nt Vercel): Project → Settings → Environment Variables → lisa OPENAI_API_KEY ja redeploy.",
+      ],
       aiFailed:
         "AI päring ebaõnnestus (võrgu või teenuse viga). Proovi uuesti või kontrolli, kas OPENAI_API_KEY on kehtiv.",
     },

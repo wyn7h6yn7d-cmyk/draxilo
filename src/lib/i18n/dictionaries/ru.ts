@@ -94,10 +94,17 @@ export const ru: Dictionary = {
     },
     error: {
       title: "Демо не ответило",
+      openaiTitle: "OpenAI не настроен",
       text: "Проверьте соединение и повторите. Данные этой демо-сессии не сохраняются.",
       retry: "Повторить",
-      openaiUnconfigured:
-        "Не задан OPENAI_API_KEY. Добавьте ключ в окружение — без него демо не запустится.",
+      openaiUnconfiguredLead:
+        "На сервере не найден OPENAI_API_KEY. Для демо нужен действующий ключ OpenAI.",
+      openaiUnconfiguredSteps: [
+        "Локально: в папке `leadforge` создайте или отредактируйте `.env` (ориентир — `.env.example`).",
+        "Добавьте OPENAI_API_KEY=\"sk-...\" — ключ: https://platform.openai.com/api-keys",
+        "Перезапустите dev-сервер (`npm run dev`) или сделайте redeploy — переменные читаются при старте.",
+        "В проде (например Vercel): Project → Settings → Environment Variables → добавьте OPENAI_API_KEY и redeploy.",
+      ],
       aiFailed: "Запрос к AI не удался (сеть или провайдер). Повторите или проверьте OPENAI_API_KEY.",
     },
     cta: {
