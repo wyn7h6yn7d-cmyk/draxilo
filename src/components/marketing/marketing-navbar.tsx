@@ -24,18 +24,26 @@ export function MarketingNavbar({
 
   return (
     <div className="fixed left-0 right-0 top-0 z-50">
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div
           className={[
-            "mt-4 flex flex-wrap items-center justify-between gap-2 rounded-2xl border px-3 py-2.5 backdrop-blur-xl backdrop-saturate-150 transition-[box-shadow,background-color,border-color] duration-300 sm:flex-nowrap sm:gap-3",
+            "relative mt-4 flex flex-wrap items-center justify-between gap-2 rounded-3xl border px-4 py-3 backdrop-blur-xl backdrop-saturate-150 transition-[box-shadow,background-color,border-color] duration-300 sm:flex-nowrap sm:gap-3",
             elevated
-              ? "border-[rgba(255,255,255,0.11)] bg-[rgba(11,15,20,0.78)] shadow-[0_12px_48px_rgba(0,0,0,0.55),0_0_0_1px_rgba(91,140,255,0.06)_inset]"
-              : "border-[var(--border)] bg-[rgba(11,15,20,0.58)] shadow-none",
+              ? "border-[rgba(255,255,255,0.11)] bg-[rgba(11,15,20,0.82)] shadow-[0_12px_48px_rgba(0,0,0,0.55),0_0_0_1px_rgba(91,140,255,0.06)_inset]"
+              : "border-[var(--border)] bg-[rgba(26,31,43,0.44)] shadow-none",
           ].join(" ")}
         >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-3xl opacity-60 [background:radial-gradient(80%_120%_at_50%_0%,rgba(91,140,255,0.16),transparent_60%),radial-gradient(60%_90%_at_15%_120%,rgba(124,247,212,0.10),transparent_55%)]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 -bottom-px h-px opacity-70 [background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]"
+          />
           <Link
             href="/"
-            className="group inline-flex items-center gap-3 rounded-xl px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+            className="group relative z-10 inline-flex items-center gap-3 rounded-2xl px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
           >
             <DraxionMark className="h-9 w-9 transition-transform duration-300 group-hover:scale-[1.03]" />
             <span className="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-[rgba(255,255,255,0.92)]">
@@ -44,7 +52,7 @@ export function MarketingNavbar({
             <span className="pointer-events-none hidden h-px w-0 bg-[linear-gradient(90deg,transparent,rgba(91,140,255,0.7),transparent)] transition-all duration-300 group-hover:w-8 sm:block" />
           </Link>
 
-          <div className="flex flex-1 flex-wrap items-center justify-end gap-1.5 sm:flex-nowrap sm:gap-2">
+          <div className="relative z-10 flex flex-1 flex-wrap items-center justify-end gap-1.5 sm:flex-nowrap sm:gap-2">
             <DemoNavLink href="/demo" label={dict.nav.demo} active={current === "demo"} />
             <LocaleSwitcher locale={locale} surface="glass" />
             <NavLink href="/login" label={dict.nav.login} />
