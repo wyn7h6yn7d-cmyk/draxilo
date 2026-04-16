@@ -361,10 +361,6 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
 
         <div className="relative p-4 sm:p-5" style={{ transform: "translateZ(16px)" }}>
           <div className="flex items-center justify-between gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.25)] px-3 py-1.5 text-[11px] font-semibold text-[rgba(255,255,255,0.74)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_14px_rgba(124,247,212,0.45)]" />
-              {dict.marketing.ui.heroSurfaceTitle}
-            </div>
             <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroSurfaceFlowShort}</div>
           </div>
 
@@ -386,13 +382,8 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
       <div className="pointer-events-none absolute inset-0 [background:radial-gradient(55%_55%_at_50%_20%,rgba(91,140,255,0.12),transparent_62%)]" />
 
       <div className="relative">
-        <div className="flex items-center justify-between gap-3">
-          <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroCoreTitle}</div>
-          <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroCoreRule}</div>
-        </div>
-
         <div
-          className="relative mt-4 overflow-hidden rounded-[28px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.46)] p-4 shadow-[0_26px_90px_rgba(0,0,0,0.45)] sm:p-5"
+          className="relative overflow-hidden rounded-[28px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.46)] p-4 shadow-[0_26px_90px_rgba(0,0,0,0.45)] sm:p-5"
           style={{ perspective: 1000 }}
         >
           <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.14),transparent_62%)]" />
@@ -419,11 +410,6 @@ function UnifiedCommandPreview({ dict, reduced }: { dict: Dictionary; reduced: b
     <div className="relative">
       {/* Top row: title + tabs */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.22)] px-3 py-1.5 text-[11px] font-semibold text-[rgba(255,255,255,0.76)]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_14px_rgba(124,247,212,0.45)]" />
-          {dict.marketing.ui.heroSurfaceTitle}
-        </div>
-
         <div className="flex gap-2 overflow-x-auto pb-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {tabs.map((t) => {
             const isActive = t.id === active;
