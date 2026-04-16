@@ -14,6 +14,8 @@ export type DemoRequestBody = {
   whatYouSell: string;
   language: DemoLanguage;
   tone: DemoTone;
+  /** Optional scenario hint for offline simulation. */
+  scenarioHint?: "maintenance" | "b2b_saas" | "local_service" | "industrial_supplier" | "agency" | null;
   /** Bump to vary generated email wording */
   variantSalt?: number;
   /** full | regenerate_email — same pipeline, different salt behavior */

@@ -16,37 +16,55 @@ import type {
 } from "@/lib/demo/types";
 import { MarketingNavbar } from "@/components/marketing/marketing-navbar";
 import { MarketingPageAtmosphere } from "@/components/marketing/marketing-page-atmosphere";
-import { AiChatPanel } from "@/components/ai/chat-panel";
 
 const PRESETS: {
   id: string;
   companyName: string;
   websiteUrl: string;
   whatYouSell: string;
+  scenarioHint?: "maintenance" | "b2b_saas" | "local_service" | "industrial_supplier" | "agency";
 }[] = [
   {
     id: "energy",
     companyName: "Baltic Current OÜ",
     websiteUrl: "https://balticcurrent.example.ee",
     whatYouSell: "Taastuvenergia lahendused ja võrgu bilansi teenused ettevõtetele",
+    scenarioHint: "b2b_saas",
   },
   {
     id: "agency",
     companyName: "Northloom Studio",
     websiteUrl: "https://northloom.example.com",
     whatYouSell: "Bränding, veeb ja performance turundus B2B klientidele",
+    scenarioHint: "agency",
   },
   {
     id: "saas",
     companyName: "Pipeledger",
     websiteUrl: "https://pipeledger.example.com",
     whatYouSell: "Finants- ja arvete töövoogude tarkvara kasvavatele tiimidele",
+    scenarioHint: "b2b_saas",
   },
   {
     id: "local",
     companyName: "Hea Kodu Hooldus",
     websiteUrl: "https://heakodu.example.ee",
     whatYouSell: "Korteriühistute ja ärikinnisvara tehniline hooldus",
+    scenarioHint: "maintenance",
+  },
+  {
+    id: "industrial",
+    companyName: "Venipak Eesti OÜ",
+    websiteUrl: "https://www.venipak.ee",
+    whatYouSell: "Pakkide ja aluste transport",
+    scenarioHint: "industrial_supplier",
+  },
+  {
+    id: "supplier",
+    companyName: "Nordic Fasteners",
+    websiteUrl: "https://nordicfasteners.example.com",
+    whatYouSell: "Tööstuslikud kinnitustarvikud, tarneahel ja RFQ teenus",
+    scenarioHint: "industrial_supplier",
   },
 ];
 
@@ -74,6 +92,9 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
   const [companyName, setCompanyName] = React.useState("");
   const [websiteUrl, setWebsiteUrl] = React.useState("");
   const [whatYouSell, setWhatYouSell] = React.useState("");
+  const [scenarioHint, setScenarioHint] = React.useState<
+    "maintenance" | "b2b_saas" | "local_service" | "industrial_supplier" | "agency" | null
+  >(null);
   const [language, setLanguage] = React.useState<DemoLanguage>(
     locale === "en" ? "en" : locale === "ru" ? "ru" : "et",
   );
@@ -143,6 +164,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
             whatYouSell,
             language,
             tone: toneVal,
+            scenarioHint,
             variantSalt: salt,
             intent,
             continuation: useContinuation,
@@ -195,6 +217,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
     setCompanyName(p.companyName);
     setWebsiteUrl(p.websiteUrl);
     setWhatYouSell(p.whatYouSell);
+    setScenarioHint(p.scenarioHint ?? null);
     setContinuation(null);
     setPhase("idle");
     setResult(null);
@@ -705,9 +728,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
           </div>
         </div>
 
-        <div className="mt-12">
-          <AiChatPanel language={language} />
-        </div>
+          {/* Offline public demo: no live AI chat calls. */}
       </main>
     </MarketingPageAtmosphere>
   );

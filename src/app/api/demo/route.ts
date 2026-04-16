@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { websiteEnrichmentSchema } from "@/lib/ai/schemas";
 import { safeUserFacingErrorCode } from "@/lib/ai/formatters";
-import { runAIDemoPipeline } from "@/lib/demo/ai-pipeline";
+import { simulateDemoAnalysis } from "@/lib/demo/sim/generator";
 import type { DemoContinuation, DemoLanguage, DemoRequestBody, DemoTone } from "@/lib/demo/types";
 
 export const runtime = "nodejs";
@@ -53,6 +53,14 @@ export async function POST(req: Request) {
     const tone = TONES.has(raw.tone ?? "") ? (raw.tone as DemoTone) : "direct";
     const variantSalt = typeof raw.variantSalt === "number" && Number.isFinite(raw.variantSalt) ? raw.variantSalt : 0;
     const continuation = parseContinuation(raw.continuation);
+    const scenarioHint =
+      raw.scenarioHint === "maintenance" ||
+      raw.scenarioHint === "b2b_saas" ||
+      raw.scenarioHint === "local_service" ||
+      raw.scenarioHint === "industrial_supplier" ||
+      raw.scenarioHint === "agency"
+        ? raw.scenarioHint
+        : null;
 
     if (companyName.length < 2 || whatYouSell.length < 2) {
       return NextResponse.json({ error: "validation" }, { status: 400 });
@@ -64,16 +72,11 @@ export async function POST(req: Request) {
       whatYouSell,
       language,
       tone,
+      scenarioHint,
       variantSalt,
       intent: raw.intent === "regenerate_email" ? "regenerate_email" : "full",
       continuation,
     };
-
-    const hasAiKey = Boolean(process.env.GEMINI_API_KEY?.trim());
-    if (!hasAiKey) {
-      console.warn(`[demo][${requestId}] AI unavailable (missing key)`);
-      return NextResponse.json({ error: "ai_unavailable", requestId }, { status: 503, headers: { "x-request-id": requestId } });
-    }
 
     try {
       const key = cacheKey(body);
@@ -83,7 +86,7 @@ export async function POST(req: Request) {
         return NextResponse.json(cached.value, { headers: { "x-request-id": requestId, "x-cache": "hit" } });
       }
 
-      const result = await runAIDemoPipeline(body);
+      const result = simulateDemoAnalysis(body);
       demoCache.set(key, { value: result, expiresAt: Date.now() + DEMO_CACHE_TTL_MS });
       console.info(`[demo][${requestId}] ok in ${Date.now() - startedAt}ms`);
       return NextResponse.json(result, { headers: { "x-request-id": requestId } });
