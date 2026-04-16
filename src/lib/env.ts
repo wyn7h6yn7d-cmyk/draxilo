@@ -17,6 +17,8 @@ const serverSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
 
   LEADFORGE_ENABLE_MOCK_PUBLIC_WEB: z.string().optional(),
+  // Public demo engine: simulated (default) | live_ai (opt-in)
+  DEMO_ENGINE: z.enum(["simulated", "live_ai"]).optional(),
   NODE_ENV: z.enum(["development", "test", "production"]).optional(),
 });
 

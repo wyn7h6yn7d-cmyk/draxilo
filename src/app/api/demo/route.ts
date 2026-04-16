@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { websiteEnrichmentSchema } from "@/lib/ai/schemas";
 import { safeUserFacingErrorCode } from "@/lib/ai/formatters";
-import { simulateDemoAnalysis } from "@/lib/demo/sim/generator";
+import { runDemoEngine } from "@/lib/demo/engine";
 import type { DemoContinuation, DemoLanguage, DemoRequestBody, DemoTone } from "@/lib/demo/types";
 
 export const runtime = "nodejs";
@@ -86,7 +86,7 @@ export async function POST(req: Request) {
         return NextResponse.json(cached.value, { headers: { "x-request-id": requestId, "x-cache": "hit" } });
       }
 
-      const result = simulateDemoAnalysis(body);
+      const result = await runDemoEngine(body);
       demoCache.set(key, { value: result, expiresAt: Date.now() + DEMO_CACHE_TTL_MS });
       console.info(`[demo][${requestId}] ok in ${Date.now() - startedAt}ms`);
       return NextResponse.json(result, { headers: { "x-request-id": requestId } });
