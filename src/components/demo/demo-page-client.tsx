@@ -84,6 +84,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
   const [result, setResult] = React.useState<DemoAnalysisResponse | null>(null);
   const [continuation, setContinuation] = React.useState<DemoContinuation | null>(null);
   const [errorDetail, setErrorDetail] = React.useState<"generic" | "ai_unavailable" | "ai_failed" | null>(null);
+  const [errorRequestId, setErrorRequestId] = React.useState<string | null>(null);
   const [isRunning, setIsRunning] = React.useState(false);
 
   const steps = React.useMemo(
@@ -123,6 +124,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
 
       setIsRunning(true);
       setErrorDetail(null);
+      setErrorRequestId(null);
       setPhase("processing");
       setProcessingStep(0);
 
@@ -147,7 +149,13 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
           }),
         });
         if (!res.ok) {
-          const errJson = (await res.json().catch(() => ({}))) as { error?: string };
+          const errJson = (await res.json().catch(() => ({}))) as { error?: string; requestId?: string };
+          const reqId =
+            errJson.requestId ||
+            res.headers.get("x-request-id") ||
+            res.headers.get("x-vercel-id") ||
+            null;
+          if (reqId) setErrorRequestId(reqId);
           if (errJson.error === "ai_unavailable") setErrorDetail("ai_unavailable");
           else if (errJson.error === "ai_failed") setErrorDetail("ai_failed");
           else setErrorDetail("generic");
@@ -483,10 +491,28 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                         ? d.error.aiFailed
                         : d.error.text}
                   </p>
+                  {errorRequestId ? (
+                    <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[rgba(255,255,255,0.66)]">
+                      <span className="text-[rgba(255,255,255,0.46)]">Request ID</span>
+                      <code className="rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.45)] px-2 py-1 font-mono text-[11px] text-white">
+                        {errorRequestId}
+                      </code>
+                      <button
+                        type="button"
+                        className="rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.45)] px-2 py-1 text-[11px] font-semibold text-white hover:bg-[rgba(11,15,20,0.65)]"
+                        onClick={() => {
+                          void navigator.clipboard?.writeText(errorRequestId);
+                        }}
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  ) : null}
                   <button
                     type="button"
                     onClick={() => {
                       setErrorDetail(null);
+                      setErrorRequestId(null);
                       setPhase("idle");
                     }}
                     className="mt-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.5)] px-4 py-2 text-sm font-semibold text-white hover:bg-[rgba(11,15,20,0.7)]"
