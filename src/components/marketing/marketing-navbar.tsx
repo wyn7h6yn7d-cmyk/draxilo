@@ -35,11 +35,11 @@ export function MarketingNavbar({
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-3xl opacity-60 [background:radial-gradient(80%_120%_at_50%_0%,rgba(91,140,255,0.16),transparent_60%),radial-gradient(60%_90%_at_15%_120%,rgba(124,247,212,0.10),transparent_55%)]"
+            className="pointer-events-none absolute inset-0 rounded-3xl opacity-55 [background:radial-gradient(80%_120%_at_50%_0%,rgba(91,140,255,0.14),transparent_62%),radial-gradient(60%_90%_at_15%_120%,rgba(124,247,212,0.09),transparent_58%)] [mask-image:radial-gradient(85%_120%_at_50%_30%,rgba(0,0,0,1),rgba(0,0,0,0)_78%)]"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 -bottom-px h-px opacity-70 [background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]"
+            className="pointer-events-none absolute inset-x-6 -bottom-px h-px opacity-55 [background:linear-gradient(90deg,transparent,rgba(255,255,255,0.14),transparent)] blur-[0.3px]"
           />
           <Link
             href="/"
