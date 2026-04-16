@@ -33,6 +33,33 @@ function safeJsonParse(raw: string): unknown {
   }
 }
 
+function coerceResponseText(response: any): string {
+  // @google/genai responses differ by version:
+  // - sometimes `text` is a string
+  // - sometimes `text()` is a function returning string
+  // - sometimes text is nested in candidates/parts
+  try {
+    const t = response?.text;
+    if (typeof t === "string") return t;
+    if (typeof t === "function") {
+      const out = t.call(response);
+      if (typeof out === "string") return out;
+    }
+  } catch {
+    // fall through to candidates parsing
+  }
+
+  const candidates = Array.isArray(response?.candidates) ? response.candidates : [];
+  for (const c of candidates) {
+    const parts = c?.content?.parts;
+    if (!Array.isArray(parts)) continue;
+    const text = parts.map((p: any) => (typeof p?.text === "string" ? p.text : "")).join("");
+    if (text.trim()) return text;
+  }
+
+  return "";
+}
+
 export class GoogleGeminiProvider implements AiProvider {
   readonly id = "google" as const;
 
@@ -73,7 +100,8 @@ export class GoogleGeminiProvider implements AiProvider {
       }
     }
 
-    const rawText = response.text ?? "";
+    const rawText = coerceResponseText(response);
+    if (!rawText.trim()) throw new Error("AI output was empty");
     const json = safeJsonParse(rawText);
     const parsed = params.parse(json);
 
