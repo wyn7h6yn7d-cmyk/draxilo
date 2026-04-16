@@ -55,20 +55,23 @@ export async function POST(req: Request) {
     const hasAiKey = Boolean(process.env.GEMINI_API_KEY?.trim());
     if (!hasAiKey) {
       console.warn(`[demo][${requestId}] AI unavailable (missing key)`);
-      return NextResponse.json({ error: "ai_unavailable" }, { status: 503 });
+      return NextResponse.json({ error: "ai_unavailable", requestId }, { status: 503, headers: { "x-request-id": requestId } });
     }
 
     try {
       const result = await runAIDemoPipeline(body);
       console.info(`[demo][${requestId}] ok in ${Date.now() - startedAt}ms`);
-      return NextResponse.json(result);
+      return NextResponse.json(result, { headers: { "x-request-id": requestId } });
     } catch (e) {
       const code = safeUserFacingErrorCode(e);
       console.error(`[demo][${requestId}] ${code} in ${Date.now() - startedAt}ms`, e);
-      return NextResponse.json({ error: code }, { status: code === "ai_unavailable" ? 503 : 502 });
+      return NextResponse.json(
+        { error: code, requestId },
+        { status: code === "ai_unavailable" ? 503 : 502, headers: { "x-request-id": requestId } },
+      );
     }
   } catch {
     console.warn(`[demo][${requestId}] bad_request in ${Date.now() - startedAt}ms`);
-    return NextResponse.json({ error: "bad_request" }, { status: 400 });
+    return NextResponse.json({ error: "bad_request", requestId }, { status: 400, headers: { "x-request-id": requestId } });
   }
 }

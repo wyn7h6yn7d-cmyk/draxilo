@@ -60,6 +60,11 @@ function coerceResponseText(response: any): string {
   return "";
 }
 
+function snippet(s: string, max = 240) {
+  const t = s.replace(/\s+/g, " ").trim();
+  return t.length <= max ? t : `${t.slice(0, max)}…`;
+}
+
 export class GoogleGeminiProvider implements AiProvider {
   readonly id = "google" as const;
 
@@ -101,9 +106,23 @@ export class GoogleGeminiProvider implements AiProvider {
     }
 
     const rawText = coerceResponseText(response);
-    if (!rawText.trim()) throw new Error("AI output was empty");
-    const json = safeJsonParse(rawText);
-    const parsed = params.parse(json);
+    if (!rawText.trim()) throw new Error(`AI output was empty (model=${usedModel})`);
+
+    let json: unknown;
+    try {
+      json = safeJsonParse(rawText);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      throw new Error(`AI_JSON_PARSE: ${msg} (model=${usedModel}, raw="${snippet(rawText)}")`);
+    }
+
+    let parsed: T;
+    try {
+      parsed = params.parse(json);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      throw new Error(`AI_SCHEMA_PARSE: ${msg} (model=${usedModel}, raw="${snippet(rawText)}")`);
+    }
 
     return {
       parsed,
