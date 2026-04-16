@@ -82,7 +82,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
   const [processingStep, setProcessingStep] = React.useState(0);
   const [result, setResult] = React.useState<DemoAnalysisResponse | null>(null);
   const [continuation, setContinuation] = React.useState<DemoContinuation | null>(null);
-  const [errorDetail, setErrorDetail] = React.useState<"generic" | "openai" | "ai" | null>(null);
+  const [errorDetail, setErrorDetail] = React.useState<"generic" | "ai_unavailable" | "ai_failed" | null>(null);
   const [isRunning, setIsRunning] = React.useState(false);
 
   const steps = React.useMemo(
@@ -147,8 +147,8 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
         });
         if (!res.ok) {
           const errJson = (await res.json().catch(() => ({}))) as { error?: string };
-          if (errJson.error === "openai_unconfigured") setErrorDetail("openai");
-          else if (errJson.error === "ai_failed") setErrorDetail("ai");
+          if (errJson.error === "ai_unavailable" || errJson.error === "openai_unconfigured") setErrorDetail("ai_unavailable");
+          else if (errJson.error === "ai_failed") setErrorDetail("ai_failed");
           else setErrorDetail("generic");
           throw new Error("demo_failed");
         }
@@ -474,23 +474,14 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                   exit={{ opacity: 0 }}
                   className="rounded-[22px] border border-[rgba(255,80,80,0.25)] bg-[rgba(40,20,20,0.35)] p-6 backdrop-blur-xl"
                 >
-                  <div className="text-sm font-semibold text-white">
-                    {errorDetail === "openai" ? d.error.openaiTitle : d.error.title}
-                  </div>
-                  {errorDetail === "openai" ? (
-                    <div className="mt-2 space-y-3 text-sm text-[var(--muted-2)]">
-                      <p className="leading-relaxed">{d.error.openaiUnconfiguredLead}</p>
-                      <ol className="list-decimal space-y-2 pl-5 leading-relaxed marker:text-[var(--muted)]">
-                        {d.error.openaiUnconfiguredSteps.map((step, idx) => (
-                          <li key={idx}>{step}</li>
-                        ))}
-                      </ol>
-                    </div>
-                  ) : (
-                    <p className="mt-2 text-sm text-[var(--muted-2)]">
-                      {errorDetail === "ai" ? d.error.aiFailed : d.error.text}
-                    </p>
-                  )}
+                  <div className="text-sm font-semibold text-white">{d.error.title}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted-2)]">
+                    {errorDetail === "ai_unavailable"
+                      ? d.error.aiUnavailable
+                      : errorDetail === "ai_failed"
+                        ? d.error.aiFailed
+                        : d.error.text}
+                  </p>
                   <button
                     type="button"
                     onClick={() => {

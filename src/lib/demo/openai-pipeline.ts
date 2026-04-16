@@ -161,7 +161,13 @@ function websiteFindingsFromEnrichment(enrichment: WebsiteEnrichment, lang: Demo
 }
 
 async function enrichFromWebsite(homepageUrl: string, domain: string | null, model: string): Promise<WebsiteEnrichment | null> {
-  const fetched = await retry(() => fetchHomepageHtml(homepageUrl), 2);
+  let fetched: Awaited<ReturnType<typeof fetchHomepageHtml>>;
+  try {
+    fetched = await retry(() => fetchHomepageHtml(homepageUrl), 2);
+  } catch {
+    // Network/DNS/timeout errors should not kill the demo — fall back to form-only enrichment.
+    return null;
+  }
   if (!fetched.ok) return null;
 
   const extracted = extractVisibleText(fetched.html);

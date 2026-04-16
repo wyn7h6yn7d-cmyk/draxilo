@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ToastProvider } from "@/components/toast/toast-provider";
 import { getLocale } from "@/lib/i18n/locale";
+import { BRAND_NAME, BRAND_SITE_URL } from "@/lib/brand";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,22 +20,22 @@ const siteDescription =
   "AI-powered B2B lead generation, enrichment, and outreach—find accounts, draft messages, run campaigns.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://draxion.eu"),
+  metadataBase: new URL(BRAND_SITE_URL),
   title: {
-    default: "Draxion",
-    template: "%s · Draxion",
+    default: BRAND_NAME,
+    template: `%s · ${BRAND_NAME}`,
   },
   description: siteDescription,
-  applicationName: "Draxion",
+  applicationName: BRAND_NAME,
   openGraph: {
     type: "website",
-    siteName: "Draxion",
-    title: "Draxion",
+    siteName: BRAND_NAME,
+    title: BRAND_NAME,
     description: siteDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Draxion",
+    title: BRAND_NAME,
     description: siteDescription,
   },
 };

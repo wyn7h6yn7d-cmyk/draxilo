@@ -19,6 +19,8 @@ const serverSchema = z.object({
 const publicSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1).optional(),
+  NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
+  NEXT_PUBLIC_CONTACT_EMAIL: z.string().email().optional(),
 });
 
 export type PublicEnv = z.infer<typeof publicSchema>;
@@ -31,41 +33,6 @@ export function getEnv() {
 
   const server = serverSchema.parse(process.env);
   const pub = publicSchema.parse(process.env);
-
-  // Runtime enforcement (avoid failing `next build` in environments without runtime secrets).
-  const phase = process.env.NEXT_PHASE ?? "";
-  const isBuildPhase = phase.includes("production-build") || phase.includes("phase-production-build");
-  if (!isBuildPhase) {
-    if (!server.DATABASE_URL) {
-      throw new z.ZodError([
-        {
-          code: "invalid_type",
-          expected: "string",
-          received: "undefined",
-          path: ["DATABASE_URL"],
-          message: "DATABASE_URL is required at runtime.",
-        } as any,
-      ]);
-    }
-    if (!pub.NEXT_PUBLIC_SUPABASE_URL || !pub.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      throw new z.ZodError([
-        {
-          code: "invalid_type",
-          expected: "string",
-          received: "undefined",
-          path: ["NEXT_PUBLIC_SUPABASE_URL"],
-          message: "NEXT_PUBLIC_SUPABASE_URL is required at runtime.",
-        } as any,
-        {
-          code: "invalid_type",
-          expected: "string",
-          received: "undefined",
-          path: ["NEXT_PUBLIC_SUPABASE_ANON_KEY"],
-          message: "NEXT_PUBLIC_SUPABASE_ANON_KEY is required at runtime.",
-        } as any,
-      ]);
-    }
-  }
 
   cached = { server, public: pub };
   return cached;

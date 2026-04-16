@@ -68,7 +68,11 @@ export function ResendSenderSettings({
           </div>
           <div className="space-y-2">
             <Label>From email</Label>
-            <Input value={fromEmail} onChange={(e) => setFromEmail(e.target.value)} placeholder="you@yourdomain.com" />
+            <Input
+              value={fromEmail}
+              onChange={(e) => setFromEmail(e.target.value)}
+              placeholder="hello@draxion.eu"
+            />
           </div>
           <div className="space-y-2">
             <Label>From name</Label>

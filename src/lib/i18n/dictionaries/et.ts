@@ -19,12 +19,12 @@ export const et: Dictionary = {
     metaTitle: "Draxion — interaktiivne demo",
     metaDescription:
       "Proovi Draxioni AI töövoogu ilma kontota: rikastus, sõnum ja kampaania eelvaade ühes vaates.",
-    badge: "Avalik demo · OpenAI + võimalusel päris koduleht",
+    badge: "Avalik demo · AI + võimalusel päris koduleht",
     headline: "Koge Draxioni töövoogu otse brauseris",
     subheadline:
       "Sisesta ettevõtte kontekst, käivita analüüs ja vaata, kuidas AI leiab haagi, koostab sõnumi ja seab kampaania eelvaate — ilma sisselogimiseta.",
     disclaimer:
-      "Demo kasutab serveris OpenAI-t ja sama rikastuse / sõnumi loogikat mis tootes. Kui veebiaadress kehtib, loetakse koduleht (nagu päris rikastus); muidu tuletatakse kontekst vormi väljadest. Andmeid ei salvestata. OPENAI_API_KEY peab olema seadistatud.",
+      "Demo kasutab serveris AI-mootorit ja sama rikastuse / sõnumi loogikat mis tootes. Kui veebiaadress kehtib, loetakse koduleht (nagu päris rikastus); muidu tuletatakse kontekst vormi väljadest. Andmeid ei salvestata.",
     form: {
       companyName: "Ettevõtte nimi",
       companyPlaceholder: "nt Nordic Grid OÜ",
@@ -94,19 +94,11 @@ export const et: Dictionary = {
     },
     error: {
       title: "Demo ei vastanud",
-      openaiTitle: "OpenAI pole seadistatud",
       text: "Kontrolli ühendust ja proovi uuesti. Demo ei salvesta sinu sisestust püsivalt.",
       retry: "Proovi uuesti",
-      openaiUnconfiguredLead:
-        "Server ei leidnud keskkonnamuutujat OPENAI_API_KEY. Demo vajab kehtivat OpenAI võtit.",
-      openaiUnconfiguredSteps: [
-        "Kui arendad kohapeal: `leadforge` kaustas loo või täienda `.env` (võid alustada `.env.example` põhjal).",
-        "Lisa rida OPENAI_API_KEY=\"sk-...\" — võtme saad https://platform.openai.com/api-keys",
-        "Taaskäivita dev-server (`npm run dev`) või tee uuesti deploy; muutujad laetakse käivitamisel.",
-        "Tootmises (nt Vercel): Project → Settings → Environment Variables → lisa OPENAI_API_KEY ja redeploy.",
-      ],
+      aiUnavailable: "AI teenus ei ole hetkel saadaval. Proovi uuesti veidi hiljem.",
       aiFailed:
-        "AI päring ebaõnnestus (võrgu või teenuse viga). Proovi uuesti või kontrolli, kas OPENAI_API_KEY on kehtiv.",
+        "Analüüsi käivitamine ebaõnnestus. Proovi uuesti või muuda sisendeid.",
     },
     cta: {
       title: "Tahad seda päriselt kasutada?",

@@ -19,12 +19,12 @@ export const en: Dictionary = {
     metaTitle: "Draxion — interactive demo",
     metaDescription:
       "Try Draxion’s AI workflow without an account: enrichment, outreach, and a campaign preview in one view.",
-    badge: "Public demo · OpenAI + live site when possible",
+    badge: "Public demo · AI + live site when possible",
     headline: "Experience Draxion’s workflow in your browser",
     subheadline:
       "Enter company context, run analysis, and see how AI finds a hook, drafts an email, and sets up a campaign preview—no login required.",
     disclaimer:
-      "This demo calls OpenAI on the server using the same enrichment and outreach approach as the product. If the URL is reachable, we fetch the homepage like real enrichment; otherwise we infer from your form fields. Nothing is persisted. OPENAI_API_KEY must be configured.",
+      "This demo runs a server-side AI engine using the same enrichment and outreach approach as the product. If the URL is reachable, we fetch the homepage like real enrichment; otherwise we infer from your form fields. Nothing is persisted.",
     form: {
       companyName: "Company name",
       companyPlaceholder: "e.g. Nordic Grid Ltd",
@@ -94,18 +94,10 @@ export const en: Dictionary = {
     },
     error: {
       title: "Demo request failed",
-      openaiTitle: "OpenAI isn’t configured",
       text: "Check your connection and try again. Nothing from this demo session is persisted.",
       retry: "Retry",
-      openaiUnconfiguredLead:
-        "The server couldn’t find OPENAI_API_KEY. This demo needs a valid OpenAI API key.",
-      openaiUnconfiguredSteps: [
-        "Local dev: in the `leadforge` folder, create or edit `.env` (see `.env.example`).",
-        "Add OPENAI_API_KEY=\"sk-...\" — create a key at https://platform.openai.com/api-keys",
-        "Restart the dev server (`npm run dev`) or redeploy; environment variables load at startup.",
-        "Production (e.g. Vercel): Project → Settings → Environment Variables → add OPENAI_API_KEY, then redeploy.",
-      ],
-      aiFailed: "The AI request failed (network or provider error). Retry or verify your OPENAI_API_KEY is valid.",
+      aiUnavailable: "AI service is temporarily unavailable. Please try again shortly.",
+      aiFailed: "We couldn’t run the analysis. Try again or adjust your inputs.",
     },
     cta: {
       title: "Want the real thing?",
