@@ -1,11 +1,4 @@
-import OpenAI from "openai";
-import { getEnv } from "@/lib/env";
-
-export function getOpenAIClient() {
-  const apiKey = getEnv().server.OPENAI_API_KEY;
-  if (!apiKey) throw new Error("Missing OPENAI_API_KEY");
-  return new OpenAI({ apiKey });
-}
+import { generateStructuredJson } from "@/lib/ai/service";
 
 export async function runStructuredJson<T>(params: {
   model: string;
@@ -16,30 +9,18 @@ export async function runStructuredJson<T>(params: {
   prompt: string;
   parse: (json: unknown) => T;
 }) {
-  const client = getOpenAIClient();
-  const response = await client.responses.create({
-    model: params.model,
-    temperature: params.temperature,
-    max_output_tokens: params.maxOutputTokens,
-    input: [{ role: "user", content: [{ type: "input_text", text: params.prompt }] }],
-    text: {
-      format: {
-        type: "json_schema",
-        name: params.schemaName,
-        schema: params.jsonSchema,
-      },
-    },
-  });
-
-  const rawText = response.output_text;
-  const json = JSON.parse(rawText);
-  const parsed = params.parse(json);
-
+  const result = await generateStructuredJson(params);
   return {
-    parsed,
-    rawText,
-    model: response.model,
-    usage: response.usage,
+    parsed: result.parsed,
+    rawText: result.rawText,
+    model: result.meta.model,
+    usage: result.meta.usage
+      ? {
+          input_tokens: result.meta.usage.inputTokens ?? undefined,
+          output_tokens: result.meta.usage.outputTokens ?? undefined,
+          total_tokens: result.meta.usage.totalTokens ?? undefined,
+        }
+      : undefined,
   };
 }
 

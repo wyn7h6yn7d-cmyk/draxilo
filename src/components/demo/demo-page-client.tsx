@@ -16,6 +16,7 @@ import type {
 } from "@/lib/demo/types";
 import { MarketingNavbar } from "@/components/marketing/marketing-navbar";
 import { MarketingPageAtmosphere } from "@/components/marketing/marketing-page-atmosphere";
+import { AiChatPanel } from "@/components/ai/chat-panel";
 
 const PRESETS: {
   id: string;
@@ -147,7 +148,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
         });
         if (!res.ok) {
           const errJson = (await res.json().catch(() => ({}))) as { error?: string };
-          if (errJson.error === "ai_unavailable" || errJson.error === "openai_unconfigured") setErrorDetail("ai_unavailable");
+          if (errJson.error === "ai_unavailable") setErrorDetail("ai_unavailable");
           else if (errJson.error === "ai_failed") setErrorDetail("ai_failed");
           else setErrorDetail("generic");
           throw new Error("demo_failed");
@@ -676,6 +677,10 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
               ) : null}
             </AnimatePresence>
           </div>
+        </div>
+
+        <div className="mt-12">
+          <AiChatPanel language={language} />
         </div>
       </main>
     </MarketingPageAtmosphere>

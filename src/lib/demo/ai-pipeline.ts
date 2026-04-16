@@ -4,6 +4,12 @@ import { outreachSubjectPrompt } from "@/lib/ai/prompts/outreach-subject-generat
 import { leadScoringPrompt } from "@/lib/ai/prompts/lead-scoring";
 import { runStructuredJson } from "@/lib/ai/client";
 import {
+  LEAD_SCORE_JSON_SCHEMA,
+  OUTREACH_BODY_JSON_SCHEMA,
+  OUTREACH_SUBJECT_JSON_SCHEMA,
+  WEBSITE_ENRICHMENT_JSON_SCHEMA,
+} from "@/lib/ai/json-schemas";
+import {
   leadScoreSchema,
   outreachBodySchema,
   outreachSubjectSchema,
@@ -16,39 +22,7 @@ import { formEnrichmentPrompt } from "@/lib/demo/prompts/form-enrichment-inferen
 import type { DemoAnalysisResponse, DemoLanguage, DemoRequestBody, DemoTone } from "@/lib/demo/types";
 import { qaMessage } from "@/lib/messages/qa";
 
-const WEBSITE_ENRICHMENT_JSON_SCHEMA: Record<string, unknown> = {
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    companySummary: { type: "string" },
-    likelyIndustry: { type: "string" },
-    likelyServicesOrProducts: { type: "array", items: { type: "string" } },
-    targetAudience: { type: "array", items: { type: "string" } },
-    possiblePainPoints: { type: "array", items: { type: "string" } },
-    websiteLanguages: {
-      type: "array",
-      items: { type: "string", enum: ["et", "en", "ru"] },
-      minItems: 1,
-      maxItems: 3,
-    },
-    locationClues: { type: "array", items: { type: "string" } },
-    contactPageUrl: { anyOf: [{ type: "string" }, { type: "null" }] },
-    pricingPageUrl: { anyOf: [{ type: "string" }, { type: "null" }] },
-    confidence: { type: "number", minimum: 0, maximum: 1 },
-  },
-  required: [
-    "companySummary",
-    "likelyIndustry",
-    "likelyServicesOrProducts",
-    "targetAudience",
-    "possiblePainPoints",
-    "websiteLanguages",
-    "locationClues",
-    "contactPageUrl",
-    "pricingPageUrl",
-    "confidence",
-  ],
-};
+// Schemas are centralized in src/lib/ai/json-schemas.ts
 
 function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
@@ -223,45 +197,13 @@ async function enrichFromForm(input: DemoRequestBody, model: string): Promise<We
   return ai.parsed;
 }
 
-const LEAD_SCORE_JSON_SCHEMA: Record<string, unknown> = {
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    score: { type: "integer", minimum: 0, maximum: 100 },
-    tier: { type: "string", enum: ["A", "B", "C", "D"] },
-    reasons: { type: "array", items: { type: "string" } },
-    confidence: { type: "number", minimum: 0, maximum: 1 },
-  },
-  required: ["score", "tier", "reasons", "confidence"],
-};
+// Schemas are centralized in src/lib/ai/json-schemas.ts
 
-const SUBJECT_JSON_SCHEMA: Record<string, unknown> = {
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    languageUsed: { type: "string", enum: ["et", "en", "ru"] },
-    subject: { type: "string" },
-    rationale: { type: "array", items: { type: "string" } },
-    confidence: { type: "number", minimum: 0, maximum: 1 },
-  },
-  required: ["languageUsed", "subject", "rationale", "confidence"],
-};
-
-const BODY_JSON_SCHEMA: Record<string, unknown> = {
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    languageUsed: { type: "string", enum: ["et", "en", "ru"] },
-    body: { type: "string" },
-    personalizationRationale: { type: "array", items: { type: "string" } },
-    confidence: { type: "number", minimum: 0, maximum: 1 },
-  },
-  required: ["languageUsed", "body", "personalizationRationale", "confidence"],
-};
-
-export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<DemoAnalysisResponse> {
-  const enrichModel = process.env.OPENAI_ENRICH_MODEL ?? "gpt-4o-mini";
-  const msgModel = process.env.OPENAI_MESSAGE_MODEL ?? "gpt-4o-mini";
+export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAnalysisResponse> {
+  const baseModel = process.env.AI_MODEL ?? "gemini-2.0-flash";
+  const enrichModel = process.env.AI_ENRICH_MODEL ?? baseModel;
+  const msgModel = process.env.AI_MESSAGE_MODEL ?? baseModel;
+  const scoreModel = process.env.AI_SCORE_MODEL ?? msgModel;
   const domain = normalizeDomain(input.websiteUrl);
 
   let enrichment: WebsiteEnrichment;
@@ -308,7 +250,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
         temperature: 0.2,
         maxOutputTokens: 200,
         schemaName: "DraxionOutreachSubject",
-        jsonSchema: SUBJECT_JSON_SCHEMA,
+        jsonSchema: OUTREACH_SUBJECT_JSON_SCHEMA,
         prompt: outreachSubjectPrompt.build({
           language: input.language,
           companyName: input.companyName,
@@ -329,7 +271,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
         temperature: 0.2,
         maxOutputTokens: 900,
         schemaName: "DraxionOutreachBody",
-        jsonSchema: BODY_JSON_SCHEMA,
+        jsonSchema: OUTREACH_BODY_JSON_SCHEMA,
         prompt: outreachBodyPrompt.build({
           language: input.language,
           style: "COLD_INTRO",
@@ -366,7 +308,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
           temperature: 0.2,
           maxOutputTokens: 900,
           schemaName: "DraxionOutreachBody",
-          jsonSchema: BODY_JSON_SCHEMA,
+          jsonSchema: OUTREACH_BODY_JSON_SCHEMA,
           prompt:
             outreachBodyPrompt.build({
               language: input.language,
@@ -401,7 +343,7 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
   const scoreAi = await retry(
     () =>
       runStructuredJson({
-        model: msgModel,
+        model: scoreModel,
         temperature: 0.2,
         maxOutputTokens: 500,
         schemaName: "DraxionLeadScore",
@@ -468,3 +410,4 @@ export async function runOpenAIDemoPipeline(input: DemoRequestBody): Promise<Dem
     },
   };
 }
+

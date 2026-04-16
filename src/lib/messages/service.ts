@@ -78,10 +78,10 @@ export async function generateOutreachMessage(params: {
   const first = await retry(
     () =>
       runStructuredJson({
-        model: process.env.OPENAI_MESSAGE_MODEL ?? "gpt-4o-mini",
+        model: process.env.AI_MESSAGE_MODEL ?? process.env.AI_MODEL ?? "gemini-2.0-flash",
         temperature: 0.2,
         maxOutputTokens: 900,
-          schemaName: "DraxionOutreachBody",
+        schemaName: "DraxionOutreachBody",
         jsonSchema: {
           type: "object",
           additionalProperties: false,
@@ -134,10 +134,10 @@ export async function generateOutreachMessage(params: {
   const second = await retry(
     () =>
       runStructuredJson({
-        model: process.env.OPENAI_MESSAGE_MODEL ?? "gpt-4o-mini",
+        model: process.env.AI_MESSAGE_MODEL ?? process.env.AI_MODEL ?? "gemini-2.0-flash",
         temperature: 0.2,
         maxOutputTokens: 900,
-          schemaName: "DraxionOutreachBody",
+        schemaName: "DraxionOutreachBody",
         jsonSchema: {
           type: "object",
           additionalProperties: false,

@@ -110,8 +110,50 @@ export type Dictionary = {
     ui: {
       badge: string;
       heroCtaHint: string;
+      /** Hero button prefix, e.g. "Start · Demo" / "Launch · Demo" */
+      heroLaunchVerb: string;
+      /** Short hero microcopy under CTAs */
+      heroMicrocopy: string;
       featuresSubtitle: string;
       featureCardKicker: string;
+      heroSurfaceTitle: string;
+      heroSurfaceFlowShort: string;
+      heroCoreTitle: string;
+      heroCoreRule: string;
+      heroConfidenceGate: string;
+      heroCoreLegendMeta: string;
+      heroCoreLegendHint: string;
+      heroSignalsTitle: string;
+      heroEnrichmentTitle: string;
+      heroOutreachTitle: string;
+      heroSubjectLabel: string;
+      heroCtaLabel: string;
+      heroCtaValue: string;
+      heroSignalsToDraft: string;
+      heroSignalProvenance: string;
+      heroSignalRouting: string;
+      heroContextLabel: string;
+      heroMessageLabel: string;
+      heroVerifiedLabel: string;
+      heroFlagshipWorkflow: string;
+      heroOutputPreview: string;
+      heroFlagshipAccess: string;
+      heroSignalBackedOutput: string;
+      heroWorkflowLabel: string;
+      heroWorkflowChain: string;
+      modulesKicker: string;
+      modulesBadge: string;
+      modulesSelectTitle: string;
+      modulesActiveLabel: string;
+      modulesOutputTitle: string;
+      modulesVerifiedPath: string;
+      modulesLiveLabel: string;
+      modulesConfidence: string;
+      modulesPersonalizationDepth: string;
+      modulesRisk: string;
+      modulesTimeToDraft: string;
+      modulesHigh: string;
+      modulesLow: string;
       productPreview: {
         windowTitle: string;
         tabLeads: string;

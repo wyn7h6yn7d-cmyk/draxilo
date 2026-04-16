@@ -80,3 +80,26 @@ export const leadScoreSchema = z.object({
 });
 export type LeadScore = z.infer<typeof leadScoreSchema>;
 
+// 8) Draxion audit (structured)
+export const draxionAuditSchema = z.object({
+  headline: z.string().min(1).max(140),
+  summary: z.string().min(1).max(900),
+  strengths: z.array(z.string().min(1).max(160)).max(10),
+  risks: z.array(z.string().min(1).max(160)).max(10),
+  quickWins: z.array(z.string().min(1).max(180)).max(10),
+  recommendedNextSteps: z.array(z.string().min(1).max(180)).max(10),
+  confidence: z.number().min(0).max(1),
+});
+export type DraxionAudit = z.infer<typeof draxionAuditSchema>;
+
+// 9) Lead analysis (structured)
+export const draxionLeadAnalysisSchema = z.object({
+  score: z.number().int().min(0).max(100),
+  tier: z.enum(["A", "B", "C", "D"]),
+  reasons: z.array(z.string().min(1).max(180)).max(12),
+  objections: z.array(z.string().min(1).max(180)).max(8),
+  bestAngle: z.string().min(1).max(260),
+  confidence: z.number().min(0).max(1),
+});
+export type DraxionLeadAnalysis = z.infer<typeof draxionLeadAnalysisSchema>;
+

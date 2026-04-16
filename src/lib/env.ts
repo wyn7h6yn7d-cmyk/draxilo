@@ -6,9 +6,13 @@ const serverSchema = z.object({
   DATABASE_URL: z.string().min(1).optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
 
-  OPENAI_API_KEY: z.string().optional(),
-  OPENAI_ENRICH_MODEL: z.string().optional(),
-  OPENAI_MESSAGE_MODEL: z.string().optional(),
+  AI_PROVIDER: z.enum(["google"]).optional(),
+
+  GEMINI_API_KEY: z.string().optional(),
+  AI_MODEL: z.string().optional(),
+  AI_ENRICH_MODEL: z.string().optional(),
+  AI_MESSAGE_MODEL: z.string().optional(),
+  AI_SCORE_MODEL: z.string().optional(),
 
   RESEND_API_KEY: z.string().optional(),
 

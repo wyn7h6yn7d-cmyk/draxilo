@@ -69,8 +69,10 @@ npx prisma migrate dev
 ### Resend sending not configured
 - Add `RESEND_API_KEY` to `.env`. The app will **not** fake sends.
 
-### OpenAI features not working
-- Add `OPENAI_API_KEY` to `.env`.
+### AI features not working
+- Add `GEMINI_API_KEY` to `.env.local` (server-side only).
+- Optionally set `AI_PROVIDER=google` and `AI_MODEL` (see `.env.example`).
+- Never put secrets in `NEXT_PUBLIC_*` variables or client code.
 
 ### “Next.js inferred your workspace root…”
 - This repo can contain multiple lockfiles. `next.config.ts` pins Turbopack root to the `leadforge/` directory.

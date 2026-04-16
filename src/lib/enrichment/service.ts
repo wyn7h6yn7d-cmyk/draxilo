@@ -72,7 +72,7 @@ export async function enrichLeadById(params: { workspaceId: string; leadId: stri
     const ai = await retry(
       () =>
         runStructuredJson({
-          model: process.env.OPENAI_ENRICH_MODEL ?? "gpt-4o-mini",
+          model: process.env.AI_ENRICH_MODEL ?? process.env.AI_MODEL ?? "gemini-2.0-flash",
           temperature: 0.2,
           maxOutputTokens: 800,
           schemaName: "DraxionWebsiteEnrichment",

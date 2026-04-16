@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { websiteEnrichmentSchema } from "@/lib/ai/schemas";
-import { runOpenAIDemoPipeline } from "@/lib/demo/openai-pipeline";
+import { runAIDemoPipeline } from "@/lib/demo/ai-pipeline";
 import type { DemoContinuation, DemoLanguage, DemoRequestBody, DemoTone } from "@/lib/demo/types";
 
 export const runtime = "nodejs";
@@ -51,14 +51,14 @@ export async function POST(req: Request) {
       continuation,
     };
 
-    const hasAiKey = Boolean(process.env.OPENAI_API_KEY?.trim());
+    const hasAiKey = Boolean(process.env.GEMINI_API_KEY?.trim());
     if (!hasAiKey) {
       console.warn(`[demo][${requestId}] AI unavailable (missing key)`);
       return NextResponse.json({ error: "ai_unavailable" }, { status: 503 });
     }
 
     try {
-      const result = await runOpenAIDemoPipeline(body);
+      const result = await runAIDemoPipeline(body);
       console.info(`[demo][${requestId}] ok in ${Date.now() - startedAt}ms`);
       return NextResponse.json(result);
     } catch (e) {

@@ -54,107 +54,102 @@ export function FutureLanding({ locale, dict }: { locale: Locale; dict: Dictiona
     <MarketingPageAtmosphere>
       <MarketingNavbar locale={locale} dict={dict} current="home" />
 
-      <main className="relative mx-auto w-full max-w-[1240px] px-6 pb-28 pt-24 sm:pt-28">
+      <main className="relative mx-auto w-full max-w-7xl overflow-x-clip px-6 pb-32 pt-24 sm:pt-28 lg:px-8">
         <motion.div style={{ y: heroY, opacity: heroOpacity }}>
           <Hero dict={dict} />
         </motion.div>
 
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
-          <TrustSection dict={dict} />
-        </motion.div>
-
-        <motion.section
-          className="mt-16"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={revealViewport}
-        >
-          <SystemMap dict={dict} />
-        </motion.section>
-
-        <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport} className="mt-16">
-          <ModuleConsole dict={dict} />
-        </motion.section>
-
-        <section className="mt-16 grid gap-6 lg:grid-cols-2 lg:items-stretch">
-          <motion.div className="min-h-0" variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
-            <HowItWorks dict={dict} />
+        <div className="mt-16 space-y-16">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+            <TrustSection dict={dict} />
           </motion.div>
-          <motion.div className="min-h-0" variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
-            <OpsStrip dict={dict} />
+
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+            <SystemMap dict={dict} />
           </motion.div>
-        </section>
 
-        <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport} className="mt-16">
-          <DemoTeaser dict={dict} />
-        </motion.section>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+            <ModuleConsole dict={dict} />
+          </motion.div>
 
-        <motion.section
-          className="mt-16 rounded-3xl border border-[var(--border)] bg-[rgba(26,31,43,0.65)] p-6 backdrop-blur-xl"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={revealViewport}
-        >
-          <motion.div
-            className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
-            variants={staggerItem}
+          <section className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
+            <motion.div className="min-h-0" variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+              <HowItWorks dict={dict} />
+            </motion.div>
+            <motion.div className="min-h-0" variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+              <OpsStrip dict={dict} />
+            </motion.div>
+          </section>
+
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+            <DemoTeaser dict={dict} />
+          </motion.div>
+
+          <motion.section
+            className="rounded-3xl border border-[var(--border)] bg-[rgba(26,31,43,0.65)] p-6 backdrop-blur-xl sm:p-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
           >
-            <div>
-              <h2 className="text-lg font-semibold tracking-tight">{s.multilingual.title}</h2>
-              <p className="mt-1 text-sm text-[var(--muted-2)]">{s.multilingual.text}</p>
-            </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[rgba(11,15,20,0.6)] px-3 py-2 text-xs text-[var(--muted)]">
-              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
-              ET / EN / RU
-            </div>
-          </motion.div>
-          <motion.div className="mt-4 grid gap-3 text-sm text-[var(--muted)] sm:grid-cols-3">
-            <motion.div variants={staggerItem}>
-              <Bullet text={s.multilingual.bullets.ui} />
+            <motion.div
+              className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
+              variants={staggerItem}
+            >
+              <div>
+                <h2 className="text-lg font-semibold tracking-tight">{s.multilingual.title}</h2>
+                <p className="mt-1 text-sm text-[var(--muted-2)]">{s.multilingual.text}</p>
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[rgba(11,15,20,0.6)] px-3 py-2 text-xs text-[var(--muted)]">
+                <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                ET / EN / RU
+              </div>
             </motion.div>
-            <motion.div variants={staggerItem}>
-              <Bullet text={s.multilingual.bullets.outreach} />
+            <motion.div className="mt-4 grid gap-3 text-sm text-[var(--muted)] sm:grid-cols-3">
+              <motion.div variants={staggerItem}>
+                <Bullet text={s.multilingual.bullets.ui} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <Bullet text={s.multilingual.bullets.outreach} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <Bullet text={s.multilingual.bullets.defaults} />
+              </motion.div>
             </motion.div>
-            <motion.div variants={staggerItem}>
-              <Bullet text={s.multilingual.bullets.defaults} />
-            </motion.div>
-          </motion.div>
-        </motion.section>
+          </motion.section>
 
-        <motion.section
-          className="mt-16"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={revealViewport}
-        >
-          <motion.h2 className="text-lg font-semibold tracking-tight" variants={staggerItem}>
-            {s.faq.title}
-          </motion.h2>
-          <div className="mt-4 grid gap-3">
-            <motion.div variants={staggerItem}>
-              <Faq q={s.faq.items.dataSources.q} a={s.faq.items.dataSources.a} />
-            </motion.div>
-            <motion.div variants={staggerItem}>
-              <Faq q={s.faq.items.deliverability.q} a={s.faq.items.deliverability.a} />
-            </motion.div>
-            <motion.div variants={staggerItem}>
-              <Faq q={s.faq.items.languages.q} a={s.faq.items.languages.a} />
-            </motion.div>
-            <motion.div variants={staggerItem}>
-              <Faq q={s.faq.items.security.q} a={s.faq.items.security.a} />
-            </motion.div>
-            <motion.div variants={staggerItem}>
-              <Faq q={s.faq.items.pricing.q} a={s.faq.items.pricing.a} />
-            </motion.div>
-          </div>
-        </motion.section>
+          <motion.section
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+          >
+            <motion.h2 className="text-lg font-semibold tracking-tight" variants={staggerItem}>
+              {s.faq.title}
+            </motion.h2>
+            <div className="mt-4 grid gap-3">
+              <motion.div variants={staggerItem}>
+                <Faq q={s.faq.items.dataSources.q} a={s.faq.items.dataSources.a} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <Faq q={s.faq.items.deliverability.q} a={s.faq.items.deliverability.a} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <Faq q={s.faq.items.languages.q} a={s.faq.items.languages.a} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <Faq q={s.faq.items.security.q} a={s.faq.items.security.a} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <Faq q={s.faq.items.pricing.q} a={s.faq.items.pricing.a} />
+              </motion.div>
+            </div>
+          </motion.section>
 
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
-          <FinalSceneCta dict={dict} />
-        </motion.div>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+            <FinalSceneCta dict={dict} />
+          </motion.div>
+        </div>
       </main>
     </MarketingPageAtmosphere>
   );
@@ -164,7 +159,7 @@ function Hero({ dict }: { dict: Dictionary }) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative">
+    <section className="relative isolate overflow-x-clip pb-10 lg:pb-14">
       {/* Signature stage: beam + pulse ring + grid */}
       <div className="pointer-events-none absolute inset-x-0 -top-20 h-[680px] [background:radial-gradient(80%_60%_at_50%_0%,rgba(91,140,255,0.28),transparent_62%),radial-gradient(70%_60%_at_70%_10%,rgba(124,247,212,0.16),transparent_62%)]" />
       <motion.div
@@ -190,19 +185,19 @@ function Hero({ dict }: { dict: Dictionary }) {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 [background:linear-gradient(to_bottom,rgba(11,15,20,0.88),transparent)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 [background:linear-gradient(to_top,rgba(11,15,20,0.92),transparent)]" />
 
-      <div className="relative grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-14">
+      <div className="relative grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-10">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative z-10 min-w-0"
+          className="relative z-10 min-w-0 lg:col-span-5"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.55)] px-3 py-2 text-xs font-semibold text-[rgba(255,255,255,0.68)] backdrop-blur-xl">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_16px_rgba(124,247,212,0.45)]" />
             {dict.marketing.ui.badge}
           </div>
 
-          <h1 className="mt-7 text-balance text-[2.75rem] font-semibold tracking-tight text-white sm:text-[3.45rem] lg:text-[4.15rem] lg:leading-[1.0]">
+          <h1 className="mt-7 max-w-[22ch] text-balance text-[2.75rem] font-semibold tracking-tight text-white sm:text-[3.45rem] lg:text-[4.15rem] lg:leading-[1.0]">
             <motion.span
               className="relative block"
               initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
@@ -217,11 +212,11 @@ function Hero({ dict }: { dict: Dictionary }) {
             </motion.span>
           </h1>
 
-          <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[var(--muted-2)] sm:text-lg sm:leading-8">
+          <p className="mt-5 max-w-[36rem] text-pretty text-base leading-7 text-[var(--muted-2)] sm:text-lg sm:leading-8">
             {dict.marketing.subheadline}
           </p>
 
-          <div className="mt-9">
+          <div className="mt-8">
             <HeroCtaCluster dict={dict} reduced={Boolean(prefersReducedMotion)} />
           </div>
 
@@ -231,17 +226,17 @@ function Hero({ dict }: { dict: Dictionary }) {
             <HeroChip text={dict.marketing.ui.signals.replyLift} value="+2.1x" />
           </div>
 
-          <p className="mt-4 max-w-lg text-sm leading-6 text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCtaHint}</p>
+          <p className="mt-4 max-w-[34rem] text-sm leading-6 text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCtaHint}</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 22, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative min-w-0 lg:-ml-16"
+          className="relative mx-auto w-full max-w-[760px] min-w-0 lg:col-span-7 lg:mx-0 lg:max-w-none lg:-ml-10 lg:translate-y-2 xl:-ml-14 xl:translate-y-3"
         >
           <div className="pointer-events-none absolute -inset-14 rounded-[44px] bg-[radial-gradient(55%_55%_at_50%_0%,rgba(91,140,255,0.26),transparent_64%)] blur-3xl" />
-          <div className="pointer-events-none absolute -right-24 top-10 hidden h-64 w-64 rounded-full bg-[rgba(124,247,212,0.10)] blur-3xl lg:block" />
+          <div className="pointer-events-none absolute right-0 top-10 hidden h-64 w-64 translate-x-24 rounded-full bg-[rgba(124,247,212,0.10)] blur-3xl lg:block" />
           <FlagshipCommandRoom dict={dict} reduced={Boolean(prefersReducedMotion)} />
           <FloatingShards reduced={Boolean(prefersReducedMotion)} />
         </motion.div>
@@ -252,23 +247,23 @@ function Hero({ dict }: { dict: Dictionary }) {
 
 function HeroCtaCluster({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
   return (
-    <div className="inline-flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center">
+    <div className="flex w-full max-w-[38rem] flex-col items-start gap-3">
       <div className="relative w-full sm:w-auto">
         <div className="pointer-events-none absolute -inset-1 rounded-[22px] [background:linear-gradient(135deg,rgba(124,247,212,0.55),rgba(91,140,255,0.50),rgba(168,120,255,0.38))] opacity-70 blur-[1px]" />
-        <div className="relative inline-flex w-full items-center justify-between gap-2 rounded-[22px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.58)] p-1.5 backdrop-blur-xl sm:w-auto">
+        <div className="relative grid w-full grid-cols-1 gap-2 rounded-[22px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.58)] p-1.5 backdrop-blur-xl sm:inline-grid sm:w-auto sm:grid-cols-[auto_auto]">
           <Magnetic strength={16}>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="/demo"
                 className={[
-                  "group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-[18px] px-5 text-sm font-semibold text-white sm:w-auto",
+                  "group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-[18px] px-5 text-sm font-semibold text-white",
                   "bg-[rgba(124,247,212,0.10)] ring-1 ring-[rgba(124,247,212,0.38)]",
                   "transition-[box-shadow,transform] duration-200",
                   "hover:shadow-[0_0_0_1px_rgba(124,247,212,0.20),0_36px_120px_rgba(124,247,212,0.14)]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
                 ].join(" ")}
               >
-                <span className="relative z-10">Launch</span>
+                <span className="relative z-10">{dict.marketing.ui.heroLaunchVerb}</span>
                 <span className="relative z-10 text-[rgba(255,255,255,0.82)]">·</span>
                 <span className="relative z-10">{dict.nav.demo}</span>
                 <span className="relative z-10 ml-1 inline-flex h-6 items-center rounded-full border border-[rgba(255,255,255,0.14)] bg-[rgba(0,0,0,0.25)] px-2 text-[10px] font-semibold text-[rgba(255,255,255,0.72)]">
@@ -298,9 +293,8 @@ function HeroCtaCluster({ dict, reduced }: { dict: Dictionary; reduced: boolean 
             <Link
               href="/signup"
               className={[
-                "relative inline-flex h-12 w-full items-center justify-center rounded-[18px] px-5 text-sm font-semibold sm:w-auto",
-                "text-[rgba(255,255,255,0.72)]",
-                "hover:text-white",
+                "relative inline-flex h-12 w-full items-center justify-center rounded-[18px] px-5 text-sm font-semibold",
+                "text-[rgba(255,255,255,0.72)] hover:text-white",
                 "transition-colors duration-200",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
               ].join(" ")}
@@ -311,9 +305,7 @@ function HeroCtaCluster({ dict, reduced }: { dict: Dictionary; reduced: boolean 
         </div>
       </div>
 
-      <div className="text-xs text-[rgba(255,255,255,0.46)]">
-        Flagship demo. No login. Instant preview.
-      </div>
+      <div className="text-xs text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroMicrocopy}</div>
     </div>
   );
 }
@@ -393,9 +385,9 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
           <div className="flex items-center justify-between gap-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.25)] px-3 py-1.5 text-[11px] font-semibold text-[rgba(255,255,255,0.74)]">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_14px_rgba(124,247,212,0.45)]" />
-              Draxion Command Room
+              {dict.marketing.ui.heroSurfaceTitle}
             </div>
-            <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">Signal → Context → Message</div>
+            <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroSurfaceFlowShort}</div>
           </div>
 
           <div className="relative mt-4">
@@ -417,8 +409,8 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
 
       <div className="relative">
         <div className="flex items-center justify-between gap-3">
-          <div className="text-[11px] font-semibold text-white">Platform brain</div>
-          <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">signal confidence → constrained output</div>
+          <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroCoreTitle}</div>
+          <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroCoreRule}</div>
         </div>
 
         <div className="relative mt-4 grid gap-4 lg:grid-cols-[1fr_0.92fr] lg:items-start">
@@ -443,7 +435,14 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
                 className="relative lg:row-span-2"
                 style={reduced ? undefined : ({ transform: "translateZ(10px)" } as any)}
               >
-                <LayerWindow title="Signals" subtitle={ui.tabLeads} tone="blue" reduced={reduced} z="z-30">
+                <LayerWindow
+                  title={dict.marketing.ui.heroSignalsTitle}
+                  subtitle={ui.tabLeads}
+                  tone="blue"
+                  reduced={reduced}
+                  z="z-30"
+                  liveLabel={dict.marketing.ui.modulesLiveLabel}
+                >
                   <HeroProductPreview dict={dict} />
                 </LayerWindow>
               </motion.div>
@@ -451,12 +450,20 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
               {/* Core (nucleus) */}
               <div className="relative hidden lg:block">
                 <CoreNucleus reduced={reduced} />
-                <CoreLegend reduced={reduced} />
+                <CoreLegend dict={dict} reduced={reduced} />
               </div>
 
               {/* Enrichment (right, tight) */}
               <motion.div className="relative" style={reduced ? undefined : ({ transform: "translateZ(14px)" } as any)}>
-                <LayerWindow title="Enrichment" subtitle={ui.tabEnrich} tone="teal" reduced={reduced} z="z-20" compact>
+                <LayerWindow
+                  title={dict.marketing.ui.heroEnrichmentTitle}
+                  subtitle={ui.tabEnrich}
+                  tone="teal"
+                  reduced={reduced}
+                  z="z-20"
+                  compact
+                  liveLabel={dict.marketing.ui.modulesLiveLabel}
+                >
                   <MiniStat k={ui.enrichLabelIndustry} v={ui.enrichValueIndustry} />
                   <MiniStat k={ui.enrichLabelIcp} v={ui.enrichValueIcp} />
                   <MiniStat k={ui.enrichLabelAngle} v={ui.enrichValueAngle} />
@@ -468,13 +475,21 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
                 className="relative lg:col-start-2 lg:col-span-2"
                 style={reduced ? undefined : ({ transform: "translateZ(18px)" } as any)}
               >
-                <LayerWindow title="Outreach" subtitle={ui.tabCompose} tone="violet" reduced={reduced} z="z-10" compact>
+                <LayerWindow
+                  title={dict.marketing.ui.heroOutreachTitle}
+                  subtitle={ui.tabCompose}
+                  tone="violet"
+                  reduced={reduced}
+                  z="z-10"
+                  compact
+                  liveLabel={dict.marketing.ui.modulesLiveLabel}
+                >
                   <div className="grid gap-3 sm:grid-cols-[0.9fr_1.1fr] sm:items-start">
                     <div className="rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.48)] p-3">
-                      <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">Subject</div>
+                      <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroSubjectLabel}</div>
                       <div className="mt-1 text-[11px] font-semibold text-white">{ui.subjectLine}</div>
-                      <div className="mt-2 text-[10px] font-medium text-[rgba(255,255,255,0.46)]">CTA</div>
-                      <div className="mt-1 text-[11px] font-semibold text-white">15 minutes</div>
+                      <div className="mt-2 text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCtaLabel}</div>
+                      <div className="mt-1 text-[11px] font-semibold text-white">{dict.marketing.ui.heroCtaValue}</div>
                     </div>
                     <div className="text-[11px] leading-relaxed text-[rgba(255,255,255,0.60)] line-clamp-5">
                       {ui.bodySample}
@@ -491,9 +506,9 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
           </div>
 
           <div className="relative">
-            <HeroHudOverlay reduced={reduced} />
+            <HeroHudOverlay dict={dict} reduced={reduced} />
             <div className="rounded-[26px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.48)] p-4">
-              <div className="text-[11px] font-semibold text-white">Signals → draft</div>
+              <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroSignalsToDraft}</div>
               <div className="mt-2 rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(26,31,43,0.38)] p-3">
                 <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{ui.subjectLine}</div>
                 <div className="mt-1 text-[11px] font-semibold text-white">{ui.subjectLine}</div>
@@ -538,8 +553,8 @@ function MobileBrainHero({ dict, reduced }: { dict: Dictionary; reduced: boolean
 
         <div className="relative">
           <div className="flex items-center justify-between">
-            <div className="text-[11px] font-semibold text-white">Core</div>
-            <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">Signal → Context → Message</div>
+            <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroCoreTitle}</div>
+            <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroSurfaceFlowShort}</div>
           </div>
 
           <div className="relative mt-3 flex items-center justify-center">
@@ -603,7 +618,7 @@ function MobileBrainHero({ dict, reduced }: { dict: Dictionary; reduced: boolean
                   exit={{ opacity: 0, y: -6, filter: "blur(6px)" }}
                   transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
                 >
-                  <div className="text-[11px] font-semibold text-white">Signals</div>
+                  <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroSignalsTitle}</div>
                   <div className="mt-2">
                     <HeroProductPreview dict={dict} />
                   </div>
@@ -616,7 +631,7 @@ function MobileBrainHero({ dict, reduced }: { dict: Dictionary; reduced: boolean
                   exit={{ opacity: 0, y: -6, filter: "blur(6px)" }}
                   transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
                 >
-                  <div className="text-[11px] font-semibold text-white">Enrichment</div>
+                  <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroEnrichmentTitle}</div>
                   <div className="mt-3 grid gap-2">
                     <MiniStat k={ui.enrichLabelIndustry} v={ui.enrichValueIndustry} />
                     <MiniStat k={ui.enrichLabelIcp} v={ui.enrichValueIcp} />
@@ -631,9 +646,9 @@ function MobileBrainHero({ dict, reduced }: { dict: Dictionary; reduced: boolean
                   exit={{ opacity: 0, y: -6, filter: "blur(6px)" }}
                   transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
                 >
-                  <div className="text-[11px] font-semibold text-white">Outreach</div>
+                  <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroOutreachTitle}</div>
                   <div className="mt-2 rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(26,31,43,0.38)] p-3">
-                    <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">Subject</div>
+                    <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroSubjectLabel}</div>
                     <div className="mt-1 text-[11px] font-semibold text-white">{ui.subjectLine}</div>
                     <div className="mt-2 text-[11px] leading-relaxed text-[rgba(255,255,255,0.60)] line-clamp-6">
                       {ui.bodySample}
@@ -649,7 +664,7 @@ function MobileBrainHero({ dict, reduced }: { dict: Dictionary; reduced: boolean
   );
 }
 
-function CoreLegend({ reduced }: { reduced: boolean }) {
+function CoreLegend({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
   return (
     <motion.div
       className="pointer-events-none absolute left-1/2 top-[68%] w-[240px] -translate-x-1/2 rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.46)] p-3 text-[10px] text-[rgba(255,255,255,0.60)] backdrop-blur-xl"
@@ -658,10 +673,10 @@ function CoreLegend({ reduced }: { reduced: boolean }) {
       transition={reduced ? undefined : { duration: 6.8, repeat: Infinity, ease: "easeInOut" }}
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="font-semibold text-white">CORE</span>
-        <span className="text-[rgba(255,255,255,0.46)]">constraints · confidence</span>
+        <span className="font-semibold text-white">{dict.marketing.ui.heroCoreTitle.toUpperCase()}</span>
+        <span className="text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCoreLegendMeta}</span>
       </div>
-      <div className="mt-1">Routes signals into structured context before drafting.</div>
+      <div className="mt-1">{dict.marketing.ui.heroCoreLegendHint}</div>
     </motion.div>
   );
 }
@@ -791,7 +806,7 @@ function CoreNucleus({ reduced }: { reduced: boolean }) {
   );
 }
 
-function HeroHudOverlay({ reduced }: { reduced: boolean }) {
+function HeroHudOverlay({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
   return (
     <div className="pointer-events-none absolute -inset-4 hidden lg:block">
       <motion.div
@@ -799,14 +814,14 @@ function HeroHudOverlay({ reduced }: { reduced: boolean }) {
         animate={reduced ? undefined : { y: [0, -4, 0], opacity: [0.75, 1, 0.75] }}
         transition={reduced ? undefined : { duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
       >
-        Confidence gate
+        {dict.marketing.ui.heroConfidenceGate}
       </motion.div>
       <motion.div
         className="absolute right-0 top-2 rounded-full border border-[rgba(124,247,212,0.22)] bg-[rgba(124,247,212,0.06)] px-3 py-1.5 text-[10px] font-semibold text-[rgba(255,255,255,0.70)] backdrop-blur-xl"
         animate={reduced ? undefined : { y: [0, 3, 0], opacity: [0.7, 1, 0.7] }}
         transition={reduced ? undefined : { duration: 6.6, repeat: Infinity, ease: "easeInOut" }}
       >
-        Signal provenance
+        {dict.marketing.ui.heroSignalProvenance}
       </motion.div>
       <svg viewBox="0 0 520 220" className="absolute inset-0 h-full w-full opacity-[0.22]">
         <defs>
@@ -871,6 +886,7 @@ function LayerWindow({
   reduced,
   z,
   compact,
+  liveLabel,
   children,
 }: {
   title: string;
@@ -879,6 +895,7 @@ function LayerWindow({
   reduced: boolean;
   z: string;
   compact?: boolean;
+  liveLabel?: string;
   children: React.ReactNode;
 }) {
   const glow =
@@ -909,7 +926,7 @@ function LayerWindow({
           </div>
           <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.45)] px-2.5 py-1 text-[10px] font-semibold text-[rgba(255,255,255,0.70)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-            Live
+            {liveLabel ?? "Live"}
           </div>
         </div>
         <div className={compact ? "mt-3" : "mt-4"}>{children}</div>
@@ -927,12 +944,12 @@ function MiniStat({ k, v }: { k: string; v: string }) {
   );
 }
 
-function SignalRouting({ reduced }: { reduced: boolean }) {
+function SignalRouting({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
   return (
     <div className="relative overflow-hidden rounded-[26px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.50)] p-4">
       <div className="flex items-center justify-between">
-        <div className="text-[11px] font-semibold text-white">Signal routing</div>
-        <div className="text-[10px] font-medium text-[rgba(255,255,255,0.45)]">Verified</div>
+        <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroSignalRouting}</div>
+        <div className="text-[10px] font-medium text-[rgba(255,255,255,0.45)]">{dict.marketing.ui.heroVerifiedLabel}</div>
       </div>
       <div className="mt-3">
         <svg viewBox="0 0 420 140" className="w-full">
@@ -968,9 +985,9 @@ function SignalRouting({ reduced }: { reduced: boolean }) {
             transition={reduced ? undefined : { duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
           />
           {[
-            { x: 30, y: 100, label: "Signals" },
-            { x: 220, y: 62, label: "Context" },
-            { x: 390, y: 68, label: "Message" },
+            { x: 30, y: 100, label: dict.marketing.ui.heroSignalsTitle },
+            { x: 220, y: 62, label: dict.marketing.ui.heroContextLabel },
+            { x: 390, y: 68, label: dict.marketing.ui.heroMessageLabel },
           ].map((n) => (
             <g key={n.label}>
               <circle cx={n.x} cy={n.y} r={12} fill="rgba(255,255,255,0.06)" />
@@ -1005,7 +1022,7 @@ function ModuleConsole({ dict }: { dict: Dictionary }) {
       <div className="relative">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <div className="text-xs font-semibold tracking-wide text-[rgba(255,255,255,0.55)]">Draxion Modules</div>
+            <div className="text-xs font-semibold tracking-wide text-[rgba(255,255,255,0.55)]">{dict.marketing.ui.modulesKicker}</div>
             <h2 className="mt-2 text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl">
               {s.features.title}
             </h2>
@@ -1013,13 +1030,13 @@ function ModuleConsole({ dict }: { dict: Dictionary }) {
           </div>
           <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.10)] bg-[rgba(0,0,0,0.25)] px-3 py-2 text-[11px] font-semibold text-[rgba(255,255,255,0.68)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_14px_rgba(124,247,212,0.45)]" />
-            Flagship workflow, one surface
+            {dict.marketing.ui.modulesBadge}
           </div>
         </div>
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
           <div className="rounded-[26px] border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.55)] p-4 sm:p-5">
-            <div className="text-[11px] font-semibold text-white">Select module</div>
+            <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.modulesSelectTitle}</div>
             <div className="mt-3 grid gap-2">
               {modules.map((m) => {
                 const isActive = m.key === active;
@@ -1051,7 +1068,7 @@ function ModuleConsole({ dict }: { dict: Dictionary }) {
                       <div className="mt-1 line-clamp-2 text-xs leading-5 text-[rgba(255,255,255,0.55)]">{m.text}</div>
                     </div>
                     <div className="ml-auto mt-1 hidden text-[10px] font-semibold text-[rgba(255,255,255,0.45)] sm:block">
-                      {isActive ? "Active" : " "}
+                      {isActive ? dict.marketing.ui.modulesActiveLabel : " "}
                     </div>
                   </button>
                 );
@@ -1063,8 +1080,8 @@ function ModuleConsole({ dict }: { dict: Dictionary }) {
             <div className="pointer-events-none absolute inset-0 opacity-40 [background:linear-gradient(110deg,transparent_35%,rgba(255,255,255,0.07),transparent_65%)] [background-size:220%_100%]" />
             <div className="relative">
               <div className="flex items-center justify-between gap-3">
-                <div className="text-[11px] font-semibold text-white">Output preview</div>
-                <div className="text-[10px] font-medium text-[rgba(255,255,255,0.45)]">Verified signal path</div>
+                <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.modulesOutputTitle}</div>
+                <div className="text-[10px] font-medium text-[rgba(255,255,255,0.45)]">{dict.marketing.ui.modulesVerifiedPath}</div>
               </div>
               <div className="mt-3 rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.55)] p-4">
                 <div className="flex items-start justify-between gap-3">
@@ -1078,14 +1095,14 @@ function ModuleConsole({ dict }: { dict: Dictionary }) {
                       animate={{ opacity: [0.4, 1, 0.4] }}
                       transition={{ duration: 1.0, repeat: Infinity, ease: "easeInOut" }}
                     />
-                    Live
+                    {dict.marketing.ui.modulesLiveLabel}
                   </div>
                 </div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  <ConsoleStat label="Confidence" value="0.82" />
-                  <ConsoleStat label="Personalization depth" value="High" />
-                  <ConsoleStat label="Risk" value="Low" />
-                  <ConsoleStat label="Time-to-first-draft" value="~20s" />
+                  <ConsoleStat label={dict.marketing.ui.modulesConfidence} value="0.82" />
+                  <ConsoleStat label={dict.marketing.ui.modulesPersonalizationDepth} value={dict.marketing.ui.modulesHigh} />
+                  <ConsoleStat label={dict.marketing.ui.modulesRisk} value={dict.marketing.ui.modulesLow} />
+                  <ConsoleStat label={dict.marketing.ui.modulesTimeToDraft} value="~20s" />
                 </div>
               </div>
 
@@ -1209,7 +1226,7 @@ function DemoTeaser({ dict }: { dict: Dictionary }) {
 function FinalSceneCta({ dict }: { dict: Dictionary }) {
   const c = dict.demo.cta;
   return (
-    <section className="relative mt-16 overflow-hidden rounded-[44px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.38)] p-8 shadow-[0_50px_220px_rgba(0,0,0,0.70)] backdrop-blur-xl sm:p-12">
+    <section className="relative overflow-hidden rounded-[44px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.38)] p-8 shadow-[0_50px_220px_rgba(0,0,0,0.70)] backdrop-blur-xl sm:p-12">
       <div className="pointer-events-none absolute inset-0 [background:radial-gradient(60%_60%_at_35%_0%,rgba(91,140,255,0.28),transparent_62%),radial-gradient(60%_60%_at_70%_100%,rgba(124,247,212,0.18),transparent_60%)]" />
       <motion.div
         aria-hidden="true"
@@ -1221,7 +1238,9 @@ function FinalSceneCta({ dict }: { dict: Dictionary }) {
 
       <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
-          <div className="text-xs font-semibold tracking-wide text-[rgba(255,255,255,0.55)]">Flagship access</div>
+          <div className="text-xs font-semibold tracking-wide text-[rgba(255,255,255,0.55)]">
+            {dict.marketing.ui.heroFlagshipAccess}
+          </div>
           <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             {c.title}
           </h2>
@@ -1617,7 +1636,7 @@ function HeroProductPreview({ dict }: { dict: Dictionary }) {
 function TrustSection({ dict }: { dict: Dictionary }) {
   const t = dict.marketing.ui.trust;
   return (
-    <section className="relative mt-16 overflow-hidden rounded-[30px] border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.40)] p-6 shadow-[0_26px_90px_rgba(0,0,0,0.50)] backdrop-blur-xl sm:p-8">
+    <section className="relative overflow-hidden rounded-[30px] border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.40)] p-6 shadow-[0_26px_90px_rgba(0,0,0,0.50)] backdrop-blur-xl sm:p-8">
       <div className="pointer-events-none absolute inset-0 [background:radial-gradient(60%_70%_at_30%_0%,rgba(91,140,255,0.22),transparent_62%),radial-gradient(60%_70%_at_70%_100%,rgba(124,247,212,0.14),transparent_58%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.18] [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:84px_84px] [mask-image:radial-gradient(60%_70%_at_50%_40%,black,transparent_70%)]" />
 
@@ -1625,7 +1644,7 @@ function TrustSection({ dict }: { dict: Dictionary }) {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.10)] bg-[rgba(0,0,0,0.25)] px-3 py-1.5 text-[11px] font-semibold text-[rgba(255,255,255,0.68)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_14px_rgba(91,140,255,0.45)]" />
-            Signal-backed output
+            {dict.marketing.ui.heroSignalBackedOutput}
           </div>
           <h2 className="mt-4 text-balance text-xl font-semibold tracking-tight text-white sm:text-2xl">
             {t.title}
@@ -1645,9 +1664,9 @@ function TrustSection({ dict }: { dict: Dictionary }) {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3">
-          <TrustChip label={t.stat1Label} value={t.stat1Value} tint="blue" />
-          <TrustChip label={t.stat2Label} value={t.stat2Value} tint="teal" />
-          <TrustChip label={t.stat3Label} value={t.stat3Value} tint="violet" />
+          <TrustChip label={t.stat1Label} value={t.stat1Value} tint="blue" verifiedLabel={dict.marketing.ui.modulesVerifiedPath} />
+          <TrustChip label={t.stat2Label} value={t.stat2Value} tint="teal" verifiedLabel={dict.marketing.ui.modulesVerifiedPath} />
+          <TrustChip label={t.stat3Label} value={t.stat3Value} tint="violet" verifiedLabel={dict.marketing.ui.modulesVerifiedPath} />
         </div>
       </div>
     </section>
@@ -1658,10 +1677,12 @@ function TrustChip({
   label,
   value,
   tint,
+  verifiedLabel,
 }: {
   label: string;
   value: string;
   tint: "blue" | "teal" | "violet";
+  verifiedLabel: string;
 }) {
   const glow =
     tint === "teal"
@@ -1680,7 +1701,9 @@ function TrustChip({
         <div className="text-[11px] font-medium text-[rgba(255,255,255,0.46)]">{label}</div>
         <div className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{value}</div>
         <div className="mt-2 h-px w-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.10),transparent)]" />
-        <div className="mt-2 text-[10px] font-medium text-[rgba(255,255,255,0.44)]">Verified signal path</div>
+        <div className="mt-2 text-[10px] font-medium text-[rgba(255,255,255,0.44)]">
+          {verifiedLabel}
+        </div>
       </div>
     </motion.div>
   );
@@ -1746,12 +1769,12 @@ function SystemMap({ dict }: { dict: Dictionary }) {
           <div className="pointer-events-none absolute -inset-8 rounded-[34px] bg-[radial-gradient(55%_55%_at_50%_0%,rgba(91,140,255,0.18),transparent_64%)] blur-2xl" />
           <div className="relative overflow-hidden rounded-[26px] border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.55)] p-5">
             <div className="flex items-center justify-between gap-2">
-              <div className="text-[11px] font-semibold text-white">Workflow</div>
-              <div className="text-[10px] font-medium text-[rgba(255,255,255,0.45)]">Signal → Context → Message → Preview</div>
+              <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroWorkflowLabel}</div>
+              <div className="text-[10px] font-medium text-[rgba(255,255,255,0.45)]">{dict.marketing.ui.heroWorkflowChain}</div>
             </div>
 
             <div className="mt-4">
-              <WorkflowGraphic active={active} />
+              <WorkflowGraphic dict={dict} active={active} />
             </div>
           </div>
         </div>
@@ -1760,12 +1783,12 @@ function SystemMap({ dict }: { dict: Dictionary }) {
   );
 }
 
-function WorkflowGraphic({ active }: { active: "source" | "enrich" | "compose" | "send" }) {
+function WorkflowGraphic({ dict, active }: { dict: Dictionary; active: "source" | "enrich" | "compose" | "send" }) {
   const nodes = [
-    { id: "source", x: 78, y: 60, label: "Signals" },
-    { id: "enrich", x: 190, y: 48, label: "Enrichment" },
-    { id: "compose", x: 290, y: 86, label: "Outreach" },
-    { id: "send", x: 370, y: 54, label: "Campaign" },
+    { id: "source", x: 78, y: 60, label: dict.marketing.ui.heroSignalsTitle },
+    { id: "enrich", x: 190, y: 48, label: dict.marketing.ui.heroEnrichmentTitle },
+    { id: "compose", x: 290, y: 86, label: dict.marketing.ui.heroOutreachTitle },
+    { id: "send", x: 370, y: 54, label: dict.marketing.ui.productPreview.tabCampaign },
   ] as const;
 
   const activeIdx = nodes.findIndex((n) => n.id === active);

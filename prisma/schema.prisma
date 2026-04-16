@@ -111,7 +111,7 @@ enum JobStatus {
 }
 
 enum ProviderType {
-  OPENAI
+  AI
   RESEND
   SUPABASE
   CUSTOM_API
@@ -706,7 +706,7 @@ model ProviderConfig {
   name        String
   isActive    Boolean      @default(true)
 
-  // Provider-specific settings (e.g. OpenAI model defaults, Resend domain, etc.)
+  // Provider-specific settings (e.g. AI model defaults, Resend domain, etc.)
   config      Json?
   // For MVP: secrets can be stored encrypted at app layer and placed here as ciphertext.
   secrets     Json?
