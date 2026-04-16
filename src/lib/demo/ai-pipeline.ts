@@ -205,6 +205,8 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
   const msgModel = process.env.AI_MESSAGE_MODEL ?? baseModel;
   const scoreModel = process.env.AI_SCORE_MODEL ?? msgModel;
   const domain = normalizeDomain(input.websiteUrl);
+  const isVercel = Boolean(process.env.VERCEL);
+  const attempts = isVercel ? 1 : 2;
 
   let enrichment: WebsiteEnrichment;
   let fetchedFromUrl: string | null = null;
@@ -243,7 +245,7 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
 
   const subjectContext = [enrichment.companySummary, variationNote].filter(Boolean).join("\n\n");
 
-  const subjectAi = await retry(
+  const subjectAiPromise = retry(
     () =>
       runStructuredJson({
         model: msgModel,
@@ -261,10 +263,10 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
         }).prompt,
         parse: (json) => outreachSubjectSchema.parse(json),
       }),
-    2,
+    attempts,
   );
 
-  let bodyAi = await retry(
+  const bodyAiPromise = retry(
     () =>
       runStructuredJson({
         model: msgModel,
@@ -291,8 +293,33 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
         }).prompt,
         parse: (json) => outreachBodySchema.parse(json),
       }),
-    2,
+    attempts,
   );
+
+  const scoreAiPromise = retry(
+    () =>
+      runStructuredJson({
+        model: scoreModel,
+        temperature: 0.2,
+        maxOutputTokens: 500,
+        schemaName: "DraxionLeadScore",
+        jsonSchema: LEAD_SCORE_JSON_SCHEMA,
+        prompt: leadScoringPrompt.build({
+          language: input.language,
+          whatYouSell: input.whatYouSell,
+          targetCustomerDescription: null,
+          offerType: null,
+          callToAction: defaultCta(input.language),
+          companyName: input.companyName,
+          domain: domain ?? "",
+          enrichmentJson: JSON.stringify(enrichment),
+        }).prompt,
+        parse: (json) => leadScoreSchema.parse(json),
+      }),
+    attempts,
+  );
+
+  let [subjectAi, bodyAi, scoreAi] = await Promise.all([subjectAiPromise, bodyAiPromise, scoreAiPromise]);
 
   let qa = qaMessage({
     subject: subjectAi.parsed.subject,
@@ -300,7 +327,9 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
     length: "MEDIUM",
   });
 
-  if (!qa.ok) {
+  // Re-running body generation is expensive and often pushes Vercel demos into timeouts.
+  // Keep the demo snappy: only do a second pass outside of Vercel.
+  if (!qa.ok && !isVercel) {
     bodyAi = await retry(
       () =>
         runStructuredJson({
@@ -331,7 +360,7 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
             qa.issues.map((i) => `- ${i}`).join("\n"),
           parse: (json) => outreachBodySchema.parse(json),
         }),
-      2,
+      attempts,
     );
     qa = qaMessage({
       subject: subjectAi.parsed.subject,
@@ -339,29 +368,6 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
       length: "MEDIUM",
     });
   }
-
-  const scoreAi = await retry(
-    () =>
-      runStructuredJson({
-        model: scoreModel,
-        temperature: 0.2,
-        maxOutputTokens: 500,
-        schemaName: "DraxionLeadScore",
-        jsonSchema: LEAD_SCORE_JSON_SCHEMA,
-        prompt: leadScoringPrompt.build({
-          language: input.language,
-          whatYouSell: input.whatYouSell,
-          targetCustomerDescription: null,
-          offerType: null,
-          callToAction: defaultCta(input.language),
-          companyName: input.companyName,
-          domain: domain ?? "",
-          enrichmentJson: JSON.stringify(enrichment),
-        }).prompt,
-        parse: (json) => leadScoreSchema.parse(json),
-      }),
-    2,
-  );
 
   const camp = campaignCopy(input.language);
   const siteLangs = enrichment.websiteLanguages.map((l) => l.toUpperCase()).join(", ");
