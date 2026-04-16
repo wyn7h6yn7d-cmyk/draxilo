@@ -327,9 +327,10 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
   const ref = React.useRef<HTMLDivElement | null>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rx = useSpring(useTransform(my, [-70, 70], [7, -7]), { stiffness: 160, damping: 26, mass: 0.45 });
-  const ry = useSpring(useTransform(mx, [-70, 70], [-10, 10]), { stiffness: 160, damping: 26, mass: 0.45 });
-  const g = useSpring(useTransform(mx, [-70, 70], ["35%", "65%"]) as any, { stiffness: 120, damping: 22, mass: 0.6 });
+  // Tone down cursor-follow: smaller parallax + gentler gradient shift.
+  const rx = useSpring(useTransform(my, [-70, 70], [4, -4]), { stiffness: 160, damping: 26, mass: 0.45 });
+  const ry = useSpring(useTransform(mx, [-70, 70], [-6, 6]), { stiffness: 160, damping: 26, mass: 0.45 });
+  const g = useSpring(useTransform(mx, [-70, 70], ["42%", "58%"]) as any, { stiffness: 120, damping: 22, mass: 0.6 });
 
   function onMove(e: React.MouseEvent<HTMLDivElement>) {
     const r = ref.current?.getBoundingClientRect();
@@ -350,10 +351,10 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
       >
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-80"
+          className="pointer-events-none absolute inset-0 opacity-55"
           style={{
             background:
-              "radial-gradient(520px 420px at var(--gx) 12%, rgba(91,140,255,0.22), transparent 64%), radial-gradient(420px 340px at 50% 10%, rgba(124,247,212,0.14), transparent 62%)",
+              "radial-gradient(520px 420px at var(--gx) 12%, rgba(91,140,255,0.14), transparent 66%), radial-gradient(420px 340px at 50% 10%, rgba(124,247,212,0.09), transparent 64%)",
             ["--gx" as any]: g,
           }}
         />
@@ -377,7 +378,7 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
   // Ruthless: keep only the "real UI" surface + its inner cards.
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-0 opacity-35 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.14),transparent_62%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-25 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.12),transparent_64%)]" />
       <NeuralLattice reduced={reduced} />
       <UnifiedCommandPreview dict={dict} reduced={reduced} />
     </div>
