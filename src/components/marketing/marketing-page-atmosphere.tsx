@@ -34,7 +34,7 @@ function AnimatedBackground({ glow }: { glow: MotionValue<string> }) {
     <div className="pointer-events-none absolute inset-0">
       <div className="absolute inset-0 bg-[#0B0F14]" />
       <motion.div
-        className="absolute -inset-[40%] opacity-60"
+        className="absolute -inset-[40%] opacity-60 [mask-image:radial-gradient(60%_55%_at_50%_45%,rgba(0,0,0,1),rgba(0,0,0,0)_72%)]"
         animate={{ rotate: [0, 12, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         style={{
@@ -79,7 +79,7 @@ function AnimatedBackground({ glow }: { glow: MotionValue<string> }) {
         />
       </motion.svg>
       <motion.div
-        className="absolute inset-0 opacity-60"
+        className="absolute inset-0 opacity-55 [mask-image:radial-gradient(60%_55%_at_50%_45%,rgba(0,0,0,1),rgba(0,0,0,0)_74%)]"
         style={{
           background: "radial-gradient(260px 260px at var(--g), rgba(91,140,255,0.20), transparent 60%)",
           ["--g" as any]: glow,
@@ -109,7 +109,7 @@ function SpotlightReveal({ glow }: { glow: MotionValue<string> }) {
 function MouseGlow({ glow }: { glow: MotionValue<string> }) {
   return (
     <motion.div
-      className="pointer-events-none absolute inset-0 opacity-80 mix-blend-screen"
+      className="pointer-events-none absolute inset-0 opacity-70 mix-blend-screen [mask-image:radial-gradient(65%_60%_at_50%_45%,rgba(0,0,0,1),rgba(0,0,0,0)_72%)]"
       style={{
         background:
           "radial-gradient(420px 320px at var(--g), rgba(91,140,255,0.20), transparent 62%), radial-gradient(320px 260px at var(--g), rgba(124,247,212,0.10), transparent 60%)",
