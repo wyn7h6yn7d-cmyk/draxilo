@@ -33,19 +33,19 @@ const PROVIDERS: LeadSearchProviderAdapter[] = [
   new PlaceholderProvider(
     "APIFY_PROVIDER",
     "Apify",
-    "Apify provider not configured. TODO: add APIFY_TOKEN and an actor/task adapter.",
+    "Apify provider is not configured. Configure APIFY_TOKEN to enable this source.",
     "LEADFORGE_ENABLE_APIFY",
   ),
   new PlaceholderProvider(
     "GOOGLE_CSE_PROVIDER",
     "Google CSE",
-    "Google CSE provider not configured. TODO: add GOOGLE_CSE_API_KEY and GOOGLE_CSE_CX.",
+    "Google CSE provider is not configured. Configure GOOGLE_CSE_API_KEY and GOOGLE_CSE_CX to enable this source.",
     "LEADFORGE_ENABLE_GOOGLE_CSE",
   ),
   new PlaceholderProvider(
     "CUSTOM_API_PROVIDER",
     "Custom API",
-    "Custom API provider not configured. TODO: add CUSTOM_API_BASE_URL + auth settings.",
+    "Custom API provider is not configured. Configure CUSTOM_API_BASE_URL and auth to enable this source.",
     "LEADFORGE_ENABLE_CUSTOM_API",
   ),
 ];

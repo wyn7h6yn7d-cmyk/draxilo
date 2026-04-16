@@ -226,7 +226,7 @@ function Hero({ dict }: { dict: Dictionary }) {
           initial={{ opacity: 0, y: 22, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative mx-auto w-full max-w-[760px] min-w-0 lg:col-span-6 lg:mx-0 lg:max-w-none lg:-ml-6 lg:translate-y-1 xl:-ml-8 xl:translate-y-2"
+          className="relative mx-auto w-full max-w-[760px] min-w-0 lg:col-span-6 lg:mx-0 lg:max-w-none"
         >
           <div className="pointer-events-none absolute -inset-10 rounded-[44px] bg-[radial-gradient(55%_55%_at_50%_0%,rgba(91,140,255,0.20),transparent_66%)] blur-3xl" />
           <FlagshipCommandRoom dict={dict} reduced={Boolean(prefersReducedMotion)} />
@@ -343,7 +343,7 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
   }
 
   return (
-    <div ref={ref} onMouseMove={reduced ? undefined : onMove} onMouseLeave={reduced ? undefined : onLeave} style={{ perspective: 1100 }}>
+    <div ref={ref} onMouseMove={reduced ? undefined : onMove} onMouseLeave={reduced ? undefined : onLeave} style={{ perspective: 900 }}>
       <motion.div
         className="relative overflow-hidden rounded-[34px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.44)] shadow-[0_28px_120px_rgba(0,0,0,0.58)] backdrop-blur-xl"
         style={reduced ? undefined : { rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
@@ -358,7 +358,7 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
           }}
         />
 
-        <div className="relative p-4 sm:p-5" style={{ transform: "translateZ(16px)" }}>
+        <div className="relative p-4 sm:p-5">
           <div className="flex items-center justify-between gap-3">
             <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroSurfaceFlowShort}</div>
           </div>
@@ -377,7 +377,6 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
   return (
     <div className="relative">
       <div className="pointer-events-none absolute inset-0 opacity-25 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.12),transparent_64%)]" />
-      <NeuralLattice reduced={reduced} />
       <UnifiedCommandPreview dict={dict} reduced={reduced} />
     </div>
   );

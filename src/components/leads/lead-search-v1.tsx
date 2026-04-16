@@ -120,7 +120,7 @@ export function LeadSearchV1({ locale, dict }: { locale: Locale; dict: Dictionar
         <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{dict.leads.search.subtitle}</p>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           type="button"
           className={[
@@ -281,19 +281,19 @@ export function LeadSearchV1({ locale, dict }: { locale: Locale; dict: Dictionar
 
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <CardTitle>{dict.leads.search.results.title}</CardTitle>
               <CardDescription>
                 {dict.leads.search.results.selectedCount}: {selectedItems.length}
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button type="button" variant="secondary" onClick={() => toggleAll(true)} disabled={results.length === 0}>
-                All
+                {dict.leads.search.actions.selectAll}
               </Button>
               <Button type="button" variant="secondary" onClick={() => toggleAll(false)} disabled={results.length === 0}>
-                None
+                {dict.leads.search.actions.selectNone}
               </Button>
               <Button type="button" onClick={saveSelected} disabled={pending || !leadSourceId || selectedItems.length === 0}>
                 {dict.leads.search.actions.saveSelected}

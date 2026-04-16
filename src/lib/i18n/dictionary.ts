@@ -40,11 +40,17 @@ export type Dictionary = {
       presetAgency: string;
       presetSaas: string;
       presetLocal: string;
+      presetIndustrial: string;
+      presetSupplier: string;
+      scenario: string;
+      scenarioHint: string;
+      scenarioClear: string;
       run: string;
       running: string;
     };
     processing: {
       title: string;
+      badge: string;
       step1: string;
       step2: string;
       step3: string;
@@ -384,6 +390,20 @@ export type Dictionary = {
       source: string;
       updated: string;
     };
+    details: {
+      enrichmentTitle: string;
+      statusLabel: string;
+      scoreAction: string;
+      enrichAction: string;
+      leadScoreTitle: string;
+      noScoreYet: string;
+      companyProfileTitle: string;
+      sourceLabel: string;
+      noEnrichmentYet: string;
+      relatedCampaignsTitle: string;
+      relatedCampaignsSubtitle: string;
+      none: string;
+    };
     search: {
       title: string;
       subtitle: string;
@@ -408,7 +428,7 @@ export type Dictionary = {
         mustHaveWords: string;
         excludeWords: string;
       };
-      actions: { search: string; saveSelected: string; next: string; prev: string };
+      actions: { search: string; saveSelected: string; selectAll: string; selectNone: string; next: string; prev: string };
       results: {
         title: string;
         selectedCount: string;
@@ -499,7 +519,19 @@ export type Dictionary = {
       deletePlaceholder: string;
     };
   };
-  common: { save: string; cancel: string; close: string; loading: string };
+  common: {
+    save: string;
+    cancel: string;
+    close: string;
+    loading: string;
+    copy: string;
+    requestId: string;
+    selectAll: string;
+    selectNone: string;
+    filter: string;
+    search: string;
+    none: string;
+  };
   errors: { generic: string; unauthorized: string };
   emptyStates: { comingSoon: string };
   toasts: { saved: string; updated: string; error: string };

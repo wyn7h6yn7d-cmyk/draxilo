@@ -149,14 +149,14 @@ export function LeadsTable({
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-1 items-center gap-2">
             <Input
-              placeholder="Search…"
+              placeholder={`${dict.common.search}…`}
               defaultValue={sp.get("q") ?? ""}
               onKeyDown={(e) => {
                 if (e.key === "Enter") setParam("q", (e.target as HTMLInputElement).value);
               }}
             />
             <Input
-              placeholder="Country"
+              placeholder={dict.leads.search.form.country}
               defaultValue={sp.get("country") ?? ""}
               onKeyDown={(e) => {
                 if (e.key === "Enter") setParam("country", (e.target as HTMLInputElement).value);
@@ -164,7 +164,7 @@ export function LeadsTable({
               className="w-28"
             />
             <Input
-              placeholder="City"
+              placeholder={dict.leads.search.form.cityOrRegion}
               defaultValue={sp.get("city") ?? ""}
               onKeyDown={(e) => {
                 if (e.key === "Enter") setParam("city", (e.target as HTMLInputElement).value);
@@ -176,12 +176,12 @@ export function LeadsTable({
               onChange={(e) => setParam("enrichment", e.target.value)}
               className="h-10 rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
             >
-              <option value="">Enrichment</option>
-              <option value="NONE">None</option>
-              <option value="PENDING">Pending</option>
-              <option value="RUNNING">Running</option>
-              <option value="COMPLETE">Complete</option>
-              <option value="FAILED">Failed</option>
+              <option value="">{dict.dashboard.recentLeads.columns.enrichment}</option>
+              <option value="NONE">{dict.common.none}</option>
+              <option value="PENDING">{locale === "et" ? "Ootel" : locale === "ru" ? "Ожидание" : "Pending"}</option>
+              <option value="RUNNING">{locale === "et" ? "Töös" : locale === "ru" ? "В работе" : "Running"}</option>
+              <option value="COMPLETE">{locale === "et" ? "Valmis" : locale === "ru" ? "Готово" : "Complete"}</option>
+              <option value="FAILED">{locale === "et" ? "Ebaõnnestus" : locale === "ru" ? "Ошибка" : "Failed"}</option>
             </select>
             <select
               defaultValue={sp.get("sort") ?? "updated_desc"}
@@ -196,10 +196,10 @@ export function LeadsTable({
 
           <div className="flex items-center gap-2">
             <Button variant="secondary" onClick={() => toggleAll(true)} disabled={rows.length === 0}>
-              All
+              {dict.common.selectAll}
             </Button>
             <Button variant="secondary" onClick={() => toggleAll(false)} disabled={rows.length === 0}>
-              None
+              {dict.common.selectNone}
             </Button>
           </div>
         </div>
@@ -207,14 +207,14 @@ export function LeadsTable({
         {selectedIds.length > 0 ? (
           <div className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-900/20 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-sm text-zinc-700 dark:text-zinc-300">
-              Selected: <span className="font-semibold">{selectedIds.length}</span>
+              {dict.leads.search.results.selectedCount}: <span className="font-semibold">{selectedIds.length}</span>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Button onClick={bulkEnrich} disabled={pending}>
-                Bulk enrich
+                {dict.leads.details.enrichAction}
               </Button>
               <Button variant="secondary" onClick={bulkScore} disabled={pending}>
-                Score
+                {dict.leads.details.scoreAction}
               </Button>
               <div className="flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-2 py-1 dark:border-zinc-800 dark:bg-zinc-950">
                 <select
@@ -238,11 +238,11 @@ export function LeadsTable({
                   <option value="ru">RU</option>
                 </select>
                 <Button variant="ghost" size="sm" onClick={bulkAddToCampaign} disabled={pending}>
-                  Add to campaign
+                  {locale === "et" ? "Lisa kampaaniasse" : locale === "ru" ? "Добавить в кампанию" : "Add to campaign"}
                 </Button>
               </div>
               <Button variant="secondary" onClick={bulkArchive} disabled={pending}>
-                Archive
+                {locale === "et" ? "Arhiveeri" : locale === "ru" ? "Архивировать" : "Archive"}
               </Button>
             </div>
           </div>
@@ -253,15 +253,15 @@ export function LeadsTable({
             <thead className="text-left text-xs text-zinc-500 dark:text-zinc-400">
               <tr>
                 <th className="w-10 px-4 py-3" />
-                <th className="px-4 py-3">Company</th>
-                <th className="px-4 py-3">Domain</th>
-                <th className="px-4 py-3">Country</th>
-                <th className="px-4 py-3">City</th>
-                <th className="px-4 py-3">Source</th>
-                <th className="px-4 py-3">Enrichment</th>
-                <th className="px-4 py-3">Score</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Updated</th>
+                <th className="px-4 py-3">{dict.leads.search.results.columns.company}</th>
+                <th className="px-4 py-3">{dict.leads.table.domain}</th>
+                <th className="px-4 py-3">{dict.leads.csvImport.fields.country}</th>
+                <th className="px-4 py-3">{dict.leads.csvImport.fields.city}</th>
+                <th className="px-4 py-3">{dict.leads.table.source}</th>
+                <th className="px-4 py-3">{dict.dashboard.recentLeads.columns.enrichment}</th>
+                <th className="px-4 py-3">{dict.demo.results.score}</th>
+                <th className="px-4 py-3">{dict.auth.fields.email}</th>
+                <th className="px-4 py-3">{dict.leads.table.updated}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">

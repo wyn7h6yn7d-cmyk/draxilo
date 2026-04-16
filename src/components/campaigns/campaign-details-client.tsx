@@ -169,7 +169,7 @@ export function CampaignDetailsClient({
                 onChange={(e) => setStatus(e.target.value)}
                 className="h-10 rounded-md border border-zinc-200 bg-white px-3 text-sm text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
               >
-                <option value="ALL">All</option>
+                <option value="ALL">{dict.common.selectAll}</option>
                 <option value="DRAFT">DRAFT</option>
                 <option value="READY">READY</option>
                 <option value="SENT">SENT</option>

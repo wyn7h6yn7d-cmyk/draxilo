@@ -16,57 +16,29 @@ import type {
 } from "@/lib/demo/types";
 import { MarketingNavbar } from "@/components/marketing/marketing-navbar";
 import { MarketingPageAtmosphere } from "@/components/marketing/marketing-page-atmosphere";
+import { DEMO_PRESETS } from "@/lib/demo/sim/presets";
+import { DEMO_SCENARIOS } from "@/lib/demo/sim/scenarios";
+import type { DemoScenarioId } from "@/lib/demo/sim/types";
 
-const PRESETS: {
-  id: string;
-  companyName: string;
-  websiteUrl: string;
-  whatYouSell: string;
-  scenarioHint?: "maintenance" | "b2b_saas" | "local_service" | "industrial_supplier" | "agency";
-}[] = [
-  {
-    id: "energy",
-    companyName: "Baltic Current OÜ",
-    websiteUrl: "https://balticcurrent.example.ee",
-    whatYouSell: "Taastuvenergia lahendused ja võrgu bilansi teenused ettevõtetele",
-    scenarioHint: "b2b_saas",
-  },
-  {
-    id: "agency",
-    companyName: "Northloom Studio",
-    websiteUrl: "https://northloom.example.com",
-    whatYouSell: "Bränding, veeb ja performance turundus B2B klientidele",
-    scenarioHint: "agency",
-  },
-  {
-    id: "saas",
-    companyName: "Pipeledger",
-    websiteUrl: "https://pipeledger.example.com",
-    whatYouSell: "Finants- ja arvete töövoogude tarkvara kasvavatele tiimidele",
-    scenarioHint: "b2b_saas",
-  },
-  {
-    id: "local",
-    companyName: "Hea Kodu Hooldus",
-    websiteUrl: "https://heakodu.example.ee",
-    whatYouSell: "Korteriühistute ja ärikinnisvara tehniline hooldus",
-    scenarioHint: "maintenance",
-  },
-  {
-    id: "industrial",
-    companyName: "Venipak Eesti OÜ",
-    websiteUrl: "https://www.venipak.ee",
-    whatYouSell: "Pakkide ja aluste transport",
-    scenarioHint: "industrial_supplier",
-  },
-  {
-    id: "supplier",
-    companyName: "Nordic Fasteners",
-    websiteUrl: "https://nordicfasteners.example.com",
-    whatYouSell: "Tööstuslikud kinnitustarvikud, tarneahel ja RFQ teenus",
-    scenarioHint: "industrial_supplier",
-  },
-];
+function presetLabel(dict: Dictionary, id: string): string {
+  const p = dict.demo.form;
+  switch (id) {
+    case "energy":
+      return p.presetEnergy;
+    case "agency":
+      return p.presetAgency;
+    case "saas":
+      return p.presetSaas;
+    case "local":
+      return p.presetLocal;
+    case "industrial":
+      return p.presetIndustrial;
+    case "supplier":
+      return p.presetSupplier;
+    default:
+      return id;
+  }
+}
 
 type Phase = "idle" | "processing" | "results" | "error";
 
@@ -92,9 +64,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
   const [companyName, setCompanyName] = React.useState("");
   const [websiteUrl, setWebsiteUrl] = React.useState("");
   const [whatYouSell, setWhatYouSell] = React.useState("");
-  const [scenarioHint, setScenarioHint] = React.useState<
-    "maintenance" | "b2b_saas" | "local_service" | "industrial_supplier" | "agency" | null
-  >(null);
+  const [scenarioHint, setScenarioHint] = React.useState<DemoScenarioId | null>(null);
   const [language, setLanguage] = React.useState<DemoLanguage>(
     locale === "en" ? "en" : locale === "ru" ? "ru" : "et",
   );
@@ -204,7 +174,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
         setIsRunning(false);
       }
     },
-    [companyName, websiteUrl, whatYouSell, language, tone, variantSalt, continuation],
+    [companyName, websiteUrl, whatYouSell, language, tone, variantSalt, continuation, scenarioHint],
   );
 
   function onSubmit(e: React.FormEvent) {
@@ -213,7 +183,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
     void execute("full", undefined, { skipContinuation: true });
   }
 
-  function applyPreset(p: (typeof PRESETS)[number]) {
+  function applyPreset(p: (typeof DEMO_PRESETS)[number]) {
     setCompanyName(p.companyName);
     setWebsiteUrl(p.websiteUrl);
     setWhatYouSell(p.whatYouSell);
@@ -237,7 +207,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
     <MarketingPageAtmosphere>
       <MarketingNavbar locale={locale} dict={dict} current="demo" />
 
-      <main className="relative mx-auto w-full max-w-6xl px-6 pb-24 pt-28">
+      <main className="relative mx-auto w-full max-w-7xl px-6 pb-24 pt-28 lg:px-8">
         <motion.header
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -265,7 +235,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
             <div className="rounded-[22px] border border-[rgba(255,255,255,0.10)] bg-[rgba(26,31,43,0.55)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl">
               <div className="text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">{d.form.presetsTitle}</div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {PRESETS.map((p, idx) => (
+                {DEMO_PRESETS.map((p) => (
                   <motion.button
                     key={p.id}
                     type="button"
@@ -274,13 +244,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                     onClick={() => applyPreset(p)}
                     className="rounded-xl border border-[rgba(91,140,255,0.28)] bg-[rgba(91,140,255,0.08)] px-3 py-2 text-left text-xs font-medium text-[rgba(255,255,255,0.82)] transition-colors hover:bg-[rgba(91,140,255,0.14)]"
                   >
-                    {idx === 0
-                      ? d.form.presetEnergy
-                      : idx === 1
-                        ? d.form.presetAgency
-                        : idx === 2
-                          ? d.form.presetSaas
-                          : d.form.presetLocal}
+                    {presetLabel(dict, p.id)}
                   </motion.button>
                 ))}
               </div>
@@ -388,6 +352,46 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                   </div>
                 </div>
 
+                <div>
+                  <div className="flex items-end justify-between gap-3">
+                    <div className="text-xs font-medium text-[rgba(255,255,255,0.55)]">{d.form.scenario}</div>
+                    {scenarioHint ? (
+                      <button
+                        type="button"
+                        onClick={() => setScenarioHint(null)}
+                        className="text-[11px] font-semibold text-[rgba(255,255,255,0.50)] hover:text-white"
+                      >
+                        {d.form.scenarioClear}
+                      </button>
+                    ) : null}
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {DEMO_SCENARIOS.map((s) => {
+                      const active = s.id === scenarioHint;
+                      return (
+                        <button
+                          key={s.id}
+                          type="button"
+                          onClick={() => {
+                            setScenarioHint(s.id);
+                            setContinuation(null);
+                          }}
+                          className={[
+                            "rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
+                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
+                            active
+                              ? "border-[rgba(124,247,212,0.30)] bg-[rgba(124,247,212,0.10)] text-white shadow-[0_0_24px_rgba(124,247,212,0.10)]"
+                              : "border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.45)] text-[rgba(255,255,255,0.66)] hover:bg-[rgba(11,15,20,0.62)] hover:text-white",
+                          ].join(" ")}
+                        >
+                          {locale === "en" ? s.label.en : locale === "ru" ? s.label.ru : s.label.et}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-2 text-xs leading-5 text-[rgba(255,255,255,0.44)]">{d.form.scenarioHint}</p>
+                </div>
+
                 <motion.button
                   type="submit"
                   disabled={isRunning}
@@ -449,7 +453,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                       transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_rgba(124,247,212,0.5)]" />
-                      Draxion AI
+                      {d.processing.badge}
                     </motion.div>
                   </div>
                   <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-[rgba(255,255,255,0.06)]">
@@ -516,7 +520,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                   </p>
                   {errorRequestId ? (
                     <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[rgba(255,255,255,0.66)]">
-                      <span className="text-[rgba(255,255,255,0.46)]">Request ID</span>
+                      <span className="text-[rgba(255,255,255,0.46)]">{dict.common.requestId}</span>
                       <code className="rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.45)] px-2 py-1 font-mono text-[11px] text-white">
                         {errorRequestId}
                       </code>
@@ -527,7 +531,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                           void navigator.clipboard?.writeText(errorRequestId);
                         }}
                       >
-                        Copy
+                        {dict.common.copy}
                       </button>
                     </div>
                   ) : null}

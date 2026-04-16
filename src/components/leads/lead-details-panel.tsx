@@ -47,7 +47,7 @@ export function LeadDetailsPanel({
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">{lead.displayName ?? lead.company?.name ?? "Lead"}</h1>
+        <h1 className="text-xl font-semibold tracking-tight">{lead.displayName ?? lead.company?.name ?? "—"}</h1>
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
           {lead.company?.websiteUrl ?? lead.company?.domain ?? "—"}
         </p>
@@ -63,15 +63,17 @@ export function LeadDetailsPanel({
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Enrichment</CardTitle>
-              <CardDescription>Status: {enrichment?.status ?? "—"}</CardDescription>
+              <CardTitle>{dict.leads.details.enrichmentTitle}</CardTitle>
+              <CardDescription>
+                {dict.leads.details.statusLabel}: {enrichment?.status ?? "—"}
+              </CardDescription>
             </div>
             <div className="flex items-center gap-2">
               <Button type="button" variant="secondary" onClick={score} disabled={pending}>
-                Score
+                {dict.leads.details.scoreAction}
               </Button>
               <Button type="button" onClick={run} disabled={pending}>
-                Enrich
+                {dict.leads.details.enrichAction}
               </Button>
             </div>
           </div>
@@ -79,7 +81,7 @@ export function LeadDetailsPanel({
         <CardContent className="space-y-3">
           <div className="rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm text-zinc-800 dark:border-zinc-800 dark:bg-zinc-900/30 dark:text-zinc-200">
             <div className="flex items-center justify-between">
-              <div className="font-semibold">Lead score</div>
+              <div className="font-semibold">{dict.leads.details.leadScoreTitle}</div>
               <div className="text-sm">{lead.score ?? "—"}/100</div>
             </div>
             {lead.scoreDetails?.factors ? (
@@ -88,14 +90,14 @@ export function LeadDetailsPanel({
               </pre>
             ) : (
               <div className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
-                No score yet. Click “Score” to compute a transparent 0–100 score.
+                {dict.leads.details.noScoreYet}
               </div>
             )}
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>Company profile</CardTitle>
+              <CardTitle>{dict.leads.details.companyProfileTitle}</CardTitle>
               <CardDescription>
                 {lead.company?.country ?? "—"} • {lead.company?.city ?? "—"} •{" "}
                 {lead.contact?.email ?? lead.email ?? "—"}
@@ -103,7 +105,7 @@ export function LeadDetailsPanel({
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="text-sm">
-                <span className="font-semibold">Source:</span>{" "}
+                <span className="font-semibold">{dict.leads.details.sourceLabel}:</span>{" "}
                 {lead.source?.type ?? "—"}
               </div>
               {lead.source?.input?.sourceUrl ? (
@@ -130,18 +132,18 @@ export function LeadDetailsPanel({
             </pre>
           ) : (
             <div className="text-sm text-zinc-600 dark:text-zinc-400">
-              No enrichment yet.
+              {dict.leads.details.noEnrichmentYet}
             </div>
           )}
 
           <Card>
             <CardHeader>
-              <CardTitle>Related campaigns</CardTitle>
-              <CardDescription>Recent campaign activity for this lead.</CardDescription>
+              <CardTitle>{dict.leads.details.relatedCampaignsTitle}</CardTitle>
+              <CardDescription>{dict.leads.details.relatedCampaignsSubtitle}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
               {(lead.campaignLeads ?? []).length === 0 ? (
-                <div className="text-sm text-zinc-600 dark:text-zinc-400">None</div>
+                <div className="text-sm text-zinc-600 dark:text-zinc-400">{dict.leads.details.none}</div>
               ) : (
                 <ul className="space-y-2 text-sm">
                   {lead.campaignLeads.map((cl: any) => (
