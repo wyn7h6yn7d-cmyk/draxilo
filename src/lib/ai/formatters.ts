@@ -8,6 +8,8 @@ export function safeUserFacingErrorCode(e: unknown): "ai_failed" | "ai_unavailab
   if (/Missing GEMINI_API_KEY/i.test(msg)) return "ai_unavailable";
   if (/401|403|unauthorized|permission denied|API key|invalid key|invalid api key|key not valid|forbidden/i.test(msg))
     return "ai_unavailable";
+  // Quota / rate limits should also be treated as temporarily unavailable.
+  if (/429|quota|rate limit|resource has been exhausted|exceeded your current quota/i.test(msg)) return "ai_unavailable";
   return "ai_failed";
 }
 

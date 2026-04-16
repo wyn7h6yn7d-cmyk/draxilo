@@ -59,6 +59,37 @@ function mapDemoTone(t: DemoTone): "FRIENDLY" | "DIRECT" | "SHARP" {
   return "DIRECT";
 }
 
+function clampInt(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, Math.round(n)));
+}
+
+function heuristicSubject(input: { language: DemoLanguage; companyName: string; whatYouSell: string }, enrichment: WebsiteEnrichment): string {
+  const topPain = enrichment.possiblePainPoints[0] ?? "";
+  const topService = enrichment.likelyServicesOrProducts[0] ?? "";
+  if (input.language === "et") {
+    const hook = topPain || topService || input.whatYouSell;
+    return hook ? `${input.companyName}: ${hook}`.slice(0, 110) : `Kiire idee: ${input.companyName}`.slice(0, 110);
+  }
+  if (input.language === "ru") {
+    const hook = topPain || topService || input.whatYouSell;
+    return hook ? `${input.companyName}: ${hook}`.slice(0, 110) : `Идея для ${input.companyName}`.slice(0, 110);
+  }
+  const hook = topPain || topService || input.whatYouSell;
+  return hook ? `${input.companyName}: ${hook}`.slice(0, 110) : `Quick idea for ${input.companyName}`.slice(0, 110);
+}
+
+function heuristicLeadScore(enrichment: WebsiteEnrichment): { score: number; reasons: string[] } {
+  const base = 55 + enrichment.confidence * 30;
+  const painsBoost = Math.min(12, enrichment.possiblePainPoints.length * 2);
+  const score = clampInt(base + painsBoost, 35, 92);
+  const reasons = [
+    enrichment.likelyIndustry ? `Industry detected: ${enrichment.likelyIndustry}` : null,
+    enrichment.possiblePainPoints[0] ? `Pain point: ${enrichment.possiblePainPoints[0]}` : null,
+    enrichment.targetAudience[0] ? `Audience: ${enrichment.targetAudience[0]}` : null,
+  ].filter(Boolean) as string[];
+  return { score, reasons: reasons.slice(0, 3) };
+}
+
 function defaultCta(lang: DemoLanguage): string {
   switch (lang) {
     case "et":
@@ -255,27 +286,8 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
 
   const subjectContext = [enrichment.companySummary, variationNote].filter(Boolean).join("\n\n");
 
-  const subjectAiPromise = retry(
-    () =>
-      runStructuredJson({
-        model: msgModel,
-        temperature: 0.2,
-        maxOutputTokens: 200,
-        schemaName: "DraxionOutreachSubject",
-        jsonSchema: OUTREACH_SUBJECT_JSON_SCHEMA,
-        prompt: outreachSubjectPrompt.build({
-          language: input.language,
-          companyName: input.companyName,
-          domain: domain ?? "",
-          oneLineContext: subjectContext,
-          callToAction: defaultCta(input.language),
-          style: "COLD_INTRO",
-        }).prompt,
-        parse: (json) => outreachSubjectSchema.parse(json),
-      }),
-    attempts,
-  );
-
+  // Free-tier safe mode (Vercel): minimize requests per click.
+  // Skip separate subject + lead scoring calls and derive those heuristically.
   const bodyAiPromise = retry(
     () =>
       runStructuredJson({
@@ -306,33 +318,34 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
     attempts,
   );
 
-  const scoreAiPromise = retry(
-    () =>
-      runStructuredJson({
-        model: scoreModel,
-        temperature: 0.2,
-        maxOutputTokens: 500,
-        schemaName: "DraxionLeadScore",
-        jsonSchema: LEAD_SCORE_JSON_SCHEMA,
-        prompt: leadScoringPrompt.build({
-          language: input.language,
-          whatYouSell: input.whatYouSell,
-          targetCustomerDescription: null,
-          offerType: null,
-          callToAction: defaultCta(input.language),
-          companyName: input.companyName,
-          domain: domain ?? "",
-          enrichmentJson: JSON.stringify(enrichment),
-        }).prompt,
-        parse: (json) => leadScoreSchema.parse(json),
-      }),
-    attempts,
-  );
-
-  let [subjectAi, bodyAi, scoreAi] = await Promise.all([subjectAiPromise, bodyAiPromise, scoreAiPromise]);
+  let bodyAi = await bodyAiPromise;
+  const subject = isVercel
+    ? heuristicSubject({ language: input.language, companyName: input.companyName, whatYouSell: input.whatYouSell }, enrichment)
+    : (
+        await retry(
+          () =>
+            runStructuredJson({
+              model: msgModel,
+              temperature: 0.2,
+              maxOutputTokens: 200,
+              schemaName: "DraxionOutreachSubject",
+              jsonSchema: OUTREACH_SUBJECT_JSON_SCHEMA,
+              prompt: outreachSubjectPrompt.build({
+                language: input.language,
+                companyName: input.companyName,
+                domain: domain ?? "",
+                oneLineContext: subjectContext,
+                callToAction: defaultCta(input.language),
+                style: "COLD_INTRO",
+              }).prompt,
+              parse: (json) => outreachSubjectSchema.parse(json),
+            }),
+          attempts,
+        )
+      ).parsed.subject;
 
   let qa = qaMessage({
-    subject: subjectAi.parsed.subject,
+    subject,
     body: bodyAi.parsed.body,
     length: "MEDIUM",
   });
@@ -373,7 +386,7 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
       attempts,
     );
     qa = qaMessage({
-      subject: subjectAi.parsed.subject,
+      subject,
       body: bodyAi.parsed.body,
       length: "MEDIUM",
     });
@@ -383,9 +396,39 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
   const siteLangs = enrichment.websiteLanguages.map((l) => l.toUpperCase()).join(", ");
 
   const opportunities = enrichment.targetAudience.slice(0, 4);
-  const whyFit = scoreAi.parsed.reasons[0] ?? enrichment.companySummary.slice(0, 240);
+  const scoreHeuristic = isVercel ? heuristicLeadScore(enrichment) : null;
+  const scoreAi = isVercel
+    ? null
+    : (
+        await retry(
+          () =>
+            runStructuredJson({
+              model: scoreModel,
+              temperature: 0.2,
+              maxOutputTokens: 500,
+              schemaName: "DraxionLeadScore",
+              jsonSchema: LEAD_SCORE_JSON_SCHEMA,
+              prompt: leadScoringPrompt.build({
+                language: input.language,
+                whatYouSell: input.whatYouSell,
+                targetCustomerDescription: null,
+                offerType: null,
+                callToAction: defaultCta(input.language),
+                companyName: input.companyName,
+                domain: domain ?? "",
+                enrichmentJson: JSON.stringify(enrichment),
+              }).prompt,
+              parse: (json) => leadScoreSchema.parse(json),
+            }),
+          attempts,
+        )
+      ).parsed;
+
+  const whyFit = (scoreAi?.reasons?.[0] ?? scoreHeuristic?.reasons?.[0]) ?? enrichment.companySummary.slice(0, 240);
   const messageAngle =
-    bodyAi.parsed.personalizationRationale[0] ?? scoreAi.parsed.reasons[0] ?? enrichment.companySummary.slice(0, 200);
+    bodyAi.parsed.personalizationRationale[0] ??
+    (scoreAi?.reasons?.[0] ?? scoreHeuristic?.reasons?.[0]) ??
+    enrichment.companySummary.slice(0, 200);
 
   return {
     company: {
@@ -402,11 +445,11 @@ export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAna
     whyFit,
     messageAngle,
     generatedEmail: {
-      subject: subjectAi.parsed.subject,
+      subject,
       body: bodyAi.parsed.body,
     },
-    leadScore: scoreAi.parsed.score,
-    leadScoreWhy: scoreAi.parsed.reasons.slice(0, 4).join(" "),
+    leadScore: scoreAi?.score ?? scoreHeuristic?.score ?? clampInt(60 + enrichment.confidence * 25, 40, 90),
+    leadScoreWhy: (scoreAi?.reasons ?? scoreHeuristic?.reasons ?? []).slice(0, 4).join(" "),
     campaignPreview: {
       statusLabel: camp.statusLabel,
       language: input.language.toUpperCase(),

@@ -12,6 +12,23 @@ export const maxDuration = 60;
 const LANGS = new Set<string>(["et", "en", "ru"]);
 const TONES = new Set<string>(["friendly", "direct", "sharp"]);
 
+type CacheEntry = { expiresAt: number; value: unknown };
+const demoCache = new Map<string, CacheEntry>();
+const DEMO_CACHE_TTL_MS = 10 * 60 * 1000;
+
+function cacheKey(body: DemoRequestBody) {
+  // Keep it stable + cheap; continuation already embeds enrichment and should not affect the final output materially.
+  return JSON.stringify({
+    companyName: body.companyName,
+    websiteUrl: body.websiteUrl,
+    whatYouSell: body.whatYouSell,
+    language: body.language,
+    tone: body.tone,
+    intent: body.intent,
+    variantSalt: body.variantSalt,
+  });
+}
+
 function parseContinuation(raw: unknown): DemoContinuation | undefined {
   if (!raw || typeof raw !== "object") return undefined;
   const o = raw as Record<string, unknown>;
@@ -59,7 +76,15 @@ export async function POST(req: Request) {
     }
 
     try {
+      const key = cacheKey(body);
+      const cached = demoCache.get(key);
+      if (cached && cached.expiresAt > Date.now()) {
+        console.info(`[demo][${requestId}] cache_hit`);
+        return NextResponse.json(cached.value, { headers: { "x-request-id": requestId, "x-cache": "hit" } });
+      }
+
       const result = await runAIDemoPipeline(body);
+      demoCache.set(key, { value: result, expiresAt: Date.now() + DEMO_CACHE_TTL_MS });
       console.info(`[demo][${requestId}] ok in ${Date.now() - startedAt}ms`);
       return NextResponse.json(result, { headers: { "x-request-id": requestId } });
     } catch (e) {
