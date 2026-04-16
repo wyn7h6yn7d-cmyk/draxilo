@@ -228,8 +228,7 @@ function Hero({ dict }: { dict: Dictionary }) {
           transition={{ duration: 0.7, delay: 0.08, ease: [0.2, 0.8, 0.2, 1] }}
           className="relative mx-auto w-full max-w-[760px] min-w-0 lg:col-span-6 lg:mx-0 lg:max-w-none lg:-ml-6 lg:translate-y-1 xl:-ml-8 xl:translate-y-2"
         >
-          <div className="pointer-events-none absolute -inset-14 rounded-[44px] bg-[radial-gradient(55%_55%_at_50%_0%,rgba(91,140,255,0.26),transparent_64%)] blur-3xl" />
-          <div className="pointer-events-none absolute right-0 top-10 hidden h-64 w-64 translate-x-24 rounded-full bg-[rgba(124,247,212,0.10)] blur-3xl lg:block" />
+          <div className="pointer-events-none absolute -inset-10 rounded-[44px] bg-[radial-gradient(55%_55%_at_50%_0%,rgba(91,140,255,0.20),transparent_66%)] blur-3xl" />
           <FlagshipCommandRoom dict={dict} reduced={Boolean(prefersReducedMotion)} />
         </motion.div>
       </div>
@@ -346,7 +345,7 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
   return (
     <div ref={ref} onMouseMove={reduced ? undefined : onMove} onMouseLeave={reduced ? undefined : onLeave} style={{ perspective: 1100 }}>
       <motion.div
-        className="relative overflow-hidden rounded-[34px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.40)] shadow-[0_34px_140px_rgba(0,0,0,0.60)] backdrop-blur-xl"
+        className="relative overflow-hidden rounded-[34px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.44)] shadow-[0_28px_120px_rgba(0,0,0,0.58)] backdrop-blur-xl"
         style={reduced ? undefined : { rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
       >
         <motion.div
@@ -358,7 +357,6 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
             ["--gx" as any]: g,
           }}
         />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(70%_60%_at_50%_35%,black,transparent_70%)]" />
 
         <div className="relative p-4 sm:p-5" style={{ transform: "translateZ(16px)" }}>
           <div className="flex items-center justify-between gap-3">
