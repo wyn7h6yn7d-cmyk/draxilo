@@ -1056,7 +1056,7 @@ function ModuleConsole({ dict }: { dict: Dictionary }) {
 
               <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="text-xs text-[rgba(255,255,255,0.44)]">
-                  No noise. No chaos. Just signal → context → message.
+                  {dict.marketing.ui.heroSurfaceFlowShort}
                 </div>
                 <Link
                   href="/demo"
@@ -1677,7 +1677,7 @@ function SystemMap({ dict }: { dict: Dictionary }) {
 
       <div className="relative grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div className="min-w-0">
-          <div className="text-xs font-semibold tracking-wide text-[rgba(255,255,255,0.55)]">Draxion System Map</div>
+          <div className="text-xs font-semibold tracking-wide text-[rgba(255,255,255,0.55)]">{dict.marketing.ui.heroWorkflowLabel}</div>
           <h2 className="mt-2 text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl">
             {s.howItWorks.title}
           </h2>
