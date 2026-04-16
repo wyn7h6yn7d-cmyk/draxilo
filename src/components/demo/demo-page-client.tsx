@@ -418,7 +418,7 @@ export function DemoPageClient({ locale, dict }: { locale: Locale; dict: Diction
                       transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_rgba(124,247,212,0.5)]" />
-                      AI
+                      Draxion AI
                     </motion.div>
                   </div>
                   <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-[rgba(255,255,255,0.06)]">

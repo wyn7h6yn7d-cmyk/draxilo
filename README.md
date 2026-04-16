@@ -70,8 +70,8 @@ npx prisma migrate dev
 - Add `RESEND_API_KEY` to `.env`. The app will **not** fake sends.
 
 ### AI features not working
-- Add `GEMINI_API_KEY` to `.env.local` (server-side only).
-- Optionally set `AI_PROVIDER=google` and `AI_MODEL` (see `.env.example`).
+- Add `GEMINI_API_KEY` to `.env` or `.env.local` (server-side only).
+- Optionally set `AI_PROVIDER=google` and `AI_MODEL` (see `.env.example`). Recommended default is `gemini-2.0-flash`.
 - Never put secrets in `NEXT_PUBLIC_*` variables or client code.
 
 ### “Next.js inferred your workspace root…”

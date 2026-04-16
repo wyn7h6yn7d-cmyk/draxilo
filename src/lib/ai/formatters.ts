@@ -4,7 +4,10 @@ export function normalizeWhitespace(s: string) {
 
 export function safeUserFacingErrorCode(e: unknown): "ai_failed" | "ai_unavailable" {
   const msg = e instanceof Error ? e.message : String(e);
+  // Missing or invalid credentials should be treated as "unavailable" for users.
   if (/Missing GEMINI_API_KEY/i.test(msg)) return "ai_unavailable";
+  if (/401|403|unauthorized|permission denied|API key|invalid key|invalid api key|key not valid|forbidden/i.test(msg))
+    return "ai_unavailable";
   return "ai_failed";
 }
 

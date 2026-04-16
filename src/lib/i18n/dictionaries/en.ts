@@ -18,13 +18,13 @@ export const en: Dictionary = {
   demo: {
     metaTitle: "Draxion — interactive demo",
     metaDescription:
-      "Try Draxion’s AI workflow without an account: enrichment, outreach, and a campaign preview in one view.",
-    badge: "Public demo · AI + live site when possible",
+      "Try the Draxion AI workflow without an account: enrichment, outreach, and a campaign preview in one view.",
+    badge: "Public demo · Draxion AI + live site when possible",
     headline: "Experience Draxion’s workflow in your browser",
     subheadline:
-      "Enter company context, run analysis, and see how AI finds a hook, drafts an email, and sets up a campaign preview—no login required.",
+      "Enter company context, run analysis, and see how Draxion AI finds a hook, drafts an email, and sets up a campaign preview—no login required.",
     disclaimer:
-      "This demo runs a server-side AI engine using the same enrichment and outreach approach as the product. If the URL is reachable, we fetch the homepage like real enrichment; otherwise we infer from your form fields. Nothing is persisted.",
+      "This demo runs a server-side Draxion AI engine using the same enrichment and outreach approach as the product. If the URL is reachable, we fetch the homepage like real enrichment; otherwise we infer from your form fields. Nothing is persisted.",
     form: {
       companyName: "Company name",
       companyPlaceholder: "e.g. Nordic Grid Ltd",
@@ -45,11 +45,11 @@ export const en: Dictionary = {
       presetAgency: "Web / creative agency",
       presetSaas: "B2B SaaS",
       presetLocal: "Local services",
-      run: "Run AI analysis",
+      run: "Run Draxion AI analysis",
       running: "Working…",
     },
     processing: {
-      title: "AI pipeline",
+      title: "Draxion AI pipeline",
       step1: "Discovering company context",
       step2: "Extracting structured website signals",
       step3: "Inferring industry & pain points",
@@ -96,7 +96,7 @@ export const en: Dictionary = {
       title: "Demo request failed",
       text: "Check your connection and try again. Nothing from this demo session is persisted.",
       retry: "Retry",
-      aiUnavailable: "AI service is temporarily unavailable. Please try again shortly.",
+      aiUnavailable: "Draxion AI service is temporarily unavailable. Please try again shortly.",
       aiFailed: "We couldn’t run the analysis. Try again or adjust your inputs.",
     },
     cta: {
@@ -113,7 +113,7 @@ export const en: Dictionary = {
     primaryCta: "Start free",
     secondaryCta: "Sign in",
     ui: {
-      badge: "AI leads → enrichment → messaging → campaigns",
+      badge: "Draxion AI leads → enrichment → messaging → campaigns",
       heroCtaHint: "Start free — surface 10 leads in under a minute.",
       heroLaunchVerb: "Launch",
       heroMicrocopy: "Flagship demo. No login. Instant preview.",
@@ -551,7 +551,7 @@ export const en: Dictionary = {
       workspace: "Workspace",
       localization: "Localization",
       emailSending: "Email sending",
-      ai: "AI settings",
+      ai: "Draxion AI settings",
       dataPrivacy: "Data & privacy",
     },
     profile: {
@@ -589,7 +589,7 @@ export const en: Dictionary = {
       providerMissing: "Resend is not configured (missing RESEND_API_KEY).",
     },
     ai: {
-      title: "AI settings",
+      title: "Draxion AI settings",
       subtitle: "Defaults used when generating messages.",
       defaultTone: "Default tone",
       defaultLength: "Default message length",

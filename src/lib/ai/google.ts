@@ -38,17 +38,40 @@ export class GoogleGeminiProvider implements AiProvider {
 
   async generateStructured<T>(params: AiGenerateStructuredParams<T>): Promise<AiStructuredResult<T>> {
     const ai = getGoogleClient();
+    const fallbackModel = "gemini-2.0-flash";
 
-    const response = await ai.models.generateContent({
-      model: params.model,
-      contents: params.prompt,
-      config: {
-        temperature: params.temperature,
-        maxOutputTokens: params.maxOutputTokens,
-        responseMimeType: "application/json",
-        responseJsonSchema: params.jsonSchema,
-      },
-    });
+    async function call(model: string) {
+      return await ai.models.generateContent({
+        model,
+        contents: params.prompt,
+        config: {
+          temperature: params.temperature,
+          maxOutputTokens: params.maxOutputTokens,
+          responseMimeType: "application/json",
+          responseJsonSchema: params.jsonSchema,
+        },
+      });
+    }
+
+    let response: Awaited<ReturnType<typeof call>>;
+    let usedModel = params.model;
+    try {
+      response = await call(params.model);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      // Common auth-style failures.
+      if (/401|403|unauthorized|permission denied|API key|invalid key|forbidden/i.test(msg)) {
+        throw new Error(`AI_AUTH: ${msg}`);
+      }
+      // If a model is misconfigured in env (common on Vercel), fall back once.
+      const isModelProblem = /model|not found|invalid argument|unknown model|does not exist/i.test(msg);
+      if (isModelProblem && params.model !== fallbackModel) {
+        usedModel = fallbackModel;
+        response = await call(fallbackModel);
+      } else {
+        throw e;
+      }
+    }
 
     const rawText = response.text ?? "";
     const json = safeJsonParse(rawText);
@@ -59,7 +82,7 @@ export class GoogleGeminiProvider implements AiProvider {
       rawText,
       meta: {
         provider: this.id,
-        model: params.model,
+        model: usedModel,
         usage: extractUsage((response as any).usageMetadata),
       },
     };

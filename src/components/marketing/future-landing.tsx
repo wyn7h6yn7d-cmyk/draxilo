@@ -160,7 +160,7 @@ function Hero({ dict }: { dict: Dictionary }) {
 
   return (
     <section className="relative isolate overflow-x-clip pb-10 lg:pb-14">
-      {/* Signature stage: beam + pulse ring + grid */}
+      {/* Signature stage: keep it minimal, product-first */}
       <div className="pointer-events-none absolute inset-x-0 -top-20 h-[680px] [background:radial-gradient(80%_60%_at_50%_0%,rgba(91,140,255,0.28),transparent_62%),radial-gradient(70%_60%_at_70%_10%,rgba(124,247,212,0.16),transparent_62%)]" />
       <motion.div
         aria-hidden="true"
@@ -180,24 +180,23 @@ function Hero({ dict }: { dict: Dictionary }) {
         }
         transition={prefersReducedMotion ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="pointer-events-none absolute inset-x-0 -top-28 h-[760px] opacity-[0.18] [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:96px_96px] [mask-image:radial-gradient(70%_55%_at_50%_28%,black,transparent_72%)]" />
-      <PulseRing reduced={Boolean(prefersReducedMotion)} />
+      <div className="pointer-events-none absolute inset-x-0 -top-28 h-[760px] opacity-[0.10] [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:120px_120px] [mask-image:radial-gradient(70%_55%_at_50%_28%,black,transparent_72%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 [background:linear-gradient(to_bottom,rgba(11,15,20,0.88),transparent)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 [background:linear-gradient(to_top,rgba(11,15,20,0.92),transparent)]" />
 
-      <div className="relative grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-10">
+      <div className="relative grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative z-10 min-w-0 lg:col-span-5"
+          className="relative z-10 min-w-0 lg:col-span-6"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.55)] px-3 py-2 text-xs font-semibold text-[rgba(255,255,255,0.68)] backdrop-blur-xl">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_16px_rgba(124,247,212,0.45)]" />
             {dict.marketing.ui.badge}
           </div>
 
-          <h1 className="mt-7 max-w-[22ch] text-balance text-[2.75rem] font-semibold tracking-tight text-white sm:text-[3.45rem] lg:text-[4.15rem] lg:leading-[1.0]">
+          <h1 className="mt-7 max-w-[23ch] text-balance text-[2.75rem] font-semibold tracking-tight text-white sm:text-[3.45rem] lg:text-[4.05rem] lg:leading-[1.02]">
             <motion.span
               className="relative block"
               initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
@@ -212,18 +211,12 @@ function Hero({ dict }: { dict: Dictionary }) {
             </motion.span>
           </h1>
 
-          <p className="mt-5 max-w-[36rem] text-pretty text-base leading-7 text-[var(--muted-2)] sm:text-lg sm:leading-8">
+          <p className="mt-5 max-w-[38rem] text-pretty text-base leading-7 text-[var(--muted-2)] sm:text-lg sm:leading-8">
             {dict.marketing.subheadline}
           </p>
 
-          <div className="mt-8">
+          <div className="mt-7">
             <HeroCtaCluster dict={dict} reduced={Boolean(prefersReducedMotion)} />
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            <HeroChip text={dict.marketing.ui.signals.leadVelocity} value="+18%" />
-            <HeroChip text={dict.marketing.ui.signals.enrichmentMatch} value="0.86" />
-            <HeroChip text={dict.marketing.ui.signals.replyLift} value="+2.1x" />
           </div>
 
           <p className="mt-4 max-w-[34rem] text-sm leading-6 text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCtaHint}</p>
@@ -233,12 +226,11 @@ function Hero({ dict }: { dict: Dictionary }) {
           initial={{ opacity: 0, y: 22, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative mx-auto w-full max-w-[760px] min-w-0 lg:col-span-7 lg:mx-0 lg:max-w-none lg:-ml-10 lg:translate-y-2 xl:-ml-14 xl:translate-y-3"
+          className="relative mx-auto w-full max-w-[760px] min-w-0 lg:col-span-6 lg:mx-0 lg:max-w-none lg:-ml-6 lg:translate-y-1 xl:-ml-8 xl:translate-y-2"
         >
           <div className="pointer-events-none absolute -inset-14 rounded-[44px] bg-[radial-gradient(55%_55%_at_50%_0%,rgba(91,140,255,0.26),transparent_64%)] blur-3xl" />
           <div className="pointer-events-none absolute right-0 top-10 hidden h-64 w-64 translate-x-24 rounded-full bg-[rgba(124,247,212,0.10)] blur-3xl lg:block" />
           <FlagshipCommandRoom dict={dict} reduced={Boolean(prefersReducedMotion)} />
-          <FloatingShards reduced={Boolean(prefersReducedMotion)} />
         </motion.div>
       </div>
     </section>
@@ -247,65 +239,53 @@ function Hero({ dict }: { dict: Dictionary }) {
 
 function HeroCtaCluster({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
   return (
-    <div className="flex w-full max-w-[38rem] flex-col items-start gap-3">
-      <div className="relative w-full sm:w-auto">
-        <div className="pointer-events-none absolute -inset-1 rounded-[22px] [background:linear-gradient(135deg,rgba(124,247,212,0.55),rgba(91,140,255,0.50),rgba(168,120,255,0.38))] opacity-70 blur-[1px]" />
-        <div className="relative grid w-full grid-cols-1 gap-2 rounded-[22px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.58)] p-1.5 backdrop-blur-xl sm:inline-grid sm:w-auto sm:grid-cols-[auto_auto]">
-          <Magnetic strength={16}>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link
-                href="/demo"
-                className={[
-                  "group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-[18px] px-5 text-sm font-semibold text-white",
-                  "bg-[rgba(124,247,212,0.10)] ring-1 ring-[rgba(124,247,212,0.38)]",
-                  "transition-[box-shadow,transform] duration-200",
-                  "hover:shadow-[0_0_0_1px_rgba(124,247,212,0.20),0_36px_120px_rgba(124,247,212,0.14)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
-                ].join(" ")}
-              >
-                <span className="relative z-10">{dict.marketing.ui.heroLaunchVerb}</span>
-                <span className="relative z-10 text-[rgba(255,255,255,0.82)]">·</span>
-                <span className="relative z-10">{dict.nav.demo}</span>
-                <span className="relative z-10 ml-1 inline-flex h-6 items-center rounded-full border border-[rgba(255,255,255,0.14)] bg-[rgba(0,0,0,0.25)] px-2 text-[10px] font-semibold text-[rgba(255,255,255,0.72)]">
-                  45s
-                </span>
-
-                <motion.span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-80"
-                  style={{
-                    background:
-                      "radial-gradient(80% 60% at 50% 0%, rgba(124,247,212,0.22), transparent 60%), radial-gradient(70% 60% at 30% 120%, rgba(91,140,255,0.20), transparent 62%)",
-                  }}
-                />
-                <motion.span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -inset-28 opacity-0 [background:radial-gradient(circle,rgba(255,255,255,0.16),transparent_55%)]"
-                  animate={reduced ? undefined : { opacity: [0, 0.55, 0], rotate: [0, 10, 0] }}
-                  transition={reduced ? undefined : { duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [background:linear-gradient(110deg,transparent,rgba(255,255,255,0.18),transparent)] [background-size:200%_100%] [animation:draxion-shimmer_1.1s_ease-out_1]" />
-              </Link>
-            </motion.div>
-          </Magnetic>
-
-          <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+    <div className="flex w-full max-w-[36rem] flex-col items-start gap-3">
+      <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-[auto_auto] sm:items-center">
+        <Magnetic strength={18}>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.985 }}>
             <Link
-              href="/signup"
+              href="/demo"
               className={[
-                "relative inline-flex h-12 w-full items-center justify-center rounded-[18px] px-5 text-sm font-semibold",
-                "text-[rgba(255,255,255,0.72)] hover:text-white",
-                "transition-colors duration-200",
+                "group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-[18px] px-5 text-sm font-semibold text-white",
+                "bg-[linear-gradient(135deg,rgba(124,247,212,0.20),rgba(91,140,255,0.18))]",
+                "ring-1 ring-[rgba(124,247,212,0.38)]",
+                "shadow-[0_30px_120px_rgba(124,247,212,0.12)]",
+                "transition-[box-shadow,transform] duration-200",
+                "hover:shadow-[0_0_0_1px_rgba(124,247,212,0.22),0_42px_160px_rgba(124,247,212,0.16)]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
               ].join(" ")}
             >
-              {dict.marketing.primaryCta}
+              <span className="relative z-10">{dict.nav.demo}</span>
+              <span className="relative z-10 text-[rgba(255,255,255,0.74)]">·</span>
+              <span className="relative z-10">{dict.marketing.ui.heroLaunchVerb}</span>
+              <span className="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(80%_60%_at_50%_0%,rgba(124,247,212,0.22),transparent_60%),radial-gradient(70%_60%_at_30%_120%,rgba(91,140,255,0.20),transparent_62%)]" />
+              <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [background:linear-gradient(110deg,transparent,rgba(255,255,255,0.18),transparent)] [background-size:200%_100%] [animation:draxion-shimmer_1.1s_ease-out_1]" />
             </Link>
           </motion.div>
-        </div>
+        </Magnetic>
+
+        <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+          <Link
+            href="/signup"
+            className={[
+              "relative inline-flex h-12 w-full items-center justify-center rounded-[18px] px-5 text-sm font-semibold",
+              "border border-[rgba(255,255,255,0.14)] bg-[rgba(11,15,20,0.35)] text-[rgba(255,255,255,0.78)]",
+              "hover:bg-[rgba(11,15,20,0.50)] hover:text-white",
+              "transition-[background,color] duration-200",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
+            ].join(" ")}
+          >
+            {dict.marketing.primaryCta}
+          </Link>
+        </motion.div>
       </div>
 
-      <div className="text-xs text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroMicrocopy}</div>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-[rgba(255,255,255,0.46)]">
+        <span className="inline-flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] opacity-80" />
+          {dict.marketing.ui.heroMicrocopy}
+        </span>
+      </div>
     </div>
   );
 }
@@ -362,8 +342,6 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
     my.set(0);
   }
 
-  const ui = dict.marketing.ui.productPreview;
-
   return (
     <div ref={ref} onMouseMove={reduced ? undefined : onMove} onMouseLeave={reduced ? undefined : onLeave} style={{ perspective: 1100 }}>
       <motion.div
@@ -413,122 +391,119 @@ function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean
           <div className="text-[10px] font-medium text-[rgba(255,255,255,0.50)]">{dict.marketing.ui.heroCoreRule}</div>
         </div>
 
-        <div className="relative mt-4 grid gap-4 lg:grid-cols-[1fr_0.92fr] lg:items-start">
-          {/* Composition stage (signals → core → enrichment/outreach) */}
-          <div
-            className="relative overflow-hidden rounded-[28px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.46)] p-4 shadow-[0_26px_90px_rgba(0,0,0,0.45)] sm:p-5"
-            style={{ perspective: 1000 }}
-          >
-            {/* Minimal atmosphere, more structure */}
-            <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.14),transparent_62%)]" />
-            <NeuralLattice reduced={reduced} />
+        <div
+          className="relative mt-4 overflow-hidden rounded-[28px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.46)] p-4 shadow-[0_26px_90px_rgba(0,0,0,0.45)] sm:p-5"
+          style={{ perspective: 1000 }}
+        >
+          <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.14),transparent_62%)]" />
+          <NeuralLattice reduced={reduced} />
 
-            {/* Mobile: core-first + dock strip + reveal (no boring stack) */}
-            <div className="lg:hidden">
-              <MobileBrainHero dict={dict} reduced={reduced} />
-            </div>
+          <UnifiedCommandPreview dict={dict} reduced={reduced} />
+        </div>
+      </div>
+    </div>
+  );
+}
 
-            {/* Desktop: full 3-column composition */}
-            <div className="relative hidden gap-4 lg:grid lg:grid-cols-[1.12fr_0.76fr_0.96fr] lg:gap-4">
-              {/* Signals (dominant) */}
-              <motion.div
-                className="relative lg:row-span-2"
-                style={reduced ? undefined : ({ transform: "translateZ(10px)" } as any)}
+function UnifiedCommandPreview({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
+  const ui = dict.marketing.ui.productPreview;
+  const [active, setActive] = React.useState<"signals" | "enrich" | "outreach">("signals");
+
+  const tabs = [
+    { id: "signals" as const, label: ui.tabLeads },
+    { id: "enrich" as const, label: ui.tabEnrich },
+    { id: "outreach" as const, label: ui.tabCompose },
+  ];
+
+  return (
+    <div className="relative">
+      {/* Top row: title + tabs */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.22)] px-3 py-1.5 text-[11px] font-semibold text-[rgba(255,255,255,0.76)]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_14px_rgba(124,247,212,0.45)]" />
+          {dict.marketing.ui.heroSurfaceTitle}
+        </div>
+
+        <div className="flex gap-2 overflow-x-auto pb-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {tabs.map((t) => {
+            const isActive = t.id === active;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setActive(t.id)}
+                className={[
+                  "shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold transition-[background,color,box-shadow] duration-200",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
+                  isActive
+                    ? "border-[rgba(124,247,212,0.30)] bg-[rgba(124,247,212,0.10)] text-white shadow-[0_0_24px_rgba(124,247,212,0.10)]"
+                    : "border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.45)] text-[rgba(255,255,255,0.66)] hover:text-white",
+                ].join(" ")}
               >
-                <LayerWindow
-                  title={dict.marketing.ui.heroSignalsTitle}
-                  subtitle={ui.tabLeads}
-                  tone="blue"
-                  reduced={reduced}
-                  z="z-30"
-                  liveLabel={dict.marketing.ui.modulesLiveLabel}
-                >
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Main surface */}
+      <div className="relative mt-4 overflow-hidden rounded-[26px] border border-[rgba(255,255,255,0.12)] bg-[rgba(26,31,43,0.36)] p-4 shadow-[0_24px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:p-5">
+        <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(420px_320px_at_50%_18%,rgba(91,140,255,0.16),transparent_62%)]" />
+
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            {active === "signals" ? (
+              <motion.div
+                key="signals"
+                initial={{ opacity: 0, y: 10, filter: "blur(7px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -8, filter: "blur(7px)" }}
+                transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroSignalsTitle}</div>
+                <div className="mt-3">
                   <HeroProductPreview dict={dict} />
-                </LayerWindow>
+                </div>
               </motion.div>
-
-              {/* Core (nucleus) */}
-              <div className="relative hidden lg:block">
-                <CoreNucleus reduced={reduced} />
-                <CoreLegend dict={dict} reduced={reduced} />
-              </div>
-
-              {/* Enrichment (right, tight) */}
-              <motion.div className="relative" style={reduced ? undefined : ({ transform: "translateZ(14px)" } as any)}>
-                <LayerWindow
-                  title={dict.marketing.ui.heroEnrichmentTitle}
-                  subtitle={ui.tabEnrich}
-                  tone="teal"
-                  reduced={reduced}
-                  z="z-20"
-                  compact
-                  liveLabel={dict.marketing.ui.modulesLiveLabel}
-                >
+            ) : active === "enrich" ? (
+              <motion.div
+                key="enrich"
+                initial={{ opacity: 0, y: 10, filter: "blur(7px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -8, filter: "blur(7px)" }}
+                transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroEnrichmentTitle}</div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
                   <MiniStat k={ui.enrichLabelIndustry} v={ui.enrichValueIndustry} />
                   <MiniStat k={ui.enrichLabelIcp} v={ui.enrichValueIcp} />
                   <MiniStat k={ui.enrichLabelAngle} v={ui.enrichValueAngle} />
-                </LayerWindow>
-              </motion.div>
-
-              {/* Outreach (bottom, spanning) */}
-              <motion.div
-                className="relative lg:col-start-2 lg:col-span-2"
-                style={reduced ? undefined : ({ transform: "translateZ(18px)" } as any)}
-              >
-                <LayerWindow
-                  title={dict.marketing.ui.heroOutreachTitle}
-                  subtitle={ui.tabCompose}
-                  tone="violet"
-                  reduced={reduced}
-                  z="z-10"
-                  compact
-                  liveLabel={dict.marketing.ui.modulesLiveLabel}
-                >
-                  <div className="grid gap-3 sm:grid-cols-[0.9fr_1.1fr] sm:items-start">
-                    <div className="rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.48)] p-3">
-                      <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroSubjectLabel}</div>
-                      <div className="mt-1 text-[11px] font-semibold text-white">{ui.subjectLine}</div>
-                      <div className="mt-2 text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCtaLabel}</div>
-                      <div className="mt-1 text-[11px] font-semibold text-white">{dict.marketing.ui.heroCtaValue}</div>
-                    </div>
-                    <div className="text-[11px] leading-relaxed text-[rgba(255,255,255,0.60)] line-clamp-5">
-                      {ui.bodySample}
-                    </div>
-                  </div>
-                </LayerWindow>
-              </motion.div>
-            </div>
-
-            {/* Connectors overlay for storytelling (signals → core → panels) */}
-            <div className="hidden lg:block">
-              <ConnectorsOverlay reduced={reduced} />
-            </div>
-          </div>
-
-          <div className="relative">
-            <HeroHudOverlay dict={dict} reduced={reduced} />
-            <div className="rounded-[26px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.48)] p-4">
-              <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroSignalsToDraft}</div>
-              <div className="mt-2 rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(26,31,43,0.38)] p-3">
-                <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{ui.subjectLine}</div>
-                <div className="mt-1 text-[11px] font-semibold text-white">{ui.subjectLine}</div>
-                <div className="mt-2 text-[11px] leading-relaxed text-[rgba(255,255,255,0.60)] line-clamp-5">
-                  {ui.bodySample}
                 </div>
-              </div>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                <ConsoleStat label={ui.enrichLabelIndustry} value={ui.enrichValueIndustry} />
-                <ConsoleStat label={ui.enrichLabelAngle} value={ui.enrichValueAngle} />
-              </div>
-            </div>
-
-            <Link
-              href="/demo"
-              className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-2xl border border-[rgba(124,247,212,0.30)] bg-[rgba(124,247,212,0.08)] px-4 text-sm font-semibold text-white hover:bg-[rgba(124,247,212,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
-            >
-              {dict.nav.demo}
-            </Link>
-          </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="outreach"
+                initial={{ opacity: 0, y: 10, filter: "blur(7px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -8, filter: "blur(7px)" }}
+                transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                <div className="text-[11px] font-semibold text-white">{dict.marketing.ui.heroOutreachTitle}</div>
+                <div className="mt-3 grid gap-3 sm:grid-cols-[0.95fr_1.05fr] sm:items-start">
+                  <div className="rounded-2xl border border-[rgba(255,255,255,0.10)] bg-[rgba(11,15,20,0.48)] p-3">
+                    <div className="text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroSubjectLabel}</div>
+                    <div className="mt-1 text-[11px] font-semibold text-white">{ui.subjectLine}</div>
+                    <div className="mt-2 text-[10px] font-medium text-[rgba(255,255,255,0.46)]">{dict.marketing.ui.heroCtaLabel}</div>
+                    <div className="mt-1 text-[11px] font-semibold text-white">{dict.marketing.ui.heroCtaValue}</div>
+                  </div>
+                  <div className="text-[11px] leading-relaxed text-[rgba(255,255,255,0.62)] line-clamp-6">
+                    {ui.bodySample}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

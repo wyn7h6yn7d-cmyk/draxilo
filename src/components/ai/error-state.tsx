@@ -3,10 +3,10 @@ import * as React from "react";
 export function AiErrorState(props: { code?: "ai_unavailable" | "ai_failed" | "validation"; onRetry?: () => void }) {
   const title =
     props.code === "ai_unavailable"
-      ? "AI is unavailable"
+      ? "Draxion AI is unavailable"
       : props.code === "validation"
         ? "Check your input"
-        : "AI request failed";
+        : "Draxion AI request failed";
   const body =
     props.code === "ai_unavailable"
       ? "Draxion AI is not configured on the server yet."

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { websiteEnrichmentSchema } from "@/lib/ai/schemas";
+import { safeUserFacingErrorCode } from "@/lib/ai/formatters";
 import { runAIDemoPipeline } from "@/lib/demo/ai-pipeline";
 import type { DemoContinuation, DemoLanguage, DemoRequestBody, DemoTone } from "@/lib/demo/types";
 
@@ -62,8 +63,9 @@ export async function POST(req: Request) {
       console.info(`[demo][${requestId}] ok in ${Date.now() - startedAt}ms`);
       return NextResponse.json(result);
     } catch (e) {
-      console.error(`[demo][${requestId}] ai_failed in ${Date.now() - startedAt}ms`, e);
-      return NextResponse.json({ error: "ai_failed" }, { status: 502 });
+      const code = safeUserFacingErrorCode(e);
+      console.error(`[demo][${requestId}] ${code} in ${Date.now() - startedAt}ms`, e);
+      return NextResponse.json({ error: code }, { status: code === "ai_unavailable" ? 503 : 502 });
     }
   } catch {
     console.warn(`[demo][${requestId}] bad_request in ${Date.now() - startedAt}ms`);

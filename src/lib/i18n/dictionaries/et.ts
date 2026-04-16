@@ -18,13 +18,13 @@ export const et: Dictionary = {
   demo: {
     metaTitle: "Draxion — interaktiivne demo",
     metaDescription:
-      "Proovi Draxioni AI töövoogu ilma kontota: rikastus, sõnum ja kampaania eelvaade ühes vaates.",
-    badge: "Avalik demo · AI + võimalusel päris koduleht",
+      "Proovi Draxion AI töövoogu ilma kontota: rikastus, sõnum ja kampaania eelvaade ühes vaates.",
+    badge: "Avalik demo · Draxion AI + võimalusel päris koduleht",
     headline: "Koge Draxioni töövoogu otse brauseris",
     subheadline:
-      "Sisesta ettevõtte kontekst, käivita analüüs ja vaata, kuidas AI leiab haagi, koostab sõnumi ja seab kampaania eelvaate — ilma sisselogimiseta.",
+      "Sisesta ettevõtte kontekst, käivita analüüs ja vaata, kuidas Draxion AI leiab haagi, koostab sõnumi ja seab kampaania eelvaate — ilma sisselogimiseta.",
     disclaimer:
-      "Demo kasutab serveris AI-mootorit ja sama rikastuse / sõnumi loogikat mis tootes. Kui veebiaadress kehtib, loetakse koduleht (nagu päris rikastus); muidu tuletatakse kontekst vormi väljadest. Andmeid ei salvestata.",
+      "Demo kasutab serveris Draxion AI-mootorit ja sama rikastuse / sõnumi loogikat mis tootes. Kui veebiaadress kehtib, loetakse koduleht (nagu päris rikastus); muidu tuletatakse kontekst vormi väljadest. Andmeid ei salvestata.",
     form: {
       companyName: "Ettevõtte nimi",
       companyPlaceholder: "nt Nordic Grid OÜ",
@@ -45,11 +45,11 @@ export const et: Dictionary = {
       presetAgency: "Veeb/disainibüroo",
       presetSaas: "B2B SaaS",
       presetLocal: "Kohalik teenus",
-      run: "Käivita AI analüüs",
+      run: "Käivita Draxion AI analüüs",
       running: "Töötlen…",
     },
     processing: {
-      title: "AI töövoog",
+      title: "Draxion AI töövoog",
       step1: "Tuvastan ettevõtte ja konteksti",
       step2: "Eraldan veebist struktureeritavat sisu",
       step3: "Määran valdkonna ja valu punktid",
@@ -96,7 +96,7 @@ export const et: Dictionary = {
       title: "Demo ei vastanud",
       text: "Kontrolli ühendust ja proovi uuesti. Demo ei salvesta sinu sisestust püsivalt.",
       retry: "Proovi uuesti",
-      aiUnavailable: "AI teenus ei ole hetkel saadaval. Proovi uuesti veidi hiljem.",
+      aiUnavailable: "Draxion AI teenus ei ole hetkel saadaval. Proovi uuesti veidi hiljem.",
       aiFailed:
         "Analüüsi käivitamine ebaõnnestus. Proovi uuesti või muuda sisendeid.",
     },
@@ -114,10 +114,10 @@ export const et: Dictionary = {
     primaryCta: "Alusta",
     secondaryCta: "Logi sisse",
     ui: {
-      badge: "AI → müügivihjed → rikastamine → sõnumid → kampaaniad",
-      heroCtaHint: "Proovi kohe — 10 müügivihjet vähem kui minutiga.",
-      heroLaunchVerb: "Alusta",
-      heroMicrocopy: "Esindusdemo. Ilma kontota. Tulemus kohe ekraanil.",
+      badge: "Draxion AI → müügivihjed → rikastamine → sõnumid → kampaaniad",
+      heroCtaHint: "Proovi kohe — näed töövoogu päriselt, ühe ekraaniga.",
+      heroLaunchVerb: "Ava demo",
+      heroMicrocopy: "Esindusdemo. Ilma kontota. Reaalne eelvaade kohe ekraanil.",
       featuresSubtitle: "Üks töövoog otsingust saatmiseni. Vähem käsitööd, rohkem kvaliteetseid vestlusi.",
       featureCardKicker: "Reaalajas signaalid",
       heroSurfaceTitle: "Draxion juhtpult",
@@ -552,7 +552,7 @@ export const et: Dictionary = {
       workspace: "Workspace",
       localization: "Keeled",
       emailSending: "E-kirjade saatmine",
-      ai: "AI seaded",
+      ai: "Draxion AI seaded",
       dataPrivacy: "Andmed & privaatsus",
     },
     profile: {
@@ -590,7 +590,7 @@ export const et: Dictionary = {
       providerMissing: "Resend pole seadistatud (puudub RESEND_API_KEY).",
     },
     ai: {
-      title: "AI seaded",
+      title: "Draxion AI seaded",
       subtitle: "Vaikimisi valikud sõnumite genereerimiseks.",
       defaultTone: "Vaikimisi toon",
       defaultLength: "Vaikimisi pikkus",

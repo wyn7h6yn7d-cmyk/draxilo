@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 const siteDescription =
-  "AI-powered B2B lead generation, enrichment, and outreach—find accounts, draft messages, run campaigns.";
+  "Draxion AI-powered B2B lead generation, enrichment, and outreach—find accounts, draft messages, run campaigns.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BRAND_SITE_URL),
