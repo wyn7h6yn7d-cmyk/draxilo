@@ -374,24 +374,12 @@ function FlagshipCommandRoom({ dict, reduced }: { dict: Dictionary; reduced: boo
 }
 
 function BrainCoreLayout({ dict, reduced }: { dict: Dictionary; reduced: boolean }) {
-  const ui = dict.marketing.ui.productPreview;
-
+  // Ruthless: keep only the "real UI" surface + its inner cards.
   return (
-    <div className="relative overflow-hidden rounded-[30px] border border-[rgba(255,255,255,0.12)] bg-[rgba(26,31,43,0.34)] p-4 shadow-[0_22px_90px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-5">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:90px_90px] [mask-image:radial-gradient(70%_70%_at_50%_35%,black,transparent_70%)]" />
-      <div className="pointer-events-none absolute inset-0 [background:radial-gradient(55%_55%_at_50%_20%,rgba(91,140,255,0.12),transparent_62%)]" />
-
-      <div className="relative">
-        <div
-          className="relative overflow-hidden rounded-[28px] border border-[rgba(255,255,255,0.12)] bg-[rgba(11,15,20,0.46)] p-4 shadow-[0_26px_90px_rgba(0,0,0,0.45)] sm:p-5"
-          style={{ perspective: 1000 }}
-        >
-          <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.14),transparent_62%)]" />
-          <NeuralLattice reduced={reduced} />
-
-          <UnifiedCommandPreview dict={dict} reduced={reduced} />
-        </div>
-      </div>
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-0 opacity-35 [background:radial-gradient(520px_420px_at_55%_22%,rgba(91,140,255,0.14),transparent_62%)]" />
+      <NeuralLattice reduced={reduced} />
+      <UnifiedCommandPreview dict={dict} reduced={reduced} />
     </div>
   );
 }
