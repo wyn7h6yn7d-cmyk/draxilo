@@ -148,20 +148,21 @@ async function enrichFromWebsite(homepageUrl: string, domain: string | null, mod
   const cleaned = cleanAndTruncateText(extracted, 22_000);
   const links = findLikelyPageUrls(homepageUrl, fetched.html);
 
-  const prompt = websiteEnrichmentExtractionPrompt.build({
-    homepageUrl,
-    domain,
-    contactPageUrlDetected: links.contactPageUrl,
-    pricingPageUrlDetected: links.pricingPageUrl,
-    cleanedVisibleText: cleaned,
-  }).prompt;
+  const prompt =
+    websiteEnrichmentExtractionPrompt.build({
+      homepageUrl,
+      domain,
+      contactPageUrlDetected: links.contactPageUrl,
+      pricingPageUrlDetected: links.pricingPageUrl,
+      cleanedVisibleText: cleaned,
+    }).prompt + "\n\nReturn ONLY a single valid JSON object matching the schema. No markdown, no extra text.";
 
   const ai = await retry(
     () =>
       runStructuredJson({
         model,
-        temperature: 0.2,
-        maxOutputTokens: 800,
+        temperature: 0.15,
+        maxOutputTokens: 1200,
         schemaName: "DraxionWebsiteEnrichment",
         jsonSchema: WEBSITE_ENRICHMENT_JSON_SCHEMA,
         prompt,
@@ -174,19 +175,20 @@ async function enrichFromWebsite(homepageUrl: string, domain: string | null, mod
 
 async function enrichFromForm(input: DemoRequestBody, model: string): Promise<WebsiteEnrichment> {
   const domain = normalizeDomain(input.websiteUrl);
-  const prompt = formEnrichmentPrompt.build({
-    companyName: input.companyName,
-    domain,
-    whatYouSell: input.whatYouSell,
-    language: input.language,
-  }).prompt;
+  const prompt =
+    formEnrichmentPrompt.build({
+      companyName: input.companyName,
+      domain,
+      whatYouSell: input.whatYouSell,
+      language: input.language,
+    }).prompt + "\n\nReturn ONLY a single valid JSON object matching the schema. No markdown, no extra text.";
 
   const ai = await retry(
     () =>
       runStructuredJson({
         model,
-        temperature: 0.25,
-        maxOutputTokens: 800,
+        temperature: 0.15,
+        maxOutputTokens: 1200,
         schemaName: "DraxionWebsiteEnrichment",
         jsonSchema: WEBSITE_ENRICHMENT_JSON_SCHEMA,
         prompt,
@@ -200,10 +202,18 @@ async function enrichFromForm(input: DemoRequestBody, model: string): Promise<We
 // Schemas are centralized in src/lib/ai/json-schemas.ts
 
 export async function runAIDemoPipeline(input: DemoRequestBody): Promise<DemoAnalysisResponse> {
-  const baseModel = process.env.AI_MODEL ?? "gemini-2.0-flash";
-  const enrichModel = process.env.AI_ENRICH_MODEL ?? baseModel;
-  const msgModel = process.env.AI_MESSAGE_MODEL ?? baseModel;
-  const scoreModel = process.env.AI_SCORE_MODEL ?? msgModel;
+  const configuredBaseModel = process.env.AI_MODEL ?? "gemini-2.0-flash";
+  // Preview models occasionally ignore/violate JSON mode. Keep the public demo reliable.
+  const baseModel = /preview/i.test(configuredBaseModel) ? "gemini-2.0-flash" : configuredBaseModel;
+  const enrichModel = /preview/i.test(process.env.AI_ENRICH_MODEL ?? "")
+    ? "gemini-2.0-flash"
+    : (process.env.AI_ENRICH_MODEL ?? baseModel);
+  const msgModel = /preview/i.test(process.env.AI_MESSAGE_MODEL ?? "")
+    ? "gemini-2.0-flash"
+    : (process.env.AI_MESSAGE_MODEL ?? baseModel);
+  const scoreModel = /preview/i.test(process.env.AI_SCORE_MODEL ?? "")
+    ? "gemini-2.0-flash"
+    : (process.env.AI_SCORE_MODEL ?? msgModel);
   const domain = normalizeDomain(input.websiteUrl);
   const isVercel = Boolean(process.env.VERCEL);
   const attempts = isVercel ? 1 : 2;
